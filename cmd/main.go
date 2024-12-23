@@ -6,6 +6,7 @@ import (
 	"log"
 	"net"
 
+	"github.com/ilyakaznacheev/cleanenv"
 	"github.com/royalcat/konfa-server/pkg/uuid"
 	"github.com/royalcat/konfa-server/src/konfa"
 	"github.com/royalcat/konfa-server/src/proto"
@@ -15,9 +16,20 @@ import (
 	"google.golang.org/grpc"
 )
 
+type Config struct {
+	DB string `env:"DB"`
+}
+
 func main() {
 	ctx := context.Background()
-	db, dbpool, err := store.ConnectPostgres(ctx, "postgres://localhost:5432/konfa?sslmode=disable&user=konfa&password=konfa")
+
+	var cfg Config
+	err := cleanenv.ReadEnv(&cfg)
+	if err != nil {
+		panic(err)
+	}
+
+	db, dbpool, err := store.ConnectPostgres(ctx, cfg.DB)
 	if err != nil {
 		panic(err)
 	}
