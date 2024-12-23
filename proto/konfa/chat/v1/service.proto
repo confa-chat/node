@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package konfa.chat.v1;
+
+option go_package = "/chatv1";
+
+import "google/protobuf/timestamp.proto";
+
+service ChatService {
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse) {}
+  rpc GetMessageHistory(GetMessageHistoryRequest) returns (GetMessageHistoryResponse) {}
+  rpc GetMessage(GetMessageRequest) returns (GetMessageResponse) {}
+  rpc StreamNewMessages(StreamNewMessagesRequest)
+      returns (stream StreamNewMessagesResponse) {}
+  rpc UploadAttachment(stream UploadAttachmentRequest) returns (UploadAttachmentResponse) {}
+}
+
+message TextChannelRef {
+  string server_id = 1;
+  string channel_id = 2;
+}
+
+message SendMessageRequest {
+  TextChannelRef channel = 1;
+  string content = 2;
+}
+
+message SendMessageResponse {
+  string message_id = 1;
+}
+
+message Message {
+  string message_id = 1;
+  string sender_id = 4;
+  string content = 5;
+  google.protobuf.Timestamp timestamp = 6;
+}
+
+message GetMessageHistoryRequest { 
+  TextChannelRef channel = 1;
+  google.protobuf.Timestamp from = 2;
+  int32 count = 3;
+ }
+
+message GetMessageHistoryResponse { repeated Message messages = 1; }
+
+message GetMessageRequest { 
+  TextChannelRef channel = 1;
+  string message_id = 2;
+ }
+
+ message GetMessageResponse { Message message = 1; }
+
+message StreamNewMessagesRequest { TextChannelRef channel = 1; }
+
+message StreamNewMessagesResponse { string message_id = 1; }
+
+message UploadAttachmentRequest {
+  oneof payload {
+    AttachmentUploadInfo info = 1;
+    bytes data = 2 ;
+  }
+}
+
+message AttachmentUploadInfo {
+  string name = 1;
+}
+
+message UploadAttachmentResponse { string attachmen_id = 1; }

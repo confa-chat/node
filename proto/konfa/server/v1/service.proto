@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package konfa.server.v1;
+
+option go_package = "/serverv1";
+
+// import "google/protobuf/timestamp.proto";
+import "konfa/channel/v1/channels.proto";
+
+service ServerService {
+  rpc ListServerChannels(ListServerChannelsRequest) returns (ListServerChannelsResponse) {}
+}
+
+message ListServerChannelsRequest {
+  string server_id = 1;
+}
+
+message ListServerChannelsResponse {
+  repeated konfa.channel.v1.Channel channels = 1;
+}

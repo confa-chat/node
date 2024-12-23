@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: postgres:16
+    ports:
+      - 5432:5432
+    volumes:
+      - data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=konfa
+      - POSTGRES_USER=konfa
+      - POSTGRES_DB=konfa
+volumes:
+  data:
