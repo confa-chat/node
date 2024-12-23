@@ -22,7 +22,6 @@ CREATE TABLE "voice_channel" (
     FOREIGN KEY (server_id) REFERENCES "server"(id),
     "name" VARCHAR(255)
 );
-CREATE UNIQUE INDEX unique_text_channel_name ON "text_channel"(server_id, "name");
 -- Message Table
 CREATE TABLE "message" (
     id uuid PRIMARY KEY,
