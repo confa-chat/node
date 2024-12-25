@@ -5,10 +5,14 @@ package konfa.server.v1;
 option go_package = "/serverv1";
 
 // import "google/protobuf/timestamp.proto";
+import "konfa/user/v1/user.proto";
 import "konfa/channel/v1/channels.proto";
+
 
 service ServerService {
   rpc ListServerChannels(ListServerChannelsRequest) returns (ListServerChannelsResponse) {}
+  rpc ListServerUsers(ListServerUsersRequest) returns (ListServerUsersResponse) {}
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {}
 }
 
 message ListServerChannelsRequest {
@@ -17,4 +21,20 @@ message ListServerChannelsRequest {
 
 message ListServerChannelsResponse {
   repeated konfa.channel.v1.Channel channels = 1;
+}
+
+message ListServerUsersRequest {
+  string server_id = 1;
+}
+
+message ListServerUsersResponse {
+  repeated konfa.user.v1.User users = 1;
+}
+
+message GetUserRequest {
+  string user_id = 1;
+}
+
+message GetUserResponse {
+  konfa.user.v1.User user = 1;
 }

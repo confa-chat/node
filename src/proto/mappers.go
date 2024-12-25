@@ -3,6 +3,7 @@ package proto
 import (
 	channelv1 "github.com/royalcat/konfa-server/src/proto/konfa/channel/v1"
 	chatv1 "github.com/royalcat/konfa-server/src/proto/konfa/chat/v1"
+	userv1 "github.com/royalcat/konfa-server/src/proto/konfa/user/v1"
 	"github.com/royalcat/konfa-server/src/store"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
@@ -45,5 +46,12 @@ func mapVoiceChannel(c store.VoiceChannel) *channelv1.VoiceChannel {
 		ServerId:  c.ServerID.String(),
 		ChannelId: c.ID.String(),
 		Name:      c.Name,
+	}
+}
+
+func mapUser(c store.User) *userv1.User {
+	return &userv1.User{
+		Id:       c.ID.String(),
+		Username: c.Username,
 	}
 }

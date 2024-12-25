@@ -46,3 +46,37 @@ func (s *ServerService) ListServerChannels(ctx context.Context, req *serverv1.Li
 		Channels: channels,
 	}, nil
 }
+
+// ListServerUsers implements serverv1.ServerServiceServer.
+func (s *ServerService) ListServerUsers(ctx context.Context, req *serverv1.ListServerUsersRequest) (*serverv1.ListServerUsersResponse, error) {
+	serverID, err := uuid.FromString(req.ServerId)
+	if err != nil {
+		return nil, err
+	}
+
+	users, err := s.srv.ListServerUser(ctx, serverID)
+	if err != nil {
+		return nil, err
+	}
+
+	return &serverv1.ListServerUsersResponse{
+		Users: apply(users, mapUser),
+	}, nil
+}
+
+// GetUser implements serverv1.ServerServiceServer.
+func (s *ServerService) GetUser(ctx context.Context, req *serverv1.GetUserRequest) (*serverv1.GetUserResponse, error) {
+	userID, err := uuid.FromString(req.UserId)
+	if err != nil {
+		return nil, err
+	}
+
+	users, err := s.srv.GetUser(ctx, userID)
+	if err != nil {
+		return nil, err
+	}
+
+	return &serverv1.GetUserResponse{
+		User: mapUser(users),
+	}, nil
+}
