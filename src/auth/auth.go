@@ -101,6 +101,7 @@ func (a *Authenticator) createUserFromExternal(ctx context.Context, resp *oidc.I
 
 		_, err = tx.NewInsert().
 			Model(&store.ExternalLogin{
+				ID:      uuid.New(),
 				UserID:  user.ID,
 				Issuer:  resp.Issuer,
 				Subject: resp.Subject,
