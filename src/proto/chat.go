@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/royalcat/konfa-server/pkg/uuid"
+	"github.com/royalcat/konfa-server/src/auth"
 	"github.com/royalcat/konfa-server/src/konfa"
 	chatv1 "github.com/royalcat/konfa-server/src/proto/konfa/chat/v1"
 	"google.golang.org/grpc"
@@ -27,7 +28,7 @@ var _ chatv1.ChatServiceServer = (*ChatService)(nil)
 
 // SendMessage implements chatv1.ChatServiceServer.
 func (c *ChatService) SendMessage(ctx context.Context, req *chatv1.SendMessageRequest) (*chatv1.SendMessageResponse, error) {
-	user := getCtxUser(ctx)
+	user := auth.CtxGetUser(ctx)
 	if user == nil {
 		return nil, ErrUnauthenticated
 	}

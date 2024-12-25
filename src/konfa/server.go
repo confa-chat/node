@@ -34,12 +34,3 @@ func (c *Service) ListServers(ctx context.Context) ([]store.Server, error) {
 		Scan(ctx)
 	return servers, err
 }
-
-func (c *Service) ListTextChannels(ctx context.Context, serverID uuid.UUID) ([]store.TextChannel, error) {
-	var channels []store.TextChannel
-	err := c.db.NewSelect().
-		Model(&channels).
-		Where("server_id = ?", serverID).
-		Scan(ctx)
-	return channels, err
-}

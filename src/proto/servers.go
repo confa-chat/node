@@ -27,7 +27,7 @@ func (s *ServerService) ListServerChannels(ctx context.Context, req *serverv1.Li
 		return nil, err
 	}
 
-	textChannels, err := s.srv.ListTextChannels(ctx, serverID)
+	textChannels, err := s.srv.ListTextChannelsOnServer(ctx, serverID)
 	if err != nil {
 		return nil, err
 	}

@@ -8,6 +8,7 @@ import (
 
 	"github.com/ilyakaznacheev/cleanenv"
 	"github.com/royalcat/konfa-server/pkg/uuid"
+	"github.com/royalcat/konfa-server/src/auth"
 	"github.com/royalcat/konfa-server/src/konfa"
 	"github.com/royalcat/konfa-server/src/proto"
 	chatv1 "github.com/royalcat/konfa-server/src/proto/konfa/chat/v1"
@@ -36,7 +37,19 @@ func main() {
 
 	srv := konfa.NewService(db, dbpool)
 
-	grpcServer := grpc.NewServer(grpc.UnaryInterceptor(proto.Authenticate))
+	authen, err := auth.NewAuthenticator(ctx, db, auth.AuthenticatorConfig{
+		Issuer:       "https://sso.konfach.ru/realms/konfach",
+		ClientID:     "konfa",
+		ClientSecret: "UqeaMowRXcGULkAepr0EAEUfE82OjY72",
+	})
+	if err != nil {
+		panic(err)
+	}
+
+	grpcServer := grpc.NewServer(
+		grpc.UnaryInterceptor(authen.UnaryAuthenticate),
+		grpc.StreamInterceptor(authen.StreamAuthenticate),
+	)
 	chatv1.RegisterChatServiceServer(grpcServer, proto.NewChatService(srv))
 	serverv1.RegisterServerServiceServer(grpcServer, proto.NewServerService(srv))
 
@@ -80,7 +93,7 @@ func createKonfach(ctx context.Context, srv *konfa.Service) (uuid.UUID, uuid.UUI
 
 	var chanID uuid.UUID
 
-	channels, err := srv.ListChannelsOnServer(ctx, serverID)
+	channels, err := srv.ListTextChannelsOnServer(ctx, serverID)
 	if err != nil {
 		return uuid.Nil, uuid.Nil, err
 	}
@@ -90,7 +103,7 @@ func createKonfach(ctx context.Context, srv *konfa.Service) (uuid.UUID, uuid.UUI
 		}
 	}
 	if chanID == uuid.Nil {
-		chanID, err = srv.CreateChannel(ctx, serverID, "general")
+		chanID, err = srv.CreateTextChannel(ctx, serverID, "general")
 		if err != nil {
 			return uuid.Nil, uuid.Nil, fmt.Errorf("failed to create channel: %w", err)
 		}

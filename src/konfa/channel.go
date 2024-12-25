@@ -7,7 +7,7 @@ import (
 	"github.com/royalcat/konfa-server/src/store"
 )
 
-func (c *Service) CreateChannel(ctx context.Context, serverID uuid.UUID, name string) (uuid.UUID, error) {
+func (c *Service) CreateTextChannel(ctx context.Context, serverID uuid.UUID, name string) (uuid.UUID, error) {
 	channel := store.TextChannel{
 		ID:       uuid.New(),
 		ServerID: serverID,
@@ -34,7 +34,7 @@ func (c *Service) GetChannel(ctx context.Context, serverID uuid.UUID, channelID 
 	return channel, err
 }
 
-func (c *Service) ListChannelsOnServer(ctx context.Context, serverID uuid.UUID) ([]store.TextChannel, error) {
+func (c *Service) ListTextChannelsOnServer(ctx context.Context, serverID uuid.UUID) ([]store.TextChannel, error) {
 	var channels []store.TextChannel
 	err := c.db.NewSelect().
 		Model(&channels).
