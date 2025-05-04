@@ -2,8 +2,10 @@ package proto
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/royalcat/konfa-server/pkg/uuid"
+	"github.com/royalcat/konfa-server/src/auth"
 	"github.com/royalcat/konfa-server/src/konfa"
 	channelv1 "github.com/royalcat/konfa-server/src/proto/konfa/channel/v1"
 	serverv1 "github.com/royalcat/konfa-server/src/proto/konfa/server/v1"
@@ -78,5 +80,17 @@ func (s *ServerService) GetUser(ctx context.Context, req *serverv1.GetUserReques
 
 	return &serverv1.GetUserResponse{
 		User: mapUser(users),
+	}, nil
+}
+
+// CurrentUser implements serverv1.ServerServiceServer.
+func (s *ServerService) CurrentUser(ctx context.Context, req *serverv1.CurrentUserRequest) (*serverv1.CurrentUserResponse, error) {
+	user := auth.CtxGetUser(ctx)
+	if user == nil {
+		return nil, fmt.Errorf("user not found in context")
+	}
+
+	return &serverv1.CurrentUserResponse{
+		User: mapUser(*user),
 	}, nil
 }

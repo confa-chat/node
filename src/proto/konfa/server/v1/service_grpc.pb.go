@@ -22,6 +22,7 @@ const (
 	ServerService_ListServerChannels_FullMethodName = "/konfa.server.v1.ServerService/ListServerChannels"
 	ServerService_ListServerUsers_FullMethodName    = "/konfa.server.v1.ServerService/ListServerUsers"
 	ServerService_GetUser_FullMethodName            = "/konfa.server.v1.ServerService/GetUser"
+	ServerService_CurrentUser_FullMethodName        = "/konfa.server.v1.ServerService/CurrentUser"
 )
 
 // ServerServiceClient is the client API for ServerService service.
@@ -31,6 +32,7 @@ type ServerServiceClient interface {
 	ListServerChannels(ctx context.Context, in *ListServerChannelsRequest, opts ...grpc.CallOption) (*ListServerChannelsResponse, error)
 	ListServerUsers(ctx context.Context, in *ListServerUsersRequest, opts ...grpc.CallOption) (*ListServerUsersResponse, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
+	CurrentUser(ctx context.Context, in *CurrentUserRequest, opts ...grpc.CallOption) (*CurrentUserResponse, error)
 }
 
 type serverServiceClient struct {
@@ -71,6 +73,16 @@ func (c *serverServiceClient) GetUser(ctx context.Context, in *GetUserRequest, o
 	return out, nil
 }
 
+func (c *serverServiceClient) CurrentUser(ctx context.Context, in *CurrentUserRequest, opts ...grpc.CallOption) (*CurrentUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CurrentUserResponse)
+	err := c.cc.Invoke(ctx, ServerService_CurrentUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ServerServiceServer is the server API for ServerService service.
 // All implementations should embed UnimplementedServerServiceServer
 // for forward compatibility.
@@ -78,6 +90,7 @@ type ServerServiceServer interface {
 	ListServerChannels(context.Context, *ListServerChannelsRequest) (*ListServerChannelsResponse, error)
 	ListServerUsers(context.Context, *ListServerUsersRequest) (*ListServerUsersResponse, error)
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
+	CurrentUser(context.Context, *CurrentUserRequest) (*CurrentUserResponse, error)
 }
 
 // UnimplementedServerServiceServer should be embedded to have
@@ -95,6 +108,9 @@ func (UnimplementedServerServiceServer) ListServerUsers(context.Context, *ListSe
 }
 func (UnimplementedServerServiceServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
+}
+func (UnimplementedServerServiceServer) CurrentUser(context.Context, *CurrentUserRequest) (*CurrentUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CurrentUser not implemented")
 }
 func (UnimplementedServerServiceServer) testEmbeddedByValue() {}
 
@@ -170,6 +186,24 @@ func _ServerService_GetUser_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ServerService_CurrentUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CurrentUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServerServiceServer).CurrentUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ServerService_CurrentUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServerServiceServer).CurrentUser(ctx, req.(*CurrentUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ServerService_ServiceDesc is the grpc.ServiceDesc for ServerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -188,6 +222,10 @@ var ServerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUser",
 			Handler:    _ServerService_GetUser_Handler,
+		},
+		{
+			MethodName: "CurrentUser",
+			Handler:    _ServerService_CurrentUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

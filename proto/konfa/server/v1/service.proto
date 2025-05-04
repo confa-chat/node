@@ -8,33 +8,29 @@ option go_package = "/serverv1";
 import "konfa/user/v1/user.proto";
 import "konfa/channel/v1/channels.proto";
 
-
 service ServerService {
-  rpc ListServerChannels(ListServerChannelsRequest) returns (ListServerChannelsResponse) {}
-  rpc ListServerUsers(ListServerUsersRequest) returns (ListServerUsersResponse) {}
+  rpc ListServerChannels(ListServerChannelsRequest)
+      returns (ListServerChannelsResponse) {}
+  rpc ListServerUsers(ListServerUsersRequest)
+      returns (ListServerUsersResponse) {}
   rpc GetUser(GetUserRequest) returns (GetUserResponse) {}
+  rpc CurrentUser(CurrentUserRequest) returns (CurrentUserResponse) {}
 }
 
-message ListServerChannelsRequest {
-  string server_id = 1;
-}
+message CurrentUserRequest {}
+
+message CurrentUserResponse { konfa.user.v1.User user = 1; }
+
+message ListServerChannelsRequest { string server_id = 1; }
 
 message ListServerChannelsResponse {
   repeated konfa.channel.v1.Channel channels = 1;
 }
 
-message ListServerUsersRequest {
-  string server_id = 1;
-}
+message ListServerUsersRequest { string server_id = 1; }
 
-message ListServerUsersResponse {
-  repeated konfa.user.v1.User users = 1;
-}
+message ListServerUsersResponse { repeated konfa.user.v1.User users = 1; }
 
-message GetUserRequest {
-  string user_id = 1;
-}
+message GetUserRequest { string user_id = 1; }
 
-message GetUserResponse {
-  konfa.user.v1.User user = 1;
-}
+message GetUserResponse { konfa.user.v1.User user = 1; }
