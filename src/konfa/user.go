@@ -3,8 +3,8 @@ package konfa
 import (
 	"context"
 
-	"github.com/royalcat/konfa-server/pkg/uuid"
-	"github.com/royalcat/konfa-server/src/store"
+	"github.com/konfa-chat/hub/pkg/uuid"
+	"github.com/konfa-chat/hub/src/store"
 )
 
 func (u *Service) GetUser(ctx context.Context, id uuid.UUID) (store.User, error) {

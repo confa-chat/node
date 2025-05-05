@@ -7,13 +7,13 @@ import (
 	"net"
 
 	"github.com/ilyakaznacheev/cleanenv"
-	"github.com/royalcat/konfa-server/pkg/uuid"
-	"github.com/royalcat/konfa-server/src/auth"
-	"github.com/royalcat/konfa-server/src/konfa"
-	"github.com/royalcat/konfa-server/src/proto"
-	chatv1 "github.com/royalcat/konfa-server/src/proto/konfa/chat/v1"
-	serverv1 "github.com/royalcat/konfa-server/src/proto/konfa/server/v1"
-	"github.com/royalcat/konfa-server/src/store"
+	"github.com/konfa-chat/hub/pkg/uuid"
+	"github.com/konfa-chat/hub/src/auth"
+	"github.com/konfa-chat/hub/src/konfa"
+	"github.com/konfa-chat/hub/src/proto"
+	chatv1 "github.com/konfa-chat/hub/src/proto/konfa/chat/v1"
+	serverv1 "github.com/konfa-chat/hub/src/proto/konfa/server/v1"
+	"github.com/konfa-chat/hub/src/store"
 	"google.golang.org/grpc"
 )
 

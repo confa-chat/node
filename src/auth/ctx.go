@@ -3,7 +3,7 @@ package auth
 import (
 	"context"
 
-	"github.com/royalcat/konfa-server/src/store"
+	"github.com/konfa-chat/hub/src/store"
 )
 
 type ctxKey string

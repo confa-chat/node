@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/cskr/pubsub/v2"
-	"github.com/royalcat/konfa-server/pkg/uuid"
-	"github.com/royalcat/konfa-server/src/store"
+	"github.com/konfa-chat/hub/pkg/uuid"
+	"github.com/konfa-chat/hub/src/store"
 )
 
 type ChannelSubscription struct {

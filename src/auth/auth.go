@@ -5,8 +5,8 @@ import (
 	"database/sql"
 	"errors"
 
-	"github.com/royalcat/konfa-server/pkg/uuid"
-	"github.com/royalcat/konfa-server/src/store"
+	"github.com/konfa-chat/hub/pkg/uuid"
+	"github.com/konfa-chat/hub/src/store"
 	"github.com/uptrace/bun"
 	"github.com/zitadel/oidc/v3/pkg/client/rs"
 	"github.com/zitadel/oidc/v3/pkg/oidc"

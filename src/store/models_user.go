@@ -3,7 +3,7 @@ package store
 import (
 	"time"
 
-	"github.com/royalcat/konfa-server/pkg/uuid"
+	"github.com/konfa-chat/hub/pkg/uuid"
 	"github.com/uptrace/bun"
 )
 

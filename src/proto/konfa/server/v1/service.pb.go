@@ -7,8 +7,8 @@
 package serverv1
 
 import (
-	v11 "github.com/royalcat/konfa-server/src/proto/konfa/channel/v1"
-	v1 "github.com/royalcat/konfa-server/src/proto/konfa/user/v1"
+	v11 "github.com/konfa-chat/hub/src/proto/konfa/channel/v1"
+	v1 "github.com/konfa-chat/hub/src/proto/konfa/user/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -392,7 +392,7 @@ const file_konfa_server_v1_service_proto_rawDesc = "" +
 	"\x0fListServerUsers\x12'.konfa.server.v1.ListServerUsersRequest\x1a(.konfa.server.v1.ListServerUsersResponse\"\x00\x12N\n" +
 	"\aGetUser\x12\x1f.konfa.server.v1.GetUserRequest\x1a .konfa.server.v1.GetUserResponse\"\x00\x12Z\n" +
 	"\vCurrentUser\x12#.konfa.server.v1.CurrentUserRequest\x1a$.konfa.server.v1.CurrentUserResponse\"\x00B\xc6\x01\n" +
-	"\x13com.konfa.server.v1B\fServiceProtoP\x01ZCgithub.com/royalcat/konfa-server/src/proto/konfa/server/v1;serverv1\xa2\x02\x03KSX\xaa\x02\x0fKonfa.Server.V1\xca\x02\x0fKonfa\\Server\\V1\xe2\x02\x1bKonfa\\Server\\V1\\GPBMetadata\xea\x02\x11Konfa::Server::V1b\x06proto3"
+	"\x13com.konfa.server.v1B\fServiceProtoP\x01ZCgithub.com/konfa-chat/hub/src/proto/konfa/server/v1;serverv1\xa2\x02\x03KSX\xaa\x02\x0fKonfa.Server.V1\xca\x02\x0fKonfa\\Server\\V1\xe2\x02\x1bKonfa\\Server\\V1\\GPBMetadata\xea\x02\x11Konfa::Server::V1b\x06proto3"
 
 var (
 	file_konfa_server_v1_service_proto_rawDescOnce sync.Once

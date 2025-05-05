@@ -1,10 +1,10 @@
 package proto
 
 import (
-	channelv1 "github.com/royalcat/konfa-server/src/proto/konfa/channel/v1"
-	chatv1 "github.com/royalcat/konfa-server/src/proto/konfa/chat/v1"
-	userv1 "github.com/royalcat/konfa-server/src/proto/konfa/user/v1"
-	"github.com/royalcat/konfa-server/src/store"
+	channelv1 "github.com/konfa-chat/hub/src/proto/konfa/channel/v1"
+	chatv1 "github.com/konfa-chat/hub/src/proto/konfa/chat/v1"
+	userv1 "github.com/konfa-chat/hub/src/proto/konfa/user/v1"
+	"github.com/konfa-chat/hub/src/store"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 

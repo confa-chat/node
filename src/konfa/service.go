@@ -3,7 +3,7 @@ package konfa
 import (
 	"github.com/cskr/pubsub/v2"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/royalcat/konfa-server/pkg/uuid"
+	"github.com/konfa-chat/hub/pkg/uuid"
 	"github.com/uptrace/bun"
 )
 

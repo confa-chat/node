@@ -242,7 +242,7 @@ const file_konfa_channel_v1_channels_proto_rawDesc = "" +
 	"\n" +
 	"channel_id\x18\x02 \x01(\tR\tchannelId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04nameB\xce\x01\n" +
-	"\x14com.konfa.channel.v1B\rChannelsProtoP\x01ZEgithub.com/royalcat/konfa-server/src/proto/konfa/channel/v1;channelv1\xa2\x02\x03KCX\xaa\x02\x10Konfa.Channel.V1\xca\x02\x10Konfa\\Channel\\V1\xe2\x02\x1cKonfa\\Channel\\V1\\GPBMetadata\xea\x02\x12Konfa::Channel::V1b\x06proto3"
+	"\x14com.konfa.channel.v1B\rChannelsProtoP\x01ZEgithub.com/konfa-chat/hub/src/proto/konfa/channel/v1;channelv1\xa2\x02\x03KCX\xaa\x02\x10Konfa.Channel.V1\xca\x02\x10Konfa\\Channel\\V1\xe2\x02\x1cKonfa\\Channel\\V1\\GPBMetadata\xea\x02\x12Konfa::Channel::V1b\x06proto3"
 
 var (
 	file_konfa_channel_v1_channels_proto_rawDescOnce sync.Once

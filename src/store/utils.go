@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/royalcat/konfa-server/pkg/uuid"
+	"github.com/konfa-chat/hub/pkg/uuid"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 )

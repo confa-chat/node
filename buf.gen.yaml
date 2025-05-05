@@ -10,7 +10,7 @@ managed:
   enabled: true
   override:
     - file_option: go_package_prefix
-      value: github.com/royalcat/konfa-server/src/proto
+      value: github.com/konfa-chat/hub/src/proto
 plugins:
   - remote: buf.build/grpc/go
     out: src/proto

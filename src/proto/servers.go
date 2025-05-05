@@ -4,12 +4,12 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/royalcat/konfa-server/pkg/uuid"
-	"github.com/royalcat/konfa-server/src/auth"
-	"github.com/royalcat/konfa-server/src/konfa"
-	channelv1 "github.com/royalcat/konfa-server/src/proto/konfa/channel/v1"
-	serverv1 "github.com/royalcat/konfa-server/src/proto/konfa/server/v1"
-	"github.com/royalcat/konfa-server/src/store"
+	"github.com/konfa-chat/hub/pkg/uuid"
+	"github.com/konfa-chat/hub/src/auth"
+	"github.com/konfa-chat/hub/src/konfa"
+	channelv1 "github.com/konfa-chat/hub/src/proto/konfa/channel/v1"
+	serverv1 "github.com/konfa-chat/hub/src/proto/konfa/server/v1"
+	"github.com/konfa-chat/hub/src/store"
 )
 
 func NewServerService(srv *konfa.Service) *ServerService {

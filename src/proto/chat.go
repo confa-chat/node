@@ -3,10 +3,10 @@ package proto
 import (
 	"context"
 
-	"github.com/royalcat/konfa-server/pkg/uuid"
-	"github.com/royalcat/konfa-server/src/auth"
-	"github.com/royalcat/konfa-server/src/konfa"
-	chatv1 "github.com/royalcat/konfa-server/src/proto/konfa/chat/v1"
+	"github.com/konfa-chat/hub/pkg/uuid"
+	"github.com/konfa-chat/hub/src/auth"
+	"github.com/konfa-chat/hub/src/konfa"
+	chatv1 "github.com/konfa-chat/hub/src/proto/konfa/chat/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
