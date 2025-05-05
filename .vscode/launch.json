@@ -10,7 +10,15 @@
             "request": "launch",
             "mode": "debug",
             "env": {
-                "DB": "postgres://localhost:5432/konfa?sslmode=disable&user=konfa&password=konfa"
+                "KONFA_HUB_DB": "postgres://localhost:5432/konfa?sslmode=disable&user=konfa&password=konfa",
+                "KONFA_HUB_AUTHPROVIDERS_0_ID": "konfach-sso",
+                "KONFA_HUB_AUTHPROVIDERS_0_NAME": "Konfach SSO",
+                "KONFA_HUB_AUTHPROVIDERS_0_OPENIDCONNECT_ISSUER": "https://sso.konfach.ru/realms/konfach",
+                "KONFA_HUB_AUTHPROVIDERS_0_OPENIDCONNECT_CLIENTID": "konfa",
+                "KONFA_HUB_AUTHPROVIDERS_0_OPENIDCONNECT_CLIENTSECRET": "UqeaMowRXcGULkAepr0EAEUfE82OjY72",
+                "KONFA_HUB_VOICERELAYS_0_ID": "local",
+                "KONFA_HUB_VOICERELAYS_0_NAME": "Local",
+                "KONFA_HUB_VOICERELAYS_0_ADDRESS": "localhost:8081"
             },
             "program": "${workspaceFolder}/cmd/main.go",
         }

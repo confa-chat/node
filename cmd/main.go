@@ -2,32 +2,35 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"log"
 	"net"
 
-	"github.com/ilyakaznacheev/cleanenv"
 	"github.com/konfa-chat/hub/pkg/uuid"
 	"github.com/konfa-chat/hub/src/auth"
+	"github.com/konfa-chat/hub/src/config"
 	"github.com/konfa-chat/hub/src/konfa"
 	"github.com/konfa-chat/hub/src/proto"
 	chatv1 "github.com/konfa-chat/hub/src/proto/konfa/chat/v1"
+	hubv1 "github.com/konfa-chat/hub/src/proto/konfa/hub/v1"
 	serverv1 "github.com/konfa-chat/hub/src/proto/konfa/server/v1"
 	"github.com/konfa-chat/hub/src/store"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
-type Config struct {
-	DB string `env:"DB"`
-}
-
 func main() {
+	// Parse command line flags
+	configFilePath := flag.String("config", "", "Path to YAML configuration file")
+	flag.Parse()
+
 	ctx := context.Background()
 
-	var cfg Config
-	err := cleanenv.ReadEnv(&cfg)
+	// Load configuration passing the config file path directly
+	cfg, err := config.Load(*configFilePath)
 	if err != nil {
-		panic(err)
+		log.Fatalf("error loading config: %v", err)
 	}
 
 	db, dbpool, err := store.ConnectPostgres(ctx, cfg.DB)
@@ -35,13 +38,23 @@ func main() {
 		panic(err)
 	}
 
-	srv := konfa.NewService(db, dbpool)
+	// Pass the entire config object to the service
+	srv := konfa.NewService(db, dbpool, cfg)
 
-	authen, err := auth.NewAuthenticator(ctx, db, auth.AuthenticatorConfig{
-		Issuer:       "https://sso.konfach.ru/realms/konfach",
-		ClientID:     "konfa",
-		ClientSecret: "UqeaMowRXcGULkAepr0EAEUfE82OjY72",
-	})
+	// Use the first auth provider for the authenticator
+	// In a more robust implementation, this might be configurable
+	provider := cfg.AuthProviders[0]
+	authen, err := auth.NewAuthenticator(ctx, db,
+		auth.AuthenticatorConfig{
+			Issuer:       provider.OpenIDConnect.Issuer,
+			ClientID:     provider.OpenIDConnect.ClientID,
+			ClientSecret: provider.OpenIDConnect.ClientSecret,
+		},
+		[]string{
+			"/grpc.reflection.v1alpha.ServerReflection",
+			"/" + hubv1.HubService_ServiceDesc.ServiceName,
+		},
+	)
 	if err != nil {
 		panic(err)
 	}
@@ -52,6 +65,9 @@ func main() {
 	)
 	chatv1.RegisterChatServiceServer(grpcServer, proto.NewChatService(srv))
 	serverv1.RegisterServerServiceServer(grpcServer, proto.NewServerService(srv))
+	hubv1.RegisterHubServiceServer(grpcServer, proto.NewHubService(srv))
+
+	reflection.Register(grpcServer)
 
 	serverID, chanID, err := createKonfach(ctx, srv)
 	if err != nil {

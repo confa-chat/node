@@ -8,7 +8,20 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
-func (a *Authenticator) UnaryAuthenticate(ctx context.Context, req any, _ *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
+func (a *Authenticator) isNeedAuth(method string) bool {
+	for _, noAuthMethod := range a.skipAuthMethods {
+		if strings.HasPrefix(method, noAuthMethod) {
+			return false
+		}
+	}
+	return true
+}
+
+func (a *Authenticator) UnaryAuthenticate(ctx context.Context, req any, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
+	if !a.isNeedAuth(info.FullMethod) {
+		return handler(ctx, req)
+	}
+
 	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
 		return nil, errMissingMetadata
@@ -28,6 +41,10 @@ func (a *Authenticator) UnaryAuthenticate(ctx context.Context, req any, _ *grpc.
 }
 
 func (a *Authenticator) StreamAuthenticate(srv any, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
+	if !a.isNeedAuth(info.FullMethod) {
+		return handler(srv, ss)
+	}
+
 	ctx := ss.Context()
 
 	md, ok := metadata.FromIncomingContext(ctx)

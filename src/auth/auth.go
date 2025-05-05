@@ -26,11 +26,13 @@ type AuthenticatorConfig struct {
 }
 
 type Authenticator struct {
+	skipAuthMethods []string
+
 	provider rs.ResourceServer
 	db       *bun.DB
 }
 
-func NewAuthenticator(ctx context.Context, db *bun.DB, acfg AuthenticatorConfig) (*Authenticator, error) {
+func NewAuthenticator(ctx context.Context, db *bun.DB, acfg AuthenticatorConfig, skipAuthMethods []string) (*Authenticator, error) {
 
 	provider, err := rs.NewResourceServerClientCredentials(ctx, acfg.Issuer, acfg.ClientID, acfg.ClientSecret)
 	if err != nil {
@@ -38,8 +40,9 @@ func NewAuthenticator(ctx context.Context, db *bun.DB, acfg AuthenticatorConfig)
 	}
 
 	return &Authenticator{
-		provider: provider,
-		db:       db,
+		skipAuthMethods: skipAuthMethods,
+		provider:        provider,
+		db:              db,
 	}, nil
 }
 

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package konfa.hub.v1;
+
+message AuthProvider {
+  string id = 1;
+  string name = 2;
+
+  oneof protocol { OpenIDConnect openid_connect = 101; }
+}
+
+message OpenIDConnect {
+  string issuer = 1;
+  string client_id = 2;
+  string client_secret = 3;
+}

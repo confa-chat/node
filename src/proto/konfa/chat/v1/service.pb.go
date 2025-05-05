@@ -748,8 +748,8 @@ const file_konfa_chat_v1_service_proto_rawDesc = "" +
 	"\n" +
 	"GetMessage\x12 .konfa.chat.v1.GetMessageRequest\x1a!.konfa.chat.v1.GetMessageResponse\"\x00\x12j\n" +
 	"\x11StreamNewMessages\x12'.konfa.chat.v1.StreamNewMessagesRequest\x1a(.konfa.chat.v1.StreamNewMessagesResponse\"\x000\x01\x12g\n" +
-	"\x10UploadAttachment\x12&.konfa.chat.v1.UploadAttachmentRequest\x1a'.konfa.chat.v1.UploadAttachmentResponse\"\x00(\x01B\xb8\x01\n" +
-	"\x11com.konfa.chat.v1B\fServiceProtoP\x01Z?github.com/konfa-chat/hub/src/proto/konfa/chat/v1;chatv1\xa2\x02\x03KCX\xaa\x02\rKonfa.Chat.V1\xca\x02\rKonfa\\Chat\\V1\xe2\x02\x19Konfa\\Chat\\V1\\GPBMetadata\xea\x02\x0fKonfa::Chat::V1b\x06proto3"
+	"\x10UploadAttachment\x12&.konfa.chat.v1.UploadAttachmentRequest\x1a'.konfa.chat.v1.UploadAttachmentResponse\"\x00(\x01B\xb1\x01\n" +
+	"\x11com.konfa.chat.v1B\fServiceProtoP\x01Z8github.com/konfa-chat/hub/src/proto/konfa/chat/v1;chatv1\xa2\x02\x03KCX\xaa\x02\rKonfa.Chat.V1\xca\x02\rKonfa\\Chat\\V1\xe2\x02\x19Konfa\\Chat\\V1\\GPBMetadata\xea\x02\x0fKonfa::Chat::V1b\x06proto3"
 
 var (
 	file_konfa_chat_v1_service_proto_rawDescOnce sync.Once

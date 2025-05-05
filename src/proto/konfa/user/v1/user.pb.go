@@ -80,8 +80,8 @@ const file_konfa_user_v1_user_proto_rawDesc = "" +
 	"\x18konfa/user/v1/user.proto\x12\rkonfa.user.v1\"2\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
-	"\busername\x18\x02 \x01(\tR\busernameB\xb5\x01\n" +
-	"\x11com.konfa.user.v1B\tUserProtoP\x01Z?github.com/konfa-chat/hub/src/proto/konfa/user/v1;userv1\xa2\x02\x03KUX\xaa\x02\rKonfa.User.V1\xca\x02\rKonfa\\User\\V1\xe2\x02\x19Konfa\\User\\V1\\GPBMetadata\xea\x02\x0fKonfa::User::V1b\x06proto3"
+	"\busername\x18\x02 \x01(\tR\busernameB\xae\x01\n" +
+	"\x11com.konfa.user.v1B\tUserProtoP\x01Z8github.com/konfa-chat/hub/src/proto/konfa/user/v1;userv1\xa2\x02\x03KUX\xaa\x02\rKonfa.User.V1\xca\x02\rKonfa\\User\\V1\xe2\x02\x19Konfa\\User\\V1\\GPBMetadata\xea\x02\x0fKonfa::User::V1b\x06proto3"
 
 var (
 	file_konfa_user_v1_user_proto_rawDescOnce sync.Once

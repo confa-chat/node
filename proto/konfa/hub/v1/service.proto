@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+import "konfa/hub/v1/auth_provider.proto";
+
+package konfa.hub.v1;
+
+service HubService {
+  rpc ListServerIDs(ListServersRequest) returns (ListServersResponse);
+  rpc ListVoiceRelays(ListVoiceRelaysRequest) returns (ListVoiceRelaysResponse);
+  rpc ListAuthProviders(ListAuthProvidersRequest)
+      returns (ListAuthProvidersResponse);
+}
+
+message ListServersRequest {}
+
+message ListServersResponse { repeated string server_ids = 1; }
+
+message ListVoiceRelaysRequest {}
+
+message VoiceRelay {
+  string id = 1;
+  string name = 2;
+  string address = 3;
+}
+
+message ListVoiceRelaysResponse { repeated VoiceRelay voice_relays = 1; }
+
+message ListAuthProvidersRequest {}
+
+message ListAuthProvidersResponse { repeated AuthProvider auth_providers = 1; }

@@ -7,21 +7,21 @@ option go_package = "/channelv1";
 // import "google/protobuf/timestamp.proto";
 
 message Channel {
-    oneof channel {
-        TextChannel text_channel = 1;
-        VoiceChannel voice_channel = 2;
-    }
+  oneof channel {
+    TextChannel text_channel = 1;
+    VoiceChannel voice_channel = 2;
+  }
 }
 
 message TextChannel {
-    string server_id = 1;
-    string channel_id = 2;
-    string name = 3;
+  string server_id = 1;
+  string channel_id = 2;
+  string name = 3;
 }
 
 message VoiceChannel {
-    string server_id = 1;
-    string channel_id = 2;
-    string name = 3;
+  string server_id = 1;
+  string channel_id = 2;
+  string name = 3;
+  string voice_relay_id = 4;
 }
-
