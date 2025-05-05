@@ -23,6 +23,7 @@ const (
 	ServerService_ListServerUsers_FullMethodName    = "/konfa.server.v1.ServerService/ListServerUsers"
 	ServerService_GetUser_FullMethodName            = "/konfa.server.v1.ServerService/GetUser"
 	ServerService_CurrentUser_FullMethodName        = "/konfa.server.v1.ServerService/CurrentUser"
+	ServerService_CreateChannel_FullMethodName      = "/konfa.server.v1.ServerService/CreateChannel"
 )
 
 // ServerServiceClient is the client API for ServerService service.
@@ -33,6 +34,7 @@ type ServerServiceClient interface {
 	ListServerUsers(ctx context.Context, in *ListServerUsersRequest, opts ...grpc.CallOption) (*ListServerUsersResponse, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
 	CurrentUser(ctx context.Context, in *CurrentUserRequest, opts ...grpc.CallOption) (*CurrentUserResponse, error)
+	CreateChannel(ctx context.Context, in *CreateChannelRequest, opts ...grpc.CallOption) (*CreateChannelResponse, error)
 }
 
 type serverServiceClient struct {
@@ -83,6 +85,16 @@ func (c *serverServiceClient) CurrentUser(ctx context.Context, in *CurrentUserRe
 	return out, nil
 }
 
+func (c *serverServiceClient) CreateChannel(ctx context.Context, in *CreateChannelRequest, opts ...grpc.CallOption) (*CreateChannelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateChannelResponse)
+	err := c.cc.Invoke(ctx, ServerService_CreateChannel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ServerServiceServer is the server API for ServerService service.
 // All implementations should embed UnimplementedServerServiceServer
 // for forward compatibility.
@@ -91,6 +103,7 @@ type ServerServiceServer interface {
 	ListServerUsers(context.Context, *ListServerUsersRequest) (*ListServerUsersResponse, error)
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	CurrentUser(context.Context, *CurrentUserRequest) (*CurrentUserResponse, error)
+	CreateChannel(context.Context, *CreateChannelRequest) (*CreateChannelResponse, error)
 }
 
 // UnimplementedServerServiceServer should be embedded to have
@@ -111,6 +124,9 @@ func (UnimplementedServerServiceServer) GetUser(context.Context, *GetUserRequest
 }
 func (UnimplementedServerServiceServer) CurrentUser(context.Context, *CurrentUserRequest) (*CurrentUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CurrentUser not implemented")
+}
+func (UnimplementedServerServiceServer) CreateChannel(context.Context, *CreateChannelRequest) (*CreateChannelResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateChannel not implemented")
 }
 func (UnimplementedServerServiceServer) testEmbeddedByValue() {}
 
@@ -204,6 +220,24 @@ func _ServerService_CurrentUser_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ServerService_CreateChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateChannelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServerServiceServer).CreateChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ServerService_CreateChannel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServerServiceServer).CreateChannel(ctx, req.(*CreateChannelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ServerService_ServiceDesc is the grpc.ServiceDesc for ServerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -226,6 +260,10 @@ var ServerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CurrentUser",
 			Handler:    _ServerService_CurrentUser_Handler,
+		},
+		{
+			MethodName: "CreateChannel",
+			Handler:    _ServerService_CreateChannel_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

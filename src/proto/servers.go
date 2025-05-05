@@ -94,3 +94,61 @@ func (s *ServerService) CurrentUser(ctx context.Context, req *serverv1.CurrentUs
 		User: mapUser(*user),
 	}, nil
 }
+
+// CreateChannel implements serverv1.ServerServiceServer.
+func (s *ServerService) CreateChannel(ctx context.Context, req *serverv1.CreateChannelRequest) (*serverv1.CreateChannelResponse, error) {
+	serverID, err := uuid.FromString(req.ServerId)
+	if err != nil {
+		return nil, fmt.Errorf("invalid server ID: %w", err)
+	}
+
+	var channelID uuid.UUID
+	var channel *channelv1.Channel
+
+	// Create either a text or voice channel based on the type
+	switch req.Type {
+	case serverv1.CreateChannelRequest_TEXT:
+		// Create a text channel
+		channelID, err = s.srv.CreateTextChannel(ctx, serverID, req.Name)
+		if err != nil {
+			return nil, fmt.Errorf("failed to create text channel: %w", err)
+		}
+
+		// Create the response with a text channel
+		channel = &channelv1.Channel{
+			Channel: &channelv1.Channel_TextChannel{
+				TextChannel: &channelv1.TextChannel{
+					ServerId:  serverID.String(),
+					ChannelId: channelID.String(),
+					Name:      req.Name,
+				},
+			},
+		}
+
+	case serverv1.CreateChannelRequest_VOICE:
+		// Create a voice channel using the service method
+		channelID, err = s.srv.CreateVoiceChannel(ctx, serverID, req.Name)
+		if err != nil {
+			return nil, fmt.Errorf("failed to create voice channel: %w", err)
+		}
+
+		// Create the response with a voice channel
+		channel = &channelv1.Channel{
+			Channel: &channelv1.Channel_VoiceChannel{
+				VoiceChannel: &channelv1.VoiceChannel{
+					ServerId:     serverID.String(),
+					ChannelId:    channelID.String(),
+					Name:         req.Name,
+					VoiceRelayId: "", // Empty for now
+				},
+			},
+		}
+
+	default:
+		return nil, fmt.Errorf("unknown channel type: %v", req.Type)
+	}
+
+	return &serverv1.CreateChannelResponse{
+		Channel: channel,
+	}, nil
+}

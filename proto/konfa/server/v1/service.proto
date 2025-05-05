@@ -15,6 +15,7 @@ service ServerService {
       returns (ListServerUsersResponse) {}
   rpc GetUser(GetUserRequest) returns (GetUserResponse) {}
   rpc CurrentUser(CurrentUserRequest) returns (CurrentUserResponse) {}
+  rpc CreateChannel(CreateChannelRequest) returns (CreateChannelResponse) {}
 }
 
 message CurrentUserRequest {}
@@ -34,3 +35,15 @@ message ListServerUsersResponse { repeated konfa.user.v1.User users = 1; }
 message GetUserRequest { string user_id = 1; }
 
 message GetUserResponse { konfa.user.v1.User user = 1; }
+
+message CreateChannelRequest {
+  string server_id = 1;
+  string name = 2;
+  enum ChannelType {
+    TEXT = 0;
+    VOICE = 1;
+  }
+  ChannelType type = 3;
+}
+
+message CreateChannelResponse { konfa.channel.v1.Channel channel = 1; }

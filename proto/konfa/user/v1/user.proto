@@ -4,9 +4,7 @@ package konfa.user.v1;
 
 option go_package = "/userv1";
 
-// import "google/protobuf/timestamp.proto";
-
 message User {
-    string id = 1;
-    string username = 2;
+  string id = 1;
+  string username = 2;
 }
