@@ -7,8 +7,8 @@
 package serverv1
 
 import (
-	v11 "github.com/konfa-chat/hub/src/proto/konfa/channel/v1"
-	v1 "github.com/konfa-chat/hub/src/proto/konfa/user/v1"
+	v1 "github.com/konfa-chat/hub/src/proto/konfa/channel/v1"
+	v11 "github.com/konfa-chat/hub/src/proto/konfa/user/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -66,111 +66,31 @@ func (x CreateChannelRequest_ChannelType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use CreateChannelRequest_ChannelType.Descriptor instead.
 func (CreateChannelRequest_ChannelType) EnumDescriptor() ([]byte, []int) {
-	return file_konfa_server_v1_service_proto_rawDescGZIP(), []int{8, 0}
+	return file_konfa_server_v1_service_proto_rawDescGZIP(), []int{4, 0}
 }
 
-type CurrentUserRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CurrentUserRequest) Reset() {
-	*x = CurrentUserRequest{}
-	mi := &file_konfa_server_v1_service_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CurrentUserRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CurrentUserRequest) ProtoMessage() {}
-
-func (x *CurrentUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_server_v1_service_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CurrentUserRequest.ProtoReflect.Descriptor instead.
-func (*CurrentUserRequest) Descriptor() ([]byte, []int) {
-	return file_konfa_server_v1_service_proto_rawDescGZIP(), []int{0}
-}
-
-type CurrentUserResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	User          *v1.User               `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CurrentUserResponse) Reset() {
-	*x = CurrentUserResponse{}
-	mi := &file_konfa_server_v1_service_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CurrentUserResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CurrentUserResponse) ProtoMessage() {}
-
-func (x *CurrentUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_server_v1_service_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CurrentUserResponse.ProtoReflect.Descriptor instead.
-func (*CurrentUserResponse) Descriptor() ([]byte, []int) {
-	return file_konfa_server_v1_service_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *CurrentUserResponse) GetUser() *v1.User {
-	if x != nil {
-		return x.User
-	}
-	return nil
-}
-
-type ListServerChannelsRequest struct {
+type ListChannelsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ServerId      string                 `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListServerChannelsRequest) Reset() {
-	*x = ListServerChannelsRequest{}
-	mi := &file_konfa_server_v1_service_proto_msgTypes[2]
+func (x *ListChannelsRequest) Reset() {
+	*x = ListChannelsRequest{}
+	mi := &file_konfa_server_v1_service_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListServerChannelsRequest) String() string {
+func (x *ListChannelsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListServerChannelsRequest) ProtoMessage() {}
+func (*ListChannelsRequest) ProtoMessage() {}
 
-func (x *ListServerChannelsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_server_v1_service_proto_msgTypes[2]
+func (x *ListChannelsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_konfa_server_v1_service_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -181,40 +101,40 @@ func (x *ListServerChannelsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListServerChannelsRequest.ProtoReflect.Descriptor instead.
-func (*ListServerChannelsRequest) Descriptor() ([]byte, []int) {
-	return file_konfa_server_v1_service_proto_rawDescGZIP(), []int{2}
+// Deprecated: Use ListChannelsRequest.ProtoReflect.Descriptor instead.
+func (*ListChannelsRequest) Descriptor() ([]byte, []int) {
+	return file_konfa_server_v1_service_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ListServerChannelsRequest) GetServerId() string {
+func (x *ListChannelsRequest) GetServerId() string {
 	if x != nil {
 		return x.ServerId
 	}
 	return ""
 }
 
-type ListServerChannelsResponse struct {
+type ListChannelsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Channels      []*v11.Channel         `protobuf:"bytes,1,rep,name=channels,proto3" json:"channels,omitempty"`
+	Channels      []*v1.Channel          `protobuf:"bytes,1,rep,name=channels,proto3" json:"channels,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListServerChannelsResponse) Reset() {
-	*x = ListServerChannelsResponse{}
-	mi := &file_konfa_server_v1_service_proto_msgTypes[3]
+func (x *ListChannelsResponse) Reset() {
+	*x = ListChannelsResponse{}
+	mi := &file_konfa_server_v1_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListServerChannelsResponse) String() string {
+func (x *ListChannelsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListServerChannelsResponse) ProtoMessage() {}
+func (*ListChannelsResponse) ProtoMessage() {}
 
-func (x *ListServerChannelsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_server_v1_service_proto_msgTypes[3]
+func (x *ListChannelsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_konfa_server_v1_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -225,40 +145,40 @@ func (x *ListServerChannelsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListServerChannelsResponse.ProtoReflect.Descriptor instead.
-func (*ListServerChannelsResponse) Descriptor() ([]byte, []int) {
-	return file_konfa_server_v1_service_proto_rawDescGZIP(), []int{3}
+// Deprecated: Use ListChannelsResponse.ProtoReflect.Descriptor instead.
+func (*ListChannelsResponse) Descriptor() ([]byte, []int) {
+	return file_konfa_server_v1_service_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ListServerChannelsResponse) GetChannels() []*v11.Channel {
+func (x *ListChannelsResponse) GetChannels() []*v1.Channel {
 	if x != nil {
 		return x.Channels
 	}
 	return nil
 }
 
-type ListServerUsersRequest struct {
+type ListUsersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ServerId      string                 `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListServerUsersRequest) Reset() {
-	*x = ListServerUsersRequest{}
-	mi := &file_konfa_server_v1_service_proto_msgTypes[4]
+func (x *ListUsersRequest) Reset() {
+	*x = ListUsersRequest{}
+	mi := &file_konfa_server_v1_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListServerUsersRequest) String() string {
+func (x *ListUsersRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListServerUsersRequest) ProtoMessage() {}
+func (*ListUsersRequest) ProtoMessage() {}
 
-func (x *ListServerUsersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_server_v1_service_proto_msgTypes[4]
+func (x *ListUsersRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_konfa_server_v1_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -269,40 +189,40 @@ func (x *ListServerUsersRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListServerUsersRequest.ProtoReflect.Descriptor instead.
-func (*ListServerUsersRequest) Descriptor() ([]byte, []int) {
-	return file_konfa_server_v1_service_proto_rawDescGZIP(), []int{4}
+// Deprecated: Use ListUsersRequest.ProtoReflect.Descriptor instead.
+func (*ListUsersRequest) Descriptor() ([]byte, []int) {
+	return file_konfa_server_v1_service_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *ListServerUsersRequest) GetServerId() string {
+func (x *ListUsersRequest) GetServerId() string {
 	if x != nil {
 		return x.ServerId
 	}
 	return ""
 }
 
-type ListServerUsersResponse struct {
+type ListUsersResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Users         []*v1.User             `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
+	Users         []*v11.User            `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListServerUsersResponse) Reset() {
-	*x = ListServerUsersResponse{}
-	mi := &file_konfa_server_v1_service_proto_msgTypes[5]
+func (x *ListUsersResponse) Reset() {
+	*x = ListUsersResponse{}
+	mi := &file_konfa_server_v1_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListServerUsersResponse) String() string {
+func (x *ListUsersResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListServerUsersResponse) ProtoMessage() {}
+func (*ListUsersResponse) ProtoMessage() {}
 
-func (x *ListServerUsersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_server_v1_service_proto_msgTypes[5]
+func (x *ListUsersResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_konfa_server_v1_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -313,102 +233,14 @@ func (x *ListServerUsersResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListServerUsersResponse.ProtoReflect.Descriptor instead.
-func (*ListServerUsersResponse) Descriptor() ([]byte, []int) {
-	return file_konfa_server_v1_service_proto_rawDescGZIP(), []int{5}
+// Deprecated: Use ListUsersResponse.ProtoReflect.Descriptor instead.
+func (*ListUsersResponse) Descriptor() ([]byte, []int) {
+	return file_konfa_server_v1_service_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *ListServerUsersResponse) GetUsers() []*v1.User {
+func (x *ListUsersResponse) GetUsers() []*v11.User {
 	if x != nil {
 		return x.Users
-	}
-	return nil
-}
-
-type GetUserRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetUserRequest) Reset() {
-	*x = GetUserRequest{}
-	mi := &file_konfa_server_v1_service_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetUserRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetUserRequest) ProtoMessage() {}
-
-func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_server_v1_service_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetUserRequest.ProtoReflect.Descriptor instead.
-func (*GetUserRequest) Descriptor() ([]byte, []int) {
-	return file_konfa_server_v1_service_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *GetUserRequest) GetUserId() string {
-	if x != nil {
-		return x.UserId
-	}
-	return ""
-}
-
-type GetUserResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	User          *v1.User               `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetUserResponse) Reset() {
-	*x = GetUserResponse{}
-	mi := &file_konfa_server_v1_service_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetUserResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetUserResponse) ProtoMessage() {}
-
-func (x *GetUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_server_v1_service_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetUserResponse.ProtoReflect.Descriptor instead.
-func (*GetUserResponse) Descriptor() ([]byte, []int) {
-	return file_konfa_server_v1_service_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *GetUserResponse) GetUser() *v1.User {
-	if x != nil {
-		return x.User
 	}
 	return nil
 }
@@ -424,7 +256,7 @@ type CreateChannelRequest struct {
 
 func (x *CreateChannelRequest) Reset() {
 	*x = CreateChannelRequest{}
-	mi := &file_konfa_server_v1_service_proto_msgTypes[8]
+	mi := &file_konfa_server_v1_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -436,7 +268,7 @@ func (x *CreateChannelRequest) String() string {
 func (*CreateChannelRequest) ProtoMessage() {}
 
 func (x *CreateChannelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_server_v1_service_proto_msgTypes[8]
+	mi := &file_konfa_server_v1_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -449,7 +281,7 @@ func (x *CreateChannelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateChannelRequest.ProtoReflect.Descriptor instead.
 func (*CreateChannelRequest) Descriptor() ([]byte, []int) {
-	return file_konfa_server_v1_service_proto_rawDescGZIP(), []int{8}
+	return file_konfa_server_v1_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *CreateChannelRequest) GetServerId() string {
@@ -475,14 +307,14 @@ func (x *CreateChannelRequest) GetType() CreateChannelRequest_ChannelType {
 
 type CreateChannelResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Channel       *v11.Channel           `protobuf:"bytes,1,opt,name=channel,proto3" json:"channel,omitempty"`
+	Channel       *v1.Channel            `protobuf:"bytes,1,opt,name=channel,proto3" json:"channel,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateChannelResponse) Reset() {
 	*x = CreateChannelResponse{}
-	mi := &file_konfa_server_v1_service_proto_msgTypes[9]
+	mi := &file_konfa_server_v1_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -494,7 +326,7 @@ func (x *CreateChannelResponse) String() string {
 func (*CreateChannelResponse) ProtoMessage() {}
 
 func (x *CreateChannelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_server_v1_service_proto_msgTypes[9]
+	mi := &file_konfa_server_v1_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -507,10 +339,10 @@ func (x *CreateChannelResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateChannelResponse.ProtoReflect.Descriptor instead.
 func (*CreateChannelResponse) Descriptor() ([]byte, []int) {
-	return file_konfa_server_v1_service_proto_rawDescGZIP(), []int{9}
+	return file_konfa_server_v1_service_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *CreateChannelResponse) GetChannel() *v11.Channel {
+func (x *CreateChannelResponse) GetChannel() *v1.Channel {
 	if x != nil {
 		return x.Channel
 	}
@@ -521,22 +353,15 @@ var File_konfa_server_v1_service_proto protoreflect.FileDescriptor
 
 const file_konfa_server_v1_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1dkonfa/server/v1/service.proto\x12\x0fkonfa.server.v1\x1a\x18konfa/user/v1/user.proto\x1a\x1fkonfa/channel/v1/channels.proto\"\x14\n" +
-	"\x12CurrentUserRequest\">\n" +
-	"\x13CurrentUserResponse\x12'\n" +
-	"\x04user\x18\x01 \x01(\v2\x13.konfa.user.v1.UserR\x04user\"8\n" +
-	"\x19ListServerChannelsRequest\x12\x1b\n" +
-	"\tserver_id\x18\x01 \x01(\tR\bserverId\"S\n" +
-	"\x1aListServerChannelsResponse\x125\n" +
-	"\bchannels\x18\x01 \x03(\v2\x19.konfa.channel.v1.ChannelR\bchannels\"5\n" +
-	"\x16ListServerUsersRequest\x12\x1b\n" +
-	"\tserver_id\x18\x01 \x01(\tR\bserverId\"D\n" +
-	"\x17ListServerUsersResponse\x12)\n" +
-	"\x05users\x18\x01 \x03(\v2\x13.konfa.user.v1.UserR\x05users\")\n" +
-	"\x0eGetUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\":\n" +
-	"\x0fGetUserResponse\x12'\n" +
-	"\x04user\x18\x01 \x01(\v2\x13.konfa.user.v1.UserR\x04user\"\xb2\x01\n" +
+	"\x1dkonfa/server/v1/service.proto\x12\x0fkonfa.server.v1\x1a\x18konfa/user/v1/user.proto\x1a\x1fkonfa/channel/v1/channels.proto\"2\n" +
+	"\x13ListChannelsRequest\x12\x1b\n" +
+	"\tserver_id\x18\x01 \x01(\tR\bserverId\"M\n" +
+	"\x14ListChannelsResponse\x125\n" +
+	"\bchannels\x18\x01 \x03(\v2\x19.konfa.channel.v1.ChannelR\bchannels\"/\n" +
+	"\x10ListUsersRequest\x12\x1b\n" +
+	"\tserver_id\x18\x01 \x01(\tR\bserverId\">\n" +
+	"\x11ListUsersResponse\x12)\n" +
+	"\x05users\x18\x01 \x03(\v2\x13.konfa.user.v1.UserR\x05users\"\xb2\x01\n" +
 	"\x14CreateChannelRequest\x12\x1b\n" +
 	"\tserver_id\x18\x01 \x01(\tR\bserverId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12E\n" +
@@ -545,12 +370,10 @@ const file_konfa_server_v1_service_proto_rawDesc = "" +
 	"\x04TEXT\x10\x00\x12\t\n" +
 	"\x05VOICE\x10\x01\"L\n" +
 	"\x15CreateChannelResponse\x123\n" +
-	"\achannel\x18\x01 \x01(\v2\x19.konfa.channel.v1.ChannelR\achannel2\xf6\x03\n" +
-	"\rServerService\x12o\n" +
-	"\x12ListServerChannels\x12*.konfa.server.v1.ListServerChannelsRequest\x1a+.konfa.server.v1.ListServerChannelsResponse\"\x00\x12f\n" +
-	"\x0fListServerUsers\x12'.konfa.server.v1.ListServerUsersRequest\x1a(.konfa.server.v1.ListServerUsersResponse\"\x00\x12N\n" +
-	"\aGetUser\x12\x1f.konfa.server.v1.GetUserRequest\x1a .konfa.server.v1.GetUserResponse\"\x00\x12Z\n" +
-	"\vCurrentUser\x12#.konfa.server.v1.CurrentUserRequest\x1a$.konfa.server.v1.CurrentUserResponse\"\x00\x12`\n" +
+	"\achannel\x18\x01 \x01(\v2\x19.konfa.channel.v1.ChannelR\achannel2\xa6\x02\n" +
+	"\rServerService\x12]\n" +
+	"\fListChannels\x12$.konfa.server.v1.ListChannelsRequest\x1a%.konfa.server.v1.ListChannelsResponse\"\x00\x12T\n" +
+	"\tListUsers\x12!.konfa.server.v1.ListUsersRequest\x1a\".konfa.server.v1.ListUsersResponse\"\x00\x12`\n" +
 	"\rCreateChannel\x12%.konfa.server.v1.CreateChannelRequest\x1a&.konfa.server.v1.CreateChannelResponse\"\x00B\xbf\x01\n" +
 	"\x13com.konfa.server.v1B\fServiceProtoP\x01Z<github.com/konfa-chat/hub/src/proto/konfa/server/v1;serverv1\xa2\x02\x03KSX\xaa\x02\x0fKonfa.Server.V1\xca\x02\x0fKonfa\\Server\\V1\xe2\x02\x1bKonfa\\Server\\V1\\GPBMetadata\xea\x02\x11Konfa::Server::V1b\x06proto3"
 
@@ -567,44 +390,34 @@ func file_konfa_server_v1_service_proto_rawDescGZIP() []byte {
 }
 
 var file_konfa_server_v1_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_konfa_server_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_konfa_server_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_konfa_server_v1_service_proto_goTypes = []any{
 	(CreateChannelRequest_ChannelType)(0), // 0: konfa.server.v1.CreateChannelRequest.ChannelType
-	(*CurrentUserRequest)(nil),            // 1: konfa.server.v1.CurrentUserRequest
-	(*CurrentUserResponse)(nil),           // 2: konfa.server.v1.CurrentUserResponse
-	(*ListServerChannelsRequest)(nil),     // 3: konfa.server.v1.ListServerChannelsRequest
-	(*ListServerChannelsResponse)(nil),    // 4: konfa.server.v1.ListServerChannelsResponse
-	(*ListServerUsersRequest)(nil),        // 5: konfa.server.v1.ListServerUsersRequest
-	(*ListServerUsersResponse)(nil),       // 6: konfa.server.v1.ListServerUsersResponse
-	(*GetUserRequest)(nil),                // 7: konfa.server.v1.GetUserRequest
-	(*GetUserResponse)(nil),               // 8: konfa.server.v1.GetUserResponse
-	(*CreateChannelRequest)(nil),          // 9: konfa.server.v1.CreateChannelRequest
-	(*CreateChannelResponse)(nil),         // 10: konfa.server.v1.CreateChannelResponse
-	(*v1.User)(nil),                       // 11: konfa.user.v1.User
-	(*v11.Channel)(nil),                   // 12: konfa.channel.v1.Channel
+	(*ListChannelsRequest)(nil),           // 1: konfa.server.v1.ListChannelsRequest
+	(*ListChannelsResponse)(nil),          // 2: konfa.server.v1.ListChannelsResponse
+	(*ListUsersRequest)(nil),              // 3: konfa.server.v1.ListUsersRequest
+	(*ListUsersResponse)(nil),             // 4: konfa.server.v1.ListUsersResponse
+	(*CreateChannelRequest)(nil),          // 5: konfa.server.v1.CreateChannelRequest
+	(*CreateChannelResponse)(nil),         // 6: konfa.server.v1.CreateChannelResponse
+	(*v1.Channel)(nil),                    // 7: konfa.channel.v1.Channel
+	(*v11.User)(nil),                      // 8: konfa.user.v1.User
 }
 var file_konfa_server_v1_service_proto_depIdxs = []int32{
-	11, // 0: konfa.server.v1.CurrentUserResponse.user:type_name -> konfa.user.v1.User
-	12, // 1: konfa.server.v1.ListServerChannelsResponse.channels:type_name -> konfa.channel.v1.Channel
-	11, // 2: konfa.server.v1.ListServerUsersResponse.users:type_name -> konfa.user.v1.User
-	11, // 3: konfa.server.v1.GetUserResponse.user:type_name -> konfa.user.v1.User
-	0,  // 4: konfa.server.v1.CreateChannelRequest.type:type_name -> konfa.server.v1.CreateChannelRequest.ChannelType
-	12, // 5: konfa.server.v1.CreateChannelResponse.channel:type_name -> konfa.channel.v1.Channel
-	3,  // 6: konfa.server.v1.ServerService.ListServerChannels:input_type -> konfa.server.v1.ListServerChannelsRequest
-	5,  // 7: konfa.server.v1.ServerService.ListServerUsers:input_type -> konfa.server.v1.ListServerUsersRequest
-	7,  // 8: konfa.server.v1.ServerService.GetUser:input_type -> konfa.server.v1.GetUserRequest
-	1,  // 9: konfa.server.v1.ServerService.CurrentUser:input_type -> konfa.server.v1.CurrentUserRequest
-	9,  // 10: konfa.server.v1.ServerService.CreateChannel:input_type -> konfa.server.v1.CreateChannelRequest
-	4,  // 11: konfa.server.v1.ServerService.ListServerChannels:output_type -> konfa.server.v1.ListServerChannelsResponse
-	6,  // 12: konfa.server.v1.ServerService.ListServerUsers:output_type -> konfa.server.v1.ListServerUsersResponse
-	8,  // 13: konfa.server.v1.ServerService.GetUser:output_type -> konfa.server.v1.GetUserResponse
-	2,  // 14: konfa.server.v1.ServerService.CurrentUser:output_type -> konfa.server.v1.CurrentUserResponse
-	10, // 15: konfa.server.v1.ServerService.CreateChannel:output_type -> konfa.server.v1.CreateChannelResponse
-	11, // [11:16] is the sub-list for method output_type
-	6,  // [6:11] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	7, // 0: konfa.server.v1.ListChannelsResponse.channels:type_name -> konfa.channel.v1.Channel
+	8, // 1: konfa.server.v1.ListUsersResponse.users:type_name -> konfa.user.v1.User
+	0, // 2: konfa.server.v1.CreateChannelRequest.type:type_name -> konfa.server.v1.CreateChannelRequest.ChannelType
+	7, // 3: konfa.server.v1.CreateChannelResponse.channel:type_name -> konfa.channel.v1.Channel
+	1, // 4: konfa.server.v1.ServerService.ListChannels:input_type -> konfa.server.v1.ListChannelsRequest
+	3, // 5: konfa.server.v1.ServerService.ListUsers:input_type -> konfa.server.v1.ListUsersRequest
+	5, // 6: konfa.server.v1.ServerService.CreateChannel:input_type -> konfa.server.v1.CreateChannelRequest
+	2, // 7: konfa.server.v1.ServerService.ListChannels:output_type -> konfa.server.v1.ListChannelsResponse
+	4, // 8: konfa.server.v1.ServerService.ListUsers:output_type -> konfa.server.v1.ListUsersResponse
+	6, // 9: konfa.server.v1.ServerService.CreateChannel:output_type -> konfa.server.v1.CreateChannelResponse
+	7, // [7:10] is the sub-list for method output_type
+	4, // [4:7] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_konfa_server_v1_service_proto_init() }
@@ -618,7 +431,7 @@ func file_konfa_server_v1_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_konfa_server_v1_service_proto_rawDesc), len(file_konfa_server_v1_service_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   10,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

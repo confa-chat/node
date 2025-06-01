@@ -24,16 +24,19 @@ func (a *Authenticator) UnaryAuthenticate(ctx context.Context, req any, info *gr
 
 	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
+		a.logger.Warn("missing metadata")
 		return nil, errMissingMetadata
 	}
 
 	token := grpcExtractToken(md["authorization"])
 	if token == "" {
+		a.logger.Warn("missing token in metadata")
 		return nil, errInvalidToken
 	}
 
 	ctx, err := a.authorize(ctx, token)
 	if err != nil {
+		a.logger.Warn("failed to authorize token", "error", err)
 		return nil, err
 	}
 

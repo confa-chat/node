@@ -7,6 +7,7 @@
 package hubv1
 
 import (
+	v1 "github.com/konfa-chat/hub/src/proto/konfa/user/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -321,11 +322,179 @@ func (x *ListAuthProvidersResponse) GetAuthProviders() []*AuthProvider {
 	return nil
 }
 
+type GetUserRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserRequest) Reset() {
+	*x = GetUserRequest{}
+	mi := &file_konfa_hub_v1_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserRequest) ProtoMessage() {}
+
+func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_konfa_hub_v1_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserRequest.ProtoReflect.Descriptor instead.
+func (*GetUserRequest) Descriptor() ([]byte, []int) {
+	return file_konfa_hub_v1_service_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetUserRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type GetUserResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	User          *v1.User               `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserResponse) Reset() {
+	*x = GetUserResponse{}
+	mi := &file_konfa_hub_v1_service_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserResponse) ProtoMessage() {}
+
+func (x *GetUserResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_konfa_hub_v1_service_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserResponse.ProtoReflect.Descriptor instead.
+func (*GetUserResponse) Descriptor() ([]byte, []int) {
+	return file_konfa_hub_v1_service_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetUserResponse) GetUser() *v1.User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+type CurrentUserRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CurrentUserRequest) Reset() {
+	*x = CurrentUserRequest{}
+	mi := &file_konfa_hub_v1_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CurrentUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CurrentUserRequest) ProtoMessage() {}
+
+func (x *CurrentUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_konfa_hub_v1_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CurrentUserRequest.ProtoReflect.Descriptor instead.
+func (*CurrentUserRequest) Descriptor() ([]byte, []int) {
+	return file_konfa_hub_v1_service_proto_rawDescGZIP(), []int{9}
+}
+
+type CurrentUserResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	User          *v1.User               `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CurrentUserResponse) Reset() {
+	*x = CurrentUserResponse{}
+	mi := &file_konfa_hub_v1_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CurrentUserResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CurrentUserResponse) ProtoMessage() {}
+
+func (x *CurrentUserResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_konfa_hub_v1_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CurrentUserResponse.ProtoReflect.Descriptor instead.
+func (*CurrentUserResponse) Descriptor() ([]byte, []int) {
+	return file_konfa_hub_v1_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *CurrentUserResponse) GetUser() *v1.User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
 var File_konfa_hub_v1_service_proto protoreflect.FileDescriptor
 
 const file_konfa_hub_v1_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1akonfa/hub/v1/service.proto\x12\fkonfa.hub.v1\x1a konfa/hub/v1/auth_provider.proto\"\x14\n" +
+	"\x1akonfa/hub/v1/service.proto\x12\fkonfa.hub.v1\x1a konfa/hub/v1/auth_provider.proto\x1a\x18konfa/user/v1/user.proto\"\x14\n" +
 	"\x12ListServersRequest\"4\n" +
 	"\x13ListServersResponse\x12\x1d\n" +
 	"\n" +
@@ -340,9 +509,18 @@ const file_konfa_hub_v1_service_proto_rawDesc = "" +
 	"\fvoice_relays\x18\x01 \x03(\v2\x18.konfa.hub.v1.VoiceRelayR\vvoiceRelays\"\x1a\n" +
 	"\x18ListAuthProvidersRequest\"^\n" +
 	"\x19ListAuthProvidersResponse\x12A\n" +
-	"\x0eauth_providers\x18\x01 \x03(\v2\x1a.konfa.hub.v1.AuthProviderR\rauthProviders2\xa8\x02\n" +
+	"\x0eauth_providers\x18\x01 \x03(\v2\x1a.konfa.hub.v1.AuthProviderR\rauthProviders\" \n" +
+	"\x0eGetUserRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\":\n" +
+	"\x0fGetUserResponse\x12'\n" +
+	"\x04user\x18\x01 \x01(\v2\x13.konfa.user.v1.UserR\x04user\"\x14\n" +
+	"\x12CurrentUserRequest\">\n" +
+	"\x13CurrentUserResponse\x12'\n" +
+	"\x04user\x18\x01 \x01(\v2\x13.konfa.user.v1.UserR\x04user2\xc8\x03\n" +
 	"\n" +
-	"HubService\x12T\n" +
+	"HubService\x12H\n" +
+	"\aGetUser\x12\x1c.konfa.hub.v1.GetUserRequest\x1a\x1d.konfa.hub.v1.GetUserResponse\"\x00\x12T\n" +
+	"\vCurrentUser\x12 .konfa.hub.v1.CurrentUserRequest\x1a!.konfa.hub.v1.CurrentUserResponse\"\x00\x12T\n" +
 	"\rListServerIDs\x12 .konfa.hub.v1.ListServersRequest\x1a!.konfa.hub.v1.ListServersResponse\x12^\n" +
 	"\x0fListVoiceRelays\x12$.konfa.hub.v1.ListVoiceRelaysRequest\x1a%.konfa.hub.v1.ListVoiceRelaysResponse\x12d\n" +
 	"\x11ListAuthProviders\x12&.konfa.hub.v1.ListAuthProvidersRequest\x1a'.konfa.hub.v1.ListAuthProvidersResponseB\xaa\x01\n" +
@@ -360,7 +538,7 @@ func file_konfa_hub_v1_service_proto_rawDescGZIP() []byte {
 	return file_konfa_hub_v1_service_proto_rawDescData
 }
 
-var file_konfa_hub_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_konfa_hub_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_konfa_hub_v1_service_proto_goTypes = []any{
 	(*ListServersRequest)(nil),        // 0: konfa.hub.v1.ListServersRequest
 	(*ListServersResponse)(nil),       // 1: konfa.hub.v1.ListServersResponse
@@ -369,22 +547,33 @@ var file_konfa_hub_v1_service_proto_goTypes = []any{
 	(*ListVoiceRelaysResponse)(nil),   // 4: konfa.hub.v1.ListVoiceRelaysResponse
 	(*ListAuthProvidersRequest)(nil),  // 5: konfa.hub.v1.ListAuthProvidersRequest
 	(*ListAuthProvidersResponse)(nil), // 6: konfa.hub.v1.ListAuthProvidersResponse
-	(*AuthProvider)(nil),              // 7: konfa.hub.v1.AuthProvider
+	(*GetUserRequest)(nil),            // 7: konfa.hub.v1.GetUserRequest
+	(*GetUserResponse)(nil),           // 8: konfa.hub.v1.GetUserResponse
+	(*CurrentUserRequest)(nil),        // 9: konfa.hub.v1.CurrentUserRequest
+	(*CurrentUserResponse)(nil),       // 10: konfa.hub.v1.CurrentUserResponse
+	(*AuthProvider)(nil),              // 11: konfa.hub.v1.AuthProvider
+	(*v1.User)(nil),                   // 12: konfa.user.v1.User
 }
 var file_konfa_hub_v1_service_proto_depIdxs = []int32{
-	3, // 0: konfa.hub.v1.ListVoiceRelaysResponse.voice_relays:type_name -> konfa.hub.v1.VoiceRelay
-	7, // 1: konfa.hub.v1.ListAuthProvidersResponse.auth_providers:type_name -> konfa.hub.v1.AuthProvider
-	0, // 2: konfa.hub.v1.HubService.ListServerIDs:input_type -> konfa.hub.v1.ListServersRequest
-	2, // 3: konfa.hub.v1.HubService.ListVoiceRelays:input_type -> konfa.hub.v1.ListVoiceRelaysRequest
-	5, // 4: konfa.hub.v1.HubService.ListAuthProviders:input_type -> konfa.hub.v1.ListAuthProvidersRequest
-	1, // 5: konfa.hub.v1.HubService.ListServerIDs:output_type -> konfa.hub.v1.ListServersResponse
-	4, // 6: konfa.hub.v1.HubService.ListVoiceRelays:output_type -> konfa.hub.v1.ListVoiceRelaysResponse
-	6, // 7: konfa.hub.v1.HubService.ListAuthProviders:output_type -> konfa.hub.v1.ListAuthProvidersResponse
-	5, // [5:8] is the sub-list for method output_type
-	2, // [2:5] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	3,  // 0: konfa.hub.v1.ListVoiceRelaysResponse.voice_relays:type_name -> konfa.hub.v1.VoiceRelay
+	11, // 1: konfa.hub.v1.ListAuthProvidersResponse.auth_providers:type_name -> konfa.hub.v1.AuthProvider
+	12, // 2: konfa.hub.v1.GetUserResponse.user:type_name -> konfa.user.v1.User
+	12, // 3: konfa.hub.v1.CurrentUserResponse.user:type_name -> konfa.user.v1.User
+	7,  // 4: konfa.hub.v1.HubService.GetUser:input_type -> konfa.hub.v1.GetUserRequest
+	9,  // 5: konfa.hub.v1.HubService.CurrentUser:input_type -> konfa.hub.v1.CurrentUserRequest
+	0,  // 6: konfa.hub.v1.HubService.ListServerIDs:input_type -> konfa.hub.v1.ListServersRequest
+	2,  // 7: konfa.hub.v1.HubService.ListVoiceRelays:input_type -> konfa.hub.v1.ListVoiceRelaysRequest
+	5,  // 8: konfa.hub.v1.HubService.ListAuthProviders:input_type -> konfa.hub.v1.ListAuthProvidersRequest
+	8,  // 9: konfa.hub.v1.HubService.GetUser:output_type -> konfa.hub.v1.GetUserResponse
+	10, // 10: konfa.hub.v1.HubService.CurrentUser:output_type -> konfa.hub.v1.CurrentUserResponse
+	1,  // 11: konfa.hub.v1.HubService.ListServerIDs:output_type -> konfa.hub.v1.ListServersResponse
+	4,  // 12: konfa.hub.v1.HubService.ListVoiceRelays:output_type -> konfa.hub.v1.ListVoiceRelaysResponse
+	6,  // 13: konfa.hub.v1.HubService.ListAuthProviders:output_type -> konfa.hub.v1.ListAuthProvidersResponse
+	9,  // [9:14] is the sub-list for method output_type
+	4,  // [4:9] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_konfa_hub_v1_service_proto_init() }
@@ -399,7 +588,7 @@ func file_konfa_hub_v1_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_konfa_hub_v1_service_proto_rawDesc), len(file_konfa_hub_v1_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

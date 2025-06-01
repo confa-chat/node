@@ -2,7 +2,10 @@ package proto
 
 import (
 	"context"
+	"fmt"
 
+	"github.com/konfa-chat/hub/pkg/uuid"
+	"github.com/konfa-chat/hub/src/auth"
 	"github.com/konfa-chat/hub/src/konfa"
 	hubv1 "github.com/konfa-chat/hub/src/proto/konfa/hub/v1"
 )
@@ -45,5 +48,34 @@ func (h *HubService) ListServerIDs(ctx context.Context, req *hubv1.ListServersRe
 	}
 	return &hubv1.ListServersResponse{
 		ServerIds: serverIds,
+	}, nil
+}
+
+// GetUser implements serverv1.ServerServiceServer.
+func (s *HubService) GetUser(ctx context.Context, req *hubv1.GetUserRequest) (*hubv1.GetUserResponse, error) {
+	userID, err := uuid.FromString(req.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	users, err := s.srv.GetUser(ctx, userID)
+	if err != nil {
+		return nil, err
+	}
+
+	return &hubv1.GetUserResponse{
+		User: mapUser(users),
+	}, nil
+}
+
+// CurrentUser implements serverv1.ServerServiceServer.
+func (s *HubService) CurrentUser(ctx context.Context, req *hubv1.CurrentUserRequest) (*hubv1.CurrentUserResponse, error) {
+	user := auth.CtxGetUser(ctx)
+	if user == nil {
+		return nil, fmt.Errorf("user not found in context")
+	}
+
+	return &hubv1.CurrentUserResponse{
+		User: mapUser(*user),
 	}, nil
 }

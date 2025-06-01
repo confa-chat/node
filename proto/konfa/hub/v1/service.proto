@@ -1,10 +1,14 @@
 syntax = "proto3";
 
 import "konfa/hub/v1/auth_provider.proto";
+import "konfa/user/v1/user.proto";
 
 package konfa.hub.v1;
 
 service HubService {
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {}
+  rpc CurrentUser(CurrentUserRequest) returns (CurrentUserResponse) {}
+
   rpc ListServerIDs(ListServersRequest) returns (ListServersResponse);
   rpc ListVoiceRelays(ListVoiceRelaysRequest) returns (ListVoiceRelaysResponse);
   rpc ListAuthProviders(ListAuthProvidersRequest)
@@ -26,5 +30,10 @@ message VoiceRelay {
 message ListVoiceRelaysResponse { repeated VoiceRelay voice_relays = 1; }
 
 message ListAuthProvidersRequest {}
-
 message ListAuthProvidersResponse { repeated AuthProvider auth_providers = 1; }
+
+message GetUserRequest { string id = 1; }
+message GetUserResponse { konfa.user.v1.User user = 1; }
+
+message CurrentUserRequest {}
+message CurrentUserResponse { konfa.user.v1.User user = 1; }

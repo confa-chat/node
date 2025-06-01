@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	"github.com/konfa-chat/hub/pkg/uuid"
-	"github.com/konfa-chat/hub/src/auth"
 	"github.com/konfa-chat/hub/src/konfa"
 	channelv1 "github.com/konfa-chat/hub/src/proto/konfa/channel/v1"
 	serverv1 "github.com/konfa-chat/hub/src/proto/konfa/server/v1"
@@ -22,8 +21,8 @@ type ServerService struct {
 
 var _ serverv1.ServerServiceServer = (*ServerService)(nil)
 
-// ListServerChannels implements serverv1.ServerServiceServer.
-func (s *ServerService) ListServerChannels(ctx context.Context, req *serverv1.ListServerChannelsRequest) (*serverv1.ListServerChannelsResponse, error) {
+// ListChannels implements serverv1.ServerServiceServer.
+func (s *ServerService) ListChannels(ctx context.Context, req *serverv1.ListChannelsRequest) (*serverv1.ListChannelsResponse, error) {
 	serverID, err := uuid.FromString(req.ServerId)
 	if err != nil {
 		return nil, err
@@ -38,19 +37,20 @@ func (s *ServerService) ListServerChannels(ctx context.Context, req *serverv1.Li
 		ID:       serverID,
 		ServerID: serverID,
 		Name:     "general",
+		RelayID:  s.srv.Config.VoiceRelays[0].ID,
 	}}
 
 	channels := make([]*channelv1.Channel, 0, len(textChannels)+len(voiceChannels))
 	channels = append(channels, apply(textChannels, mapTextChannelToChannel)...)
 	channels = append(channels, apply(voiceChannels, mapVoiceChannelToChannel)...)
 
-	return &serverv1.ListServerChannelsResponse{
+	return &serverv1.ListChannelsResponse{
 		Channels: channels,
 	}, nil
 }
 
-// ListServerUsers implements serverv1.ServerServiceServer.
-func (s *ServerService) ListServerUsers(ctx context.Context, req *serverv1.ListServerUsersRequest) (*serverv1.ListServerUsersResponse, error) {
+// ListUsers implements serverv1.ServerServiceServer.
+func (s *ServerService) ListUsers(ctx context.Context, req *serverv1.ListUsersRequest) (*serverv1.ListUsersResponse, error) {
 	serverID, err := uuid.FromString(req.ServerId)
 	if err != nil {
 		return nil, err
@@ -61,37 +61,8 @@ func (s *ServerService) ListServerUsers(ctx context.Context, req *serverv1.ListS
 		return nil, err
 	}
 
-	return &serverv1.ListServerUsersResponse{
+	return &serverv1.ListUsersResponse{
 		Users: apply(users, mapUser),
-	}, nil
-}
-
-// GetUser implements serverv1.ServerServiceServer.
-func (s *ServerService) GetUser(ctx context.Context, req *serverv1.GetUserRequest) (*serverv1.GetUserResponse, error) {
-	userID, err := uuid.FromString(req.UserId)
-	if err != nil {
-		return nil, err
-	}
-
-	users, err := s.srv.GetUser(ctx, userID)
-	if err != nil {
-		return nil, err
-	}
-
-	return &serverv1.GetUserResponse{
-		User: mapUser(users),
-	}, nil
-}
-
-// CurrentUser implements serverv1.ServerServiceServer.
-func (s *ServerService) CurrentUser(ctx context.Context, req *serverv1.CurrentUserRequest) (*serverv1.CurrentUserResponse, error) {
-	user := auth.CtxGetUser(ctx)
-	if user == nil {
-		return nil, fmt.Errorf("user not found in context")
-	}
-
-	return &serverv1.CurrentUserResponse{
-		User: mapUser(*user),
 	}, nil
 }
 
@@ -114,7 +85,6 @@ func (s *ServerService) CreateChannel(ctx context.Context, req *serverv1.CreateC
 			return nil, fmt.Errorf("failed to create text channel: %w", err)
 		}
 
-		// Create the response with a text channel
 		channel = &channelv1.Channel{
 			Channel: &channelv1.Channel_TextChannel{
 				TextChannel: &channelv1.TextChannel{
@@ -132,14 +102,13 @@ func (s *ServerService) CreateChannel(ctx context.Context, req *serverv1.CreateC
 			return nil, fmt.Errorf("failed to create voice channel: %w", err)
 		}
 
-		// Create the response with a voice channel
 		channel = &channelv1.Channel{
 			Channel: &channelv1.Channel_VoiceChannel{
 				VoiceChannel: &channelv1.VoiceChannel{
 					ServerId:     serverID.String(),
 					ChannelId:    channelID.String(),
 					Name:         req.Name,
-					VoiceRelayId: "", // Empty for now
+					VoiceRelayId: []string{s.srv.Config.VoiceRelays[0].ID},
 				},
 			},
 		}

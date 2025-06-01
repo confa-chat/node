@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"log/slog"
 
 	"github.com/konfa-chat/hub/pkg/uuid"
 	"github.com/konfa-chat/hub/src/store"
@@ -30,6 +31,8 @@ type Authenticator struct {
 
 	provider rs.ResourceServer
 	db       *bun.DB
+
+	logger *slog.Logger
 }
 
 func NewAuthenticator(ctx context.Context, db *bun.DB, acfg AuthenticatorConfig, skipAuthMethods []string) (*Authenticator, error) {
@@ -43,6 +46,7 @@ func NewAuthenticator(ctx context.Context, db *bun.DB, acfg AuthenticatorConfig,
 		skipAuthMethods: skipAuthMethods,
 		provider:        provider,
 		db:              db,
+		logger:          slog.With("component", "authenticator"),
 	}, nil
 }
 

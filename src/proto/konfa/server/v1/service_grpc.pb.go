@@ -19,21 +19,17 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ServerService_ListServerChannels_FullMethodName = "/konfa.server.v1.ServerService/ListServerChannels"
-	ServerService_ListServerUsers_FullMethodName    = "/konfa.server.v1.ServerService/ListServerUsers"
-	ServerService_GetUser_FullMethodName            = "/konfa.server.v1.ServerService/GetUser"
-	ServerService_CurrentUser_FullMethodName        = "/konfa.server.v1.ServerService/CurrentUser"
-	ServerService_CreateChannel_FullMethodName      = "/konfa.server.v1.ServerService/CreateChannel"
+	ServerService_ListChannels_FullMethodName  = "/konfa.server.v1.ServerService/ListChannels"
+	ServerService_ListUsers_FullMethodName     = "/konfa.server.v1.ServerService/ListUsers"
+	ServerService_CreateChannel_FullMethodName = "/konfa.server.v1.ServerService/CreateChannel"
 )
 
 // ServerServiceClient is the client API for ServerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ServerServiceClient interface {
-	ListServerChannels(ctx context.Context, in *ListServerChannelsRequest, opts ...grpc.CallOption) (*ListServerChannelsResponse, error)
-	ListServerUsers(ctx context.Context, in *ListServerUsersRequest, opts ...grpc.CallOption) (*ListServerUsersResponse, error)
-	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
-	CurrentUser(ctx context.Context, in *CurrentUserRequest, opts ...grpc.CallOption) (*CurrentUserResponse, error)
+	ListChannels(ctx context.Context, in *ListChannelsRequest, opts ...grpc.CallOption) (*ListChannelsResponse, error)
+	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
 	CreateChannel(ctx context.Context, in *CreateChannelRequest, opts ...grpc.CallOption) (*CreateChannelResponse, error)
 }
 
@@ -45,40 +41,20 @@ func NewServerServiceClient(cc grpc.ClientConnInterface) ServerServiceClient {
 	return &serverServiceClient{cc}
 }
 
-func (c *serverServiceClient) ListServerChannels(ctx context.Context, in *ListServerChannelsRequest, opts ...grpc.CallOption) (*ListServerChannelsResponse, error) {
+func (c *serverServiceClient) ListChannels(ctx context.Context, in *ListChannelsRequest, opts ...grpc.CallOption) (*ListChannelsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListServerChannelsResponse)
-	err := c.cc.Invoke(ctx, ServerService_ListServerChannels_FullMethodName, in, out, cOpts...)
+	out := new(ListChannelsResponse)
+	err := c.cc.Invoke(ctx, ServerService_ListChannels_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *serverServiceClient) ListServerUsers(ctx context.Context, in *ListServerUsersRequest, opts ...grpc.CallOption) (*ListServerUsersResponse, error) {
+func (c *serverServiceClient) ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListServerUsersResponse)
-	err := c.cc.Invoke(ctx, ServerService_ListServerUsers_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *serverServiceClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetUserResponse)
-	err := c.cc.Invoke(ctx, ServerService_GetUser_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *serverServiceClient) CurrentUser(ctx context.Context, in *CurrentUserRequest, opts ...grpc.CallOption) (*CurrentUserResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CurrentUserResponse)
-	err := c.cc.Invoke(ctx, ServerService_CurrentUser_FullMethodName, in, out, cOpts...)
+	out := new(ListUsersResponse)
+	err := c.cc.Invoke(ctx, ServerService_ListUsers_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -99,10 +75,8 @@ func (c *serverServiceClient) CreateChannel(ctx context.Context, in *CreateChann
 // All implementations should embed UnimplementedServerServiceServer
 // for forward compatibility.
 type ServerServiceServer interface {
-	ListServerChannels(context.Context, *ListServerChannelsRequest) (*ListServerChannelsResponse, error)
-	ListServerUsers(context.Context, *ListServerUsersRequest) (*ListServerUsersResponse, error)
-	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
-	CurrentUser(context.Context, *CurrentUserRequest) (*CurrentUserResponse, error)
+	ListChannels(context.Context, *ListChannelsRequest) (*ListChannelsResponse, error)
+	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
 	CreateChannel(context.Context, *CreateChannelRequest) (*CreateChannelResponse, error)
 }
 
@@ -113,17 +87,11 @@ type ServerServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedServerServiceServer struct{}
 
-func (UnimplementedServerServiceServer) ListServerChannels(context.Context, *ListServerChannelsRequest) (*ListServerChannelsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListServerChannels not implemented")
+func (UnimplementedServerServiceServer) ListChannels(context.Context, *ListChannelsRequest) (*ListChannelsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListChannels not implemented")
 }
-func (UnimplementedServerServiceServer) ListServerUsers(context.Context, *ListServerUsersRequest) (*ListServerUsersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListServerUsers not implemented")
-}
-func (UnimplementedServerServiceServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
-}
-func (UnimplementedServerServiceServer) CurrentUser(context.Context, *CurrentUserRequest) (*CurrentUserResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CurrentUser not implemented")
+func (UnimplementedServerServiceServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUsers not implemented")
 }
 func (UnimplementedServerServiceServer) CreateChannel(context.Context, *CreateChannelRequest) (*CreateChannelResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateChannel not implemented")
@@ -148,74 +116,38 @@ func RegisterServerServiceServer(s grpc.ServiceRegistrar, srv ServerServiceServe
 	s.RegisterService(&ServerService_ServiceDesc, srv)
 }
 
-func _ServerService_ListServerChannels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListServerChannelsRequest)
+func _ServerService_ListChannels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListChannelsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServerServiceServer).ListServerChannels(ctx, in)
+		return srv.(ServerServiceServer).ListChannels(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ServerService_ListServerChannels_FullMethodName,
+		FullMethod: ServerService_ListChannels_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServerServiceServer).ListServerChannels(ctx, req.(*ListServerChannelsRequest))
+		return srv.(ServerServiceServer).ListChannels(ctx, req.(*ListChannelsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ServerService_ListServerUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListServerUsersRequest)
+func _ServerService_ListUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUsersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServerServiceServer).ListServerUsers(ctx, in)
+		return srv.(ServerServiceServer).ListUsers(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: ServerService_ListServerUsers_FullMethodName,
+		FullMethod: ServerService_ListUsers_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServerServiceServer).ListServerUsers(ctx, req.(*ListServerUsersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ServerService_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServerServiceServer).GetUser(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ServerService_GetUser_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServerServiceServer).GetUser(ctx, req.(*GetUserRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ServerService_CurrentUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CurrentUserRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServerServiceServer).CurrentUser(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ServerService_CurrentUser_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServerServiceServer).CurrentUser(ctx, req.(*CurrentUserRequest))
+		return srv.(ServerServiceServer).ListUsers(ctx, req.(*ListUsersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -246,20 +178,12 @@ var ServerService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ServerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ListServerChannels",
-			Handler:    _ServerService_ListServerChannels_Handler,
+			MethodName: "ListChannels",
+			Handler:    _ServerService_ListChannels_Handler,
 		},
 		{
-			MethodName: "ListServerUsers",
-			Handler:    _ServerService_ListServerUsers_Handler,
-		},
-		{
-			MethodName: "GetUser",
-			Handler:    _ServerService_GetUser_Handler,
-		},
-		{
-			MethodName: "CurrentUser",
-			Handler:    _ServerService_CurrentUser_Handler,
+			MethodName: "ListUsers",
+			Handler:    _ServerService_ListUsers_Handler,
 		},
 		{
 			MethodName: "CreateChannel",

@@ -43,9 +43,10 @@ func mapTextChannel(c store.TextChannel) *channelv1.TextChannel {
 
 func mapVoiceChannel(c store.VoiceChannel) *channelv1.VoiceChannel {
 	return &channelv1.VoiceChannel{
-		ServerId:  c.ServerID.String(),
-		ChannelId: c.ID.String(),
-		Name:      c.Name,
+		ServerId:     c.ServerID.String(),
+		ChannelId:    c.ID.String(),
+		Name:         c.Name,
+		VoiceRelayId: []string{c.RelayID},
 	}
 }
 

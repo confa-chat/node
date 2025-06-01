@@ -23,5 +23,5 @@ message VoiceChannel {
   string server_id = 1;
   string channel_id = 2;
   string name = 3;
-  string voice_relay_id = 4;
+  repeated string voice_relay_id = 4;
 }

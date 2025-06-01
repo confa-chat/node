@@ -52,7 +52,7 @@ func main() {
 		},
 		[]string{
 			"/grpc.reflection.v1alpha.ServerReflection",
-			"/" + hubv1.HubService_ServiceDesc.ServiceName,
+			hubv1.HubService_ListAuthProviders_FullMethodName,
 		},
 	)
 	if err != nil {

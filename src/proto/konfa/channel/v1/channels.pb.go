@@ -168,7 +168,7 @@ type VoiceChannel struct {
 	ServerId      string                 `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
 	ChannelId     string                 `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
 	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	VoiceRelayId  string                 `protobuf:"bytes,4,opt,name=voice_relay_id,json=voiceRelayId,proto3" json:"voice_relay_id,omitempty"`
+	VoiceRelayId  []string               `protobuf:"bytes,4,rep,name=voice_relay_id,json=voiceRelayId,proto3" json:"voice_relay_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -224,11 +224,11 @@ func (x *VoiceChannel) GetName() string {
 	return ""
 }
 
-func (x *VoiceChannel) GetVoiceRelayId() string {
+func (x *VoiceChannel) GetVoiceRelayId() []string {
 	if x != nil {
 		return x.VoiceRelayId
 	}
-	return ""
+	return nil
 }
 
 var File_konfa_channel_v1_channels_proto protoreflect.FileDescriptor
@@ -250,7 +250,7 @@ const file_konfa_channel_v1_channels_proto_rawDesc = "" +
 	"\n" +
 	"channel_id\x18\x02 \x01(\tR\tchannelId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12$\n" +
-	"\x0evoice_relay_id\x18\x04 \x01(\tR\fvoiceRelayIdB\xc7\x01\n" +
+	"\x0evoice_relay_id\x18\x04 \x03(\tR\fvoiceRelayIdB\xc7\x01\n" +
 	"\x14com.konfa.channel.v1B\rChannelsProtoP\x01Z>github.com/konfa-chat/hub/src/proto/konfa/channel/v1;channelv1\xa2\x02\x03KCX\xaa\x02\x10Konfa.Channel.V1\xca\x02\x10Konfa\\Channel\\V1\xe2\x02\x1cKonfa\\Channel\\V1\\GPBMetadata\xea\x02\x12Konfa::Channel::V1b\x06proto3"
 
 var (

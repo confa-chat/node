@@ -11,5 +11,9 @@ type ctxKey string
 const ctxUserKey ctxKey = "user"
 
 func CtxGetUser(ctx context.Context) *store.User {
-	return ctx.Value(ctxUserKey).(*store.User)
+	user := ctx.Value(ctxUserKey)
+	if user == nil {
+		return nil
+	}
+	return user.(*store.User)
 }

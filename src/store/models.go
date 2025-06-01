@@ -39,4 +39,5 @@ type VoiceChannel struct {
 	ID       uuid.UUID `bun:"id,pk"`
 	ServerID uuid.UUID `bun:"server_id"`
 	Name     string    `bun:"name"`
+	RelayID  string    `bun:"relay_id"`
 }

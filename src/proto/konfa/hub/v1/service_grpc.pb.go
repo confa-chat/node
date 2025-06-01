@@ -19,6 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	HubService_GetUser_FullMethodName           = "/konfa.hub.v1.HubService/GetUser"
+	HubService_CurrentUser_FullMethodName       = "/konfa.hub.v1.HubService/CurrentUser"
 	HubService_ListServerIDs_FullMethodName     = "/konfa.hub.v1.HubService/ListServerIDs"
 	HubService_ListVoiceRelays_FullMethodName   = "/konfa.hub.v1.HubService/ListVoiceRelays"
 	HubService_ListAuthProviders_FullMethodName = "/konfa.hub.v1.HubService/ListAuthProviders"
@@ -28,6 +30,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HubServiceClient interface {
+	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
+	CurrentUser(ctx context.Context, in *CurrentUserRequest, opts ...grpc.CallOption) (*CurrentUserResponse, error)
 	ListServerIDs(ctx context.Context, in *ListServersRequest, opts ...grpc.CallOption) (*ListServersResponse, error)
 	ListVoiceRelays(ctx context.Context, in *ListVoiceRelaysRequest, opts ...grpc.CallOption) (*ListVoiceRelaysResponse, error)
 	ListAuthProviders(ctx context.Context, in *ListAuthProvidersRequest, opts ...grpc.CallOption) (*ListAuthProvidersResponse, error)
@@ -39,6 +43,26 @@ type hubServiceClient struct {
 
 func NewHubServiceClient(cc grpc.ClientConnInterface) HubServiceClient {
 	return &hubServiceClient{cc}
+}
+
+func (c *hubServiceClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserResponse)
+	err := c.cc.Invoke(ctx, HubService_GetUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *hubServiceClient) CurrentUser(ctx context.Context, in *CurrentUserRequest, opts ...grpc.CallOption) (*CurrentUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CurrentUserResponse)
+	err := c.cc.Invoke(ctx, HubService_CurrentUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *hubServiceClient) ListServerIDs(ctx context.Context, in *ListServersRequest, opts ...grpc.CallOption) (*ListServersResponse, error) {
@@ -75,6 +99,8 @@ func (c *hubServiceClient) ListAuthProviders(ctx context.Context, in *ListAuthPr
 // All implementations should embed UnimplementedHubServiceServer
 // for forward compatibility.
 type HubServiceServer interface {
+	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
+	CurrentUser(context.Context, *CurrentUserRequest) (*CurrentUserResponse, error)
 	ListServerIDs(context.Context, *ListServersRequest) (*ListServersResponse, error)
 	ListVoiceRelays(context.Context, *ListVoiceRelaysRequest) (*ListVoiceRelaysResponse, error)
 	ListAuthProviders(context.Context, *ListAuthProvidersRequest) (*ListAuthProvidersResponse, error)
@@ -87,6 +113,12 @@ type HubServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedHubServiceServer struct{}
 
+func (UnimplementedHubServiceServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
+}
+func (UnimplementedHubServiceServer) CurrentUser(context.Context, *CurrentUserRequest) (*CurrentUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CurrentUser not implemented")
+}
 func (UnimplementedHubServiceServer) ListServerIDs(context.Context, *ListServersRequest) (*ListServersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListServerIDs not implemented")
 }
@@ -114,6 +146,42 @@ func RegisterHubServiceServer(s grpc.ServiceRegistrar, srv HubServiceServer) {
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&HubService_ServiceDesc, srv)
+}
+
+func _HubService_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HubServiceServer).GetUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HubService_GetUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HubServiceServer).GetUser(ctx, req.(*GetUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HubService_CurrentUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CurrentUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HubServiceServer).CurrentUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HubService_CurrentUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HubServiceServer).CurrentUser(ctx, req.(*CurrentUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _HubService_ListServerIDs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -177,6 +245,14 @@ var HubService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "konfa.hub.v1.HubService",
 	HandlerType: (*HubServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetUser",
+			Handler:    _HubService_GetUser_Handler,
+		},
+		{
+			MethodName: "CurrentUser",
+			Handler:    _HubService_CurrentUser_Handler,
+		},
 		{
 			MethodName: "ListServerIDs",
 			Handler:    _HubService_ListServerIDs_Handler,
