@@ -1,6 +1,8 @@
 package proto
 
 import (
+	"fmt"
+
 	channelv1 "github.com/konfa-chat/hub/src/proto/konfa/channel/v1"
 	chatv1 "github.com/konfa-chat/hub/src/proto/konfa/chat/v1"
 	userv1 "github.com/konfa-chat/hub/src/proto/konfa/user/v1"
@@ -9,12 +11,27 @@ import (
 )
 
 func mapMessage(msg store.Message) *chatv1.Message {
-	return &chatv1.Message{
+	protoMsg := &chatv1.Message{
 		MessageId: msg.ID.String(),
 		SenderId:  msg.SenderID.String(),
 		Content:   msg.Content,
 		Timestamp: timestamppb.New(msg.Timestamp),
 	}
+
+	// Map attachments if any exist
+	if len(msg.Attachments) > 0 {
+		protoMsg.Attachments = make([]*chatv1.Attachment, len(msg.Attachments))
+
+		for i, attachment := range msg.Attachments {
+			protoMsg.Attachments[i] = &chatv1.Attachment{
+				AttachmentId: attachment.AttachmentID.String(),
+				Name:         attachment.Name,
+				Url:          fmt.Sprintf("/attachments/%s/%s", attachment.AttachmentID.String(), attachment.Name),
+			}
+		}
+	}
+
+	return protoMsg
 }
 
 func mapTextChannelToChannel(c store.TextChannel) *channelv1.Channel {

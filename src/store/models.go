@@ -22,6 +22,15 @@ type TextChannel struct {
 	Name     string    `bun:"name"`
 }
 
+type MessageAttachment struct {
+	bun.BaseModel `bun:"table:message_attachment"`
+
+	ID           uuid.UUID `bun:"id,pk"`
+	MessageID    uuid.UUID `bun:"message_id"`
+	Name         string    `bun:"name"`
+	AttachmentID uuid.UUID `bun:"attachment_id"`
+}
+
 type Message struct {
 	bun.BaseModel `bun:"table:message"`
 
@@ -31,6 +40,8 @@ type Message struct {
 	SenderID  uuid.UUID `bun:"sender_id"`
 	Content   string    `bun:"content"`
 	Timestamp time.Time `bun:"timestamp"`
+
+	Attachments []MessageAttachment `bun:"rel:has-many,join:id=message_id"`
 }
 
 type VoiceChannel struct {

@@ -78,6 +78,7 @@ type SendMessageRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Channel       *TextChannelRef        `protobuf:"bytes,1,opt,name=channel,proto3" json:"channel,omitempty"`
 	Content       string                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
+	AttachmentIds []string               `protobuf:"bytes,3,rep,name=attachment_ids,json=attachmentIds,proto3" json:"attachment_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -124,6 +125,13 @@ func (x *SendMessageRequest) GetContent() string {
 		return x.Content
 	}
 	return ""
+}
+
+func (x *SendMessageRequest) GetAttachmentIds() []string {
+	if x != nil {
+		return x.AttachmentIds
+	}
+	return nil
 }
 
 type SendMessageResponse struct {
@@ -176,6 +184,7 @@ type Message struct {
 	SenderId      string                 `protobuf:"bytes,4,opt,name=sender_id,json=senderId,proto3" json:"sender_id,omitempty"`
 	Content       string                 `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
 	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Attachments   []*Attachment          `protobuf:"bytes,7,rep,name=attachments,proto3" json:"attachments,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -238,6 +247,73 @@ func (x *Message) GetTimestamp() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *Message) GetAttachments() []*Attachment {
+	if x != nil {
+		return x.Attachments
+	}
+	return nil
+}
+
+type Attachment struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AttachmentId  string                 `protobuf:"bytes,1,opt,name=attachment_id,json=attachmentId,proto3" json:"attachment_id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Url           string                 `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Attachment) Reset() {
+	*x = Attachment{}
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Attachment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Attachment) ProtoMessage() {}
+
+func (x *Attachment) ProtoReflect() protoreflect.Message {
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Attachment.ProtoReflect.Descriptor instead.
+func (*Attachment) Descriptor() ([]byte, []int) {
+	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *Attachment) GetAttachmentId() string {
+	if x != nil {
+		return x.AttachmentId
+	}
+	return ""
+}
+
+func (x *Attachment) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Attachment) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
 type GetMessageHistoryRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Channel       *TextChannelRef        `protobuf:"bytes,1,opt,name=channel,proto3" json:"channel,omitempty"`
@@ -249,7 +325,7 @@ type GetMessageHistoryRequest struct {
 
 func (x *GetMessageHistoryRequest) Reset() {
 	*x = GetMessageHistoryRequest{}
-	mi := &file_konfa_chat_v1_service_proto_msgTypes[4]
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -261,7 +337,7 @@ func (x *GetMessageHistoryRequest) String() string {
 func (*GetMessageHistoryRequest) ProtoMessage() {}
 
 func (x *GetMessageHistoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_chat_v1_service_proto_msgTypes[4]
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -274,7 +350,7 @@ func (x *GetMessageHistoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMessageHistoryRequest.ProtoReflect.Descriptor instead.
 func (*GetMessageHistoryRequest) Descriptor() ([]byte, []int) {
-	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{4}
+	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetMessageHistoryRequest) GetChannel() *TextChannelRef {
@@ -307,7 +383,7 @@ type GetMessageHistoryResponse struct {
 
 func (x *GetMessageHistoryResponse) Reset() {
 	*x = GetMessageHistoryResponse{}
-	mi := &file_konfa_chat_v1_service_proto_msgTypes[5]
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -319,7 +395,7 @@ func (x *GetMessageHistoryResponse) String() string {
 func (*GetMessageHistoryResponse) ProtoMessage() {}
 
 func (x *GetMessageHistoryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_chat_v1_service_proto_msgTypes[5]
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -332,7 +408,7 @@ func (x *GetMessageHistoryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMessageHistoryResponse.ProtoReflect.Descriptor instead.
 func (*GetMessageHistoryResponse) Descriptor() ([]byte, []int) {
-	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{5}
+	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *GetMessageHistoryResponse) GetMessages() []*Message {
@@ -352,7 +428,7 @@ type GetMessageRequest struct {
 
 func (x *GetMessageRequest) Reset() {
 	*x = GetMessageRequest{}
-	mi := &file_konfa_chat_v1_service_proto_msgTypes[6]
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -364,7 +440,7 @@ func (x *GetMessageRequest) String() string {
 func (*GetMessageRequest) ProtoMessage() {}
 
 func (x *GetMessageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_chat_v1_service_proto_msgTypes[6]
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -377,7 +453,7 @@ func (x *GetMessageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMessageRequest.ProtoReflect.Descriptor instead.
 func (*GetMessageRequest) Descriptor() ([]byte, []int) {
-	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{6}
+	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetMessageRequest) GetChannel() *TextChannelRef {
@@ -403,7 +479,7 @@ type GetMessageResponse struct {
 
 func (x *GetMessageResponse) Reset() {
 	*x = GetMessageResponse{}
-	mi := &file_konfa_chat_v1_service_proto_msgTypes[7]
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -415,7 +491,7 @@ func (x *GetMessageResponse) String() string {
 func (*GetMessageResponse) ProtoMessage() {}
 
 func (x *GetMessageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_chat_v1_service_proto_msgTypes[7]
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -428,7 +504,7 @@ func (x *GetMessageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMessageResponse.ProtoReflect.Descriptor instead.
 func (*GetMessageResponse) Descriptor() ([]byte, []int) {
-	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{7}
+	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetMessageResponse) GetMessage() *Message {
@@ -447,7 +523,7 @@ type StreamNewMessagesRequest struct {
 
 func (x *StreamNewMessagesRequest) Reset() {
 	*x = StreamNewMessagesRequest{}
-	mi := &file_konfa_chat_v1_service_proto_msgTypes[8]
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -459,7 +535,7 @@ func (x *StreamNewMessagesRequest) String() string {
 func (*StreamNewMessagesRequest) ProtoMessage() {}
 
 func (x *StreamNewMessagesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_chat_v1_service_proto_msgTypes[8]
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -472,7 +548,7 @@ func (x *StreamNewMessagesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamNewMessagesRequest.ProtoReflect.Descriptor instead.
 func (*StreamNewMessagesRequest) Descriptor() ([]byte, []int) {
-	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{8}
+	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *StreamNewMessagesRequest) GetChannel() *TextChannelRef {
@@ -491,7 +567,7 @@ type StreamNewMessagesResponse struct {
 
 func (x *StreamNewMessagesResponse) Reset() {
 	*x = StreamNewMessagesResponse{}
-	mi := &file_konfa_chat_v1_service_proto_msgTypes[9]
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -503,7 +579,7 @@ func (x *StreamNewMessagesResponse) String() string {
 func (*StreamNewMessagesResponse) ProtoMessage() {}
 
 func (x *StreamNewMessagesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_chat_v1_service_proto_msgTypes[9]
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -516,7 +592,7 @@ func (x *StreamNewMessagesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamNewMessagesResponse.ProtoReflect.Descriptor instead.
 func (*StreamNewMessagesResponse) Descriptor() ([]byte, []int) {
-	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{9}
+	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *StreamNewMessagesResponse) GetMessageId() string {
@@ -539,7 +615,7 @@ type UploadAttachmentRequest struct {
 
 func (x *UploadAttachmentRequest) Reset() {
 	*x = UploadAttachmentRequest{}
-	mi := &file_konfa_chat_v1_service_proto_msgTypes[10]
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -551,7 +627,7 @@ func (x *UploadAttachmentRequest) String() string {
 func (*UploadAttachmentRequest) ProtoMessage() {}
 
 func (x *UploadAttachmentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_chat_v1_service_proto_msgTypes[10]
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -564,7 +640,7 @@ func (x *UploadAttachmentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadAttachmentRequest.ProtoReflect.Descriptor instead.
 func (*UploadAttachmentRequest) Descriptor() ([]byte, []int) {
-	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{10}
+	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *UploadAttachmentRequest) GetPayload() isUploadAttachmentRequest_Payload {
@@ -617,7 +693,7 @@ type AttachmentUploadInfo struct {
 
 func (x *AttachmentUploadInfo) Reset() {
 	*x = AttachmentUploadInfo{}
-	mi := &file_konfa_chat_v1_service_proto_msgTypes[11]
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -629,7 +705,7 @@ func (x *AttachmentUploadInfo) String() string {
 func (*AttachmentUploadInfo) ProtoMessage() {}
 
 func (x *AttachmentUploadInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_chat_v1_service_proto_msgTypes[11]
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -642,7 +718,7 @@ func (x *AttachmentUploadInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachmentUploadInfo.ProtoReflect.Descriptor instead.
 func (*AttachmentUploadInfo) Descriptor() ([]byte, []int) {
-	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{11}
+	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *AttachmentUploadInfo) GetName() string {
@@ -654,14 +730,14 @@ func (x *AttachmentUploadInfo) GetName() string {
 
 type UploadAttachmentResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	AttachmenId   string                 `protobuf:"bytes,1,opt,name=attachmen_id,json=attachmenId,proto3" json:"attachmen_id,omitempty"`
+	AttachmentId  string                 `protobuf:"bytes,1,opt,name=attachment_id,json=attachmentId,proto3" json:"attachment_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UploadAttachmentResponse) Reset() {
 	*x = UploadAttachmentResponse{}
-	mi := &file_konfa_chat_v1_service_proto_msgTypes[12]
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -673,7 +749,7 @@ func (x *UploadAttachmentResponse) String() string {
 func (*UploadAttachmentResponse) ProtoMessage() {}
 
 func (x *UploadAttachmentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_chat_v1_service_proto_msgTypes[12]
+	mi := &file_konfa_chat_v1_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -686,12 +762,12 @@ func (x *UploadAttachmentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadAttachmentResponse.ProtoReflect.Descriptor instead.
 func (*UploadAttachmentResponse) Descriptor() ([]byte, []int) {
-	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{12}
+	return file_konfa_chat_v1_service_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *UploadAttachmentResponse) GetAttachmenId() string {
+func (x *UploadAttachmentResponse) GetAttachmentId() string {
 	if x != nil {
-		return x.AttachmenId
+		return x.AttachmentId
 	}
 	return ""
 }
@@ -704,19 +780,26 @@ const file_konfa_chat_v1_service_proto_rawDesc = "" +
 	"\x0eTextChannelRef\x12\x1b\n" +
 	"\tserver_id\x18\x01 \x01(\tR\bserverId\x12\x1d\n" +
 	"\n" +
-	"channel_id\x18\x02 \x01(\tR\tchannelId\"g\n" +
+	"channel_id\x18\x02 \x01(\tR\tchannelId\"\x8e\x01\n" +
 	"\x12SendMessageRequest\x127\n" +
 	"\achannel\x18\x01 \x01(\v2\x1d.konfa.chat.v1.TextChannelRefR\achannel\x12\x18\n" +
-	"\acontent\x18\x02 \x01(\tR\acontent\"4\n" +
+	"\acontent\x18\x02 \x01(\tR\acontent\x12%\n" +
+	"\x0eattachment_ids\x18\x03 \x03(\tR\rattachmentIds\"4\n" +
 	"\x13SendMessageResponse\x12\x1d\n" +
 	"\n" +
-	"message_id\x18\x01 \x01(\tR\tmessageId\"\x99\x01\n" +
+	"message_id\x18\x01 \x01(\tR\tmessageId\"\xd6\x01\n" +
 	"\aMessage\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x01 \x01(\tR\tmessageId\x12\x1b\n" +
 	"\tsender_id\x18\x04 \x01(\tR\bsenderId\x12\x18\n" +
 	"\acontent\x18\x05 \x01(\tR\acontent\x128\n" +
-	"\ttimestamp\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\"\x99\x01\n" +
+	"\ttimestamp\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12;\n" +
+	"\vattachments\x18\a \x03(\v2\x19.konfa.chat.v1.AttachmentR\vattachments\"W\n" +
+	"\n" +
+	"Attachment\x12#\n" +
+	"\rattachment_id\x18\x01 \x01(\tR\fattachmentId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x10\n" +
+	"\x03url\x18\x03 \x01(\tR\x03url\"\x99\x01\n" +
 	"\x18GetMessageHistoryRequest\x127\n" +
 	"\achannel\x18\x01 \x01(\v2\x1d.konfa.chat.v1.TextChannelRefR\achannel\x12.\n" +
 	"\x04from\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x04from\x12\x14\n" +
@@ -739,9 +822,9 @@ const file_konfa_chat_v1_service_proto_rawDesc = "" +
 	"\x04data\x18\x02 \x01(\fH\x00R\x04dataB\t\n" +
 	"\apayload\"*\n" +
 	"\x14AttachmentUploadInfo\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"=\n" +
-	"\x18UploadAttachmentResponse\x12!\n" +
-	"\fattachmen_id\x18\x01 \x01(\tR\vattachmenId2\xf9\x03\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"?\n" +
+	"\x18UploadAttachmentResponse\x12#\n" +
+	"\rattachment_id\x18\x01 \x01(\tR\fattachmentId2\xf9\x03\n" +
 	"\vChatService\x12V\n" +
 	"\vSendMessage\x12!.konfa.chat.v1.SendMessageRequest\x1a\".konfa.chat.v1.SendMessageResponse\"\x00\x12h\n" +
 	"\x11GetMessageHistory\x12'.konfa.chat.v1.GetMessageHistoryRequest\x1a(.konfa.chat.v1.GetMessageHistoryResponse\"\x00\x12S\n" +
@@ -763,48 +846,50 @@ func file_konfa_chat_v1_service_proto_rawDescGZIP() []byte {
 	return file_konfa_chat_v1_service_proto_rawDescData
 }
 
-var file_konfa_chat_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_konfa_chat_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_konfa_chat_v1_service_proto_goTypes = []any{
 	(*TextChannelRef)(nil),            // 0: konfa.chat.v1.TextChannelRef
 	(*SendMessageRequest)(nil),        // 1: konfa.chat.v1.SendMessageRequest
 	(*SendMessageResponse)(nil),       // 2: konfa.chat.v1.SendMessageResponse
 	(*Message)(nil),                   // 3: konfa.chat.v1.Message
-	(*GetMessageHistoryRequest)(nil),  // 4: konfa.chat.v1.GetMessageHistoryRequest
-	(*GetMessageHistoryResponse)(nil), // 5: konfa.chat.v1.GetMessageHistoryResponse
-	(*GetMessageRequest)(nil),         // 6: konfa.chat.v1.GetMessageRequest
-	(*GetMessageResponse)(nil),        // 7: konfa.chat.v1.GetMessageResponse
-	(*StreamNewMessagesRequest)(nil),  // 8: konfa.chat.v1.StreamNewMessagesRequest
-	(*StreamNewMessagesResponse)(nil), // 9: konfa.chat.v1.StreamNewMessagesResponse
-	(*UploadAttachmentRequest)(nil),   // 10: konfa.chat.v1.UploadAttachmentRequest
-	(*AttachmentUploadInfo)(nil),      // 11: konfa.chat.v1.AttachmentUploadInfo
-	(*UploadAttachmentResponse)(nil),  // 12: konfa.chat.v1.UploadAttachmentResponse
-	(*timestamppb.Timestamp)(nil),     // 13: google.protobuf.Timestamp
+	(*Attachment)(nil),                // 4: konfa.chat.v1.Attachment
+	(*GetMessageHistoryRequest)(nil),  // 5: konfa.chat.v1.GetMessageHistoryRequest
+	(*GetMessageHistoryResponse)(nil), // 6: konfa.chat.v1.GetMessageHistoryResponse
+	(*GetMessageRequest)(nil),         // 7: konfa.chat.v1.GetMessageRequest
+	(*GetMessageResponse)(nil),        // 8: konfa.chat.v1.GetMessageResponse
+	(*StreamNewMessagesRequest)(nil),  // 9: konfa.chat.v1.StreamNewMessagesRequest
+	(*StreamNewMessagesResponse)(nil), // 10: konfa.chat.v1.StreamNewMessagesResponse
+	(*UploadAttachmentRequest)(nil),   // 11: konfa.chat.v1.UploadAttachmentRequest
+	(*AttachmentUploadInfo)(nil),      // 12: konfa.chat.v1.AttachmentUploadInfo
+	(*UploadAttachmentResponse)(nil),  // 13: konfa.chat.v1.UploadAttachmentResponse
+	(*timestamppb.Timestamp)(nil),     // 14: google.protobuf.Timestamp
 }
 var file_konfa_chat_v1_service_proto_depIdxs = []int32{
 	0,  // 0: konfa.chat.v1.SendMessageRequest.channel:type_name -> konfa.chat.v1.TextChannelRef
-	13, // 1: konfa.chat.v1.Message.timestamp:type_name -> google.protobuf.Timestamp
-	0,  // 2: konfa.chat.v1.GetMessageHistoryRequest.channel:type_name -> konfa.chat.v1.TextChannelRef
-	13, // 3: konfa.chat.v1.GetMessageHistoryRequest.from:type_name -> google.protobuf.Timestamp
-	3,  // 4: konfa.chat.v1.GetMessageHistoryResponse.messages:type_name -> konfa.chat.v1.Message
-	0,  // 5: konfa.chat.v1.GetMessageRequest.channel:type_name -> konfa.chat.v1.TextChannelRef
-	3,  // 6: konfa.chat.v1.GetMessageResponse.message:type_name -> konfa.chat.v1.Message
-	0,  // 7: konfa.chat.v1.StreamNewMessagesRequest.channel:type_name -> konfa.chat.v1.TextChannelRef
-	11, // 8: konfa.chat.v1.UploadAttachmentRequest.info:type_name -> konfa.chat.v1.AttachmentUploadInfo
-	1,  // 9: konfa.chat.v1.ChatService.SendMessage:input_type -> konfa.chat.v1.SendMessageRequest
-	4,  // 10: konfa.chat.v1.ChatService.GetMessageHistory:input_type -> konfa.chat.v1.GetMessageHistoryRequest
-	6,  // 11: konfa.chat.v1.ChatService.GetMessage:input_type -> konfa.chat.v1.GetMessageRequest
-	8,  // 12: konfa.chat.v1.ChatService.StreamNewMessages:input_type -> konfa.chat.v1.StreamNewMessagesRequest
-	10, // 13: konfa.chat.v1.ChatService.UploadAttachment:input_type -> konfa.chat.v1.UploadAttachmentRequest
-	2,  // 14: konfa.chat.v1.ChatService.SendMessage:output_type -> konfa.chat.v1.SendMessageResponse
-	5,  // 15: konfa.chat.v1.ChatService.GetMessageHistory:output_type -> konfa.chat.v1.GetMessageHistoryResponse
-	7,  // 16: konfa.chat.v1.ChatService.GetMessage:output_type -> konfa.chat.v1.GetMessageResponse
-	9,  // 17: konfa.chat.v1.ChatService.StreamNewMessages:output_type -> konfa.chat.v1.StreamNewMessagesResponse
-	12, // 18: konfa.chat.v1.ChatService.UploadAttachment:output_type -> konfa.chat.v1.UploadAttachmentResponse
-	14, // [14:19] is the sub-list for method output_type
-	9,  // [9:14] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	14, // 1: konfa.chat.v1.Message.timestamp:type_name -> google.protobuf.Timestamp
+	4,  // 2: konfa.chat.v1.Message.attachments:type_name -> konfa.chat.v1.Attachment
+	0,  // 3: konfa.chat.v1.GetMessageHistoryRequest.channel:type_name -> konfa.chat.v1.TextChannelRef
+	14, // 4: konfa.chat.v1.GetMessageHistoryRequest.from:type_name -> google.protobuf.Timestamp
+	3,  // 5: konfa.chat.v1.GetMessageHistoryResponse.messages:type_name -> konfa.chat.v1.Message
+	0,  // 6: konfa.chat.v1.GetMessageRequest.channel:type_name -> konfa.chat.v1.TextChannelRef
+	3,  // 7: konfa.chat.v1.GetMessageResponse.message:type_name -> konfa.chat.v1.Message
+	0,  // 8: konfa.chat.v1.StreamNewMessagesRequest.channel:type_name -> konfa.chat.v1.TextChannelRef
+	12, // 9: konfa.chat.v1.UploadAttachmentRequest.info:type_name -> konfa.chat.v1.AttachmentUploadInfo
+	1,  // 10: konfa.chat.v1.ChatService.SendMessage:input_type -> konfa.chat.v1.SendMessageRequest
+	5,  // 11: konfa.chat.v1.ChatService.GetMessageHistory:input_type -> konfa.chat.v1.GetMessageHistoryRequest
+	7,  // 12: konfa.chat.v1.ChatService.GetMessage:input_type -> konfa.chat.v1.GetMessageRequest
+	9,  // 13: konfa.chat.v1.ChatService.StreamNewMessages:input_type -> konfa.chat.v1.StreamNewMessagesRequest
+	11, // 14: konfa.chat.v1.ChatService.UploadAttachment:input_type -> konfa.chat.v1.UploadAttachmentRequest
+	2,  // 15: konfa.chat.v1.ChatService.SendMessage:output_type -> konfa.chat.v1.SendMessageResponse
+	6,  // 16: konfa.chat.v1.ChatService.GetMessageHistory:output_type -> konfa.chat.v1.GetMessageHistoryResponse
+	8,  // 17: konfa.chat.v1.ChatService.GetMessage:output_type -> konfa.chat.v1.GetMessageResponse
+	10, // 18: konfa.chat.v1.ChatService.StreamNewMessages:output_type -> konfa.chat.v1.StreamNewMessagesResponse
+	13, // 19: konfa.chat.v1.ChatService.UploadAttachment:output_type -> konfa.chat.v1.UploadAttachmentResponse
+	15, // [15:20] is the sub-list for method output_type
+	10, // [10:15] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_konfa_chat_v1_service_proto_init() }
@@ -812,7 +897,7 @@ func file_konfa_chat_v1_service_proto_init() {
 	if File_konfa_chat_v1_service_proto != nil {
 		return
 	}
-	file_konfa_chat_v1_service_proto_msgTypes[10].OneofWrappers = []any{
+	file_konfa_chat_v1_service_proto_msgTypes[11].OneofWrappers = []any{
 		(*UploadAttachmentRequest_Info)(nil),
 		(*UploadAttachmentRequest_Data)(nil),
 	}
@@ -822,7 +907,7 @@ func file_konfa_chat_v1_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_konfa_chat_v1_service_proto_rawDesc), len(file_konfa_chat_v1_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   13,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

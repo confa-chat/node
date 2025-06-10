@@ -13,7 +13,8 @@
             "driver": "PostgreSQL",
             "name": "local",
             "database": "konfa",
-            "username": "konfa"
+            "username": "konfa",
+            "password": "konfa"
         }
     ]
 }

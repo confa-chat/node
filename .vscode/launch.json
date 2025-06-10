@@ -18,9 +18,12 @@
                 "KONFA_HUB_AUTHPROVIDERS_0_OPENIDCONNECT_CLIENTSECRET": "UqeaMowRXcGULkAepr0EAEUfE82OjY72",
                 "KONFA_HUB_VOICERELAYS_0_ID": "local",
                 "KONFA_HUB_VOICERELAYS_0_NAME": "Local",
-                "KONFA_HUB_VOICERELAYS_0_ADDRESS": "localhost:8081"
+                "KONFA_HUB_VOICERELAYS_0_ADDRESS": "localhost:8081",
+                "KONFA_HUB_ATTACHMENT_TYPE": "local",
+                "KONFA_HUB_ATTACHMENT_LOCAL_PATH": "./attachments",
             },
             "program": "${workspaceFolder}/cmd/main.go",
+            "cwd": "${workspaceFolder}/bin",
         }
     ]
 }

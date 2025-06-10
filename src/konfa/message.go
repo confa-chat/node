@@ -2,6 +2,7 @@ package konfa
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/cskr/pubsub/v2"
@@ -41,6 +42,7 @@ func (c *Service) GetMessagesHistory(ctx context.Context, serverID uuid.UUID, ch
 		Where("channel_id = ?", channelID).
 		Where("timestamp < ?", from).
 		Order("timestamp DESC").
+		Relation("Attachments").
 		Limit(count).
 		Scan(ctx)
 	return messages, err
@@ -53,6 +55,7 @@ func (c *Service) GetMessage(ctx context.Context, serverID, channelID, messageID
 		// Where("server_id = ?", serverID).
 		// Where("channel_id = ?", channelID).
 		Where("id = ?", messageID).
+		Relation("Attachments").
 		Order("timestamp DESC").
 		Scan(ctx)
 	return message, err
@@ -90,4 +93,65 @@ func (c *Service) SendMessage(ctx context.Context, senderID, serverID, channelID
 	// c.msgBroker.Pub(id, channelID)
 
 	// return id, nil
+}
+
+// SendMessageWithAttachments creates a new message with the specified attachments
+func (c *Service) SendMessageWithAttachments(ctx context.Context, senderID, serverID, channelID uuid.UUID, content string, attachmentIDs []uuid.UUID, attachmentNames []string) (uuid.UUID, error) {
+	// Create transaction
+	tx, err := c.db.BeginTx(ctx, nil)
+	if err != nil {
+		return uuid.Nil, err
+	}
+	defer tx.Rollback()
+
+	// Create the message
+	msgID := uuid.New()
+	msg := store.Message{
+		ID:        msgID,
+		Timestamp: time.Now(),
+		ChannelID: channelID,
+		SenderID:  senderID,
+		Content:   content,
+	}
+
+	// Insert the message
+	_, err = tx.NewInsert().Model(&msg).Exec(ctx)
+	if err != nil {
+		return uuid.Nil, err
+	}
+
+	// Add attachments if any
+	if len(attachmentIDs) > 0 {
+		// Ensure we have the same number of names as IDs
+		if len(attachmentIDs) != len(attachmentNames) {
+			return uuid.Nil, fmt.Errorf("number of attachment IDs (%d) doesn't match number of names (%d)", len(attachmentIDs), len(attachmentNames))
+		}
+
+		// Create attachment records
+		attachments := make([]store.MessageAttachment, len(attachmentIDs))
+		for i := range attachmentIDs {
+			attachments[i] = store.MessageAttachment{
+				ID:           uuid.New(),
+				MessageID:    msgID,
+				Name:         attachmentNames[i],
+				AttachmentID: attachmentIDs[i],
+			}
+		}
+
+		// Insert all attachments
+		_, err = tx.NewInsert().Model(&attachments).Exec(ctx)
+		if err != nil {
+			return uuid.Nil, err
+		}
+	}
+
+	// Commit the transaction
+	if err := tx.Commit(); err != nil {
+		return uuid.Nil, err
+	}
+
+	// Publish message to subscribers
+	c.msgBroker.Pub(msgID, channelID)
+
+	return msgID, nil
 }

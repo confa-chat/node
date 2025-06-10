@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"net/http"
+	"strings"
 
 	"github.com/konfa-chat/hub/pkg/uuid"
 	"github.com/konfa-chat/hub/src/auth"
@@ -16,6 +18,9 @@ import (
 	hubv1 "github.com/konfa-chat/hub/src/proto/konfa/hub/v1"
 	serverv1 "github.com/konfa-chat/hub/src/proto/konfa/server/v1"
 	"github.com/konfa-chat/hub/src/store"
+	"github.com/konfa-chat/hub/src/store/attachment"
+	"golang.org/x/net/http2"
+	"golang.org/x/net/http2/h2c"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -38,8 +43,14 @@ func main() {
 		panic(err)
 	}
 
-	// Pass the entire config object to the service
-	srv := konfa.NewService(db, dbpool, cfg)
+	// Initialize attachment storage provider based on configuration
+	attachStorage, err := attachment.NewStorageFromConfig(&cfg.AttachmentConfig)
+	if err != nil {
+		log.Fatalf("error initializing attachment storage: %v", err)
+	}
+
+	// Pass the entire config object and attachment storage to the service
+	srv := konfa.NewService(db, dbpool, cfg, attachStorage)
 
 	// Use the first auth provider for the authenticator
 	// In a more robust implementation, this might be configurable
@@ -59,10 +70,12 @@ func main() {
 		panic(err)
 	}
 
+	// Initialize gRPC server
 	grpcServer := grpc.NewServer(
 		grpc.UnaryInterceptor(authen.UnaryAuthenticate),
 		grpc.StreamInterceptor(authen.StreamAuthenticate),
 	)
+
 	chatv1.RegisterChatServiceServer(grpcServer, proto.NewChatService(srv))
 	serverv1.RegisterServerServiceServer(grpcServer, proto.NewServerService(srv))
 	hubv1.RegisterHubServiceServer(grpcServer, proto.NewHubService(srv))
@@ -77,15 +90,36 @@ func main() {
 	println(serverID.String())
 	println(chanID.String())
 
-	port := 38100
+	// Create an HTTP mux for handling attachments
+	httpMux := http.NewServeMux()
+	attachmentHandler := attachment.NewHTTPHandler(attachStorage)
+	httpMux.Handle("/attachments/", attachmentHandler)
 
+	// Create a server that can handle both gRPC and HTTP
+	port := 38100
 	lis, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%d", port))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
+	var handler http.Handler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Check if this is a gRPC request based on content type header
+		if r.ProtoMajor == 2 && strings.Contains(r.Header.Get("Content-Type"), "application/grpc") {
+			grpcServer.ServeHTTP(w, r)
+		} else {
+			// Otherwise, handle as a regular HTTP request
+			httpMux.ServeHTTP(w, r)
+		}
+	})
+	handler = h2c.NewHandler(handler, &http2.Server{})
+
+	// Create a multiplexed server
+	multiplexedServer := &http.Server{
+		Handler: handler,
+	}
+
 	println("Server is running on port", port)
-	panic(grpcServer.Serve(lis))
+	log.Fatal(multiplexedServer.Serve(lis))
 }
 
 func createKonfach(ctx context.Context, srv *konfa.Service) (uuid.UUID, uuid.UUID, error) {

@@ -50,7 +50,7 @@ func NewAuthenticator(ctx context.Context, db *bun.DB, acfg AuthenticatorConfig,
 	}, nil
 }
 
-func (a *Authenticator) authorize(ctx context.Context, token string) (context.Context, error) {
+func (a *Authenticator) authorize(ctx context.Context, token string) (store.User, error) {
 	// var claims oidc.AccessTokenClaims
 	// _, err := oidc.ParseToken(token, &claims)
 	// if err != nil {
@@ -59,17 +59,15 @@ func (a *Authenticator) authorize(ctx context.Context, token string) (context.Co
 
 	resp, err := rs.Introspect[*oidc.IntrospectionResponse](ctx, a.provider, token)
 	if err != nil {
-		return nil, err
+		return store.User{}, err
 	}
 
 	user, err := a.loginWithExternal(ctx, resp)
 	if err != nil {
-		return nil, err
+		return store.User{}, err
 	}
 
-	ctx = context.WithValue(ctx, ctxUserKey, &user)
-
-	return ctx, nil
+	return user, nil
 }
 
 func (a *Authenticator) loginWithExternal(ctx context.Context, resp *oidc.IntrospectionResponse) (store.User, error) {

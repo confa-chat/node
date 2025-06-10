@@ -4,6 +4,7 @@ import (
 	"context"
 	"strings"
 
+	"github.com/konfa-chat/hub/src/store"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 )
@@ -34,11 +35,13 @@ func (a *Authenticator) UnaryAuthenticate(ctx context.Context, req any, info *gr
 		return nil, errInvalidToken
 	}
 
-	ctx, err := a.authorize(ctx, token)
+	user, err := a.authorize(ctx, token)
 	if err != nil {
 		a.logger.Warn("failed to authorize token", "error", err)
 		return nil, err
 	}
+
+	ctx = ctxWithUser(ctx, user)
 
 	return handler(ctx, req)
 }
@@ -60,12 +63,12 @@ func (a *Authenticator) StreamAuthenticate(srv any, ss grpc.ServerStream, info *
 		return errInvalidToken
 	}
 
-	ctx, err := a.authorize(ctx, token)
+	user, err := a.authorize(ctx, token)
 	if err != nil {
 		return err
 	}
 
-	return handler(srv, newWrappedStream(ctx, ss))
+	return handler(srv, newWrappedStream(ss, user))
 }
 
 func grpcExtractToken(authorization []string) string {
@@ -77,10 +80,16 @@ func grpcExtractToken(authorization []string) string {
 }
 
 type wrappedStreamContext struct {
-	ctx context.Context
+	user store.User
 	grpc.ServerStream
 }
 
-func newWrappedStream(ctx context.Context, s grpc.ServerStream) grpc.ServerStream {
-	return &wrappedStreamContext{ctx: ctx, ServerStream: s}
+func newWrappedStream(s grpc.ServerStream, user store.User) grpc.ServerStream {
+	return &wrappedStreamContext{ServerStream: s, user: user}
+}
+
+func (w *wrappedStreamContext) Context() context.Context {
+	ctx := w.ServerStream.Context()
+	ctx = ctxWithUser(ctx, w.user)
+	return ctx
 }
