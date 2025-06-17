@@ -4,8 +4,11 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./bin/data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=confa
       - POSTGRES_USER=confa
       - POSTGRES_DB=confa
+
+volumes:
+  pgdata:
