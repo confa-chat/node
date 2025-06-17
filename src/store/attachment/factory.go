@@ -8,11 +8,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	konfaconfig "github.com/konfa-chat/hub/src/config"
+	confaconfig "github.com/confa-chat/node/src/config"
 )
 
 // NewStorageFromConfig creates a new storage provider based on the application configuration
-func NewStorageFromConfig(cfg *konfaconfig.AttachmentStorage) (Storage, error) {
+func NewStorageFromConfig(cfg *confaconfig.AttachmentStorage) (Storage, error) {
 	switch cfg.Type {
 	case "local":
 		return NewLocalStorage(cfg.Local.Path)
@@ -24,7 +24,7 @@ func NewStorageFromConfig(cfg *konfaconfig.AttachmentStorage) (Storage, error) {
 }
 
 // createS3Storage initializes an S3 storage provider with the given configuration
-func createS3Storage(cfg *konfaconfig.AttachmentStorage) (Storage, error) {
+func createS3Storage(cfg *confaconfig.AttachmentStorage) (Storage, error) {
 	s3Cfg := cfg.S3
 
 	// Create AWS SDK configuration

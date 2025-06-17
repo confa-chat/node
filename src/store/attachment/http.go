@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/konfa-chat/hub/pkg/uuid"
+	"github.com/confa-chat/node/pkg/uuid"
 )
 
 // HTTPHandler is an HTTP handler for serving attachments

@@ -19,15 +19,15 @@ COPY ./src ./src
 
 RUN --mount=type=cache,mode=0777,target=/go/pkg/mod \
     CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH \
-    go build -tags timetzdata -o /server ./cmd/main.go 
+    go build -tags timetzdata -o /node ./cmd/main.go 
 
 # run container
 FROM scratch
 
 #Adding root serts for ssl
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
-COPY --from=builder /server /app/konfa-server
+COPY --from=builder /node /app/confa-node
 
 WORKDIR /app
 
-ENTRYPOINT [ "/app/konfa-server" ]
+ENTRYPOINT [ "/app/confa-node" ]

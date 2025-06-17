@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package konfa.channel.v1;
+package confa.channel.v1;
 
 option go_package = "/channelv1";
 

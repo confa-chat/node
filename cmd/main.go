@@ -9,16 +9,16 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/konfa-chat/hub/pkg/uuid"
-	"github.com/konfa-chat/hub/src/auth"
-	"github.com/konfa-chat/hub/src/config"
-	"github.com/konfa-chat/hub/src/konfa"
-	"github.com/konfa-chat/hub/src/proto"
-	chatv1 "github.com/konfa-chat/hub/src/proto/konfa/chat/v1"
-	hubv1 "github.com/konfa-chat/hub/src/proto/konfa/hub/v1"
-	serverv1 "github.com/konfa-chat/hub/src/proto/konfa/server/v1"
-	"github.com/konfa-chat/hub/src/store"
-	"github.com/konfa-chat/hub/src/store/attachment"
+	"github.com/confa-chat/node/pkg/uuid"
+	"github.com/confa-chat/node/src/auth"
+	"github.com/confa-chat/node/src/confa"
+	"github.com/confa-chat/node/src/config"
+	"github.com/confa-chat/node/src/proto"
+	chatv1 "github.com/confa-chat/node/src/proto/confa/chat/v1"
+	hubv1 "github.com/confa-chat/node/src/proto/confa/hub/v1"
+	serverv1 "github.com/confa-chat/node/src/proto/confa/server/v1"
+	"github.com/confa-chat/node/src/store"
+	"github.com/confa-chat/node/src/store/attachment"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 	"google.golang.org/grpc"
@@ -50,7 +50,7 @@ func main() {
 	}
 
 	// Pass the entire config object and attachment storage to the service
-	srv := konfa.NewService(db, dbpool, cfg, attachStorage)
+	srv := confa.NewService(db, dbpool, cfg, attachStorage)
 
 	// Use the first auth provider for the authenticator
 	// In a more robust implementation, this might be configurable
@@ -63,7 +63,7 @@ func main() {
 		},
 		[]string{
 			"/grpc.reflection.v1alpha.ServerReflection",
-			hubv1.HubService_ListAuthProviders_FullMethodName,
+			// hubv1.HubService_ListAuthProviders_FullMethodName,
 		},
 	)
 	if err != nil {
@@ -82,7 +82,7 @@ func main() {
 
 	reflection.Register(grpcServer)
 
-	serverID, chanID, err := createKonfach(ctx, srv)
+	serverID, chanID, err := createConfach(ctx, srv)
 	if err != nil {
 		panic(err)
 	}
@@ -122,7 +122,7 @@ func main() {
 	log.Fatal(multiplexedServer.Serve(lis))
 }
 
-func createKonfach(ctx context.Context, srv *konfa.Service) (uuid.UUID, uuid.UUID, error) {
+func createConfach(ctx context.Context, srv *confa.Service) (uuid.UUID, uuid.UUID, error) {
 	var serverID uuid.UUID
 
 	servers, err := srv.ListServers(ctx)
@@ -130,12 +130,12 @@ func createKonfach(ctx context.Context, srv *konfa.Service) (uuid.UUID, uuid.UUI
 		return uuid.Nil, uuid.Nil, fmt.Errorf("failed to list servers: %w", err)
 	}
 	for _, serv := range servers {
-		if serv.Name == "konfach" {
+		if serv.Name == "confach" {
 			serverID = serv.ID
 		}
 	}
 	if serverID == uuid.Nil {
-		serverID, err = srv.CreateServer(ctx, "konfach")
+		serverID, err = srv.CreateServer(ctx, "confach")
 		if err != nil {
 			return uuid.Nil, uuid.Nil, fmt.Errorf("failed to create server: %w", err)
 		}

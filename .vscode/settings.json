@@ -12,9 +12,9 @@
             "port": 5432,
             "driver": "PostgreSQL",
             "name": "local",
-            "database": "konfa",
-            "username": "konfa",
-            "password": "konfa"
+            "database": "confa",
+            "username": "confa",
+            "password": "confa"
         }
     ]
 }

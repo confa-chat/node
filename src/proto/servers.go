@@ -4,19 +4,19 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/konfa-chat/hub/pkg/uuid"
-	"github.com/konfa-chat/hub/src/konfa"
-	channelv1 "github.com/konfa-chat/hub/src/proto/konfa/channel/v1"
-	serverv1 "github.com/konfa-chat/hub/src/proto/konfa/server/v1"
-	"github.com/konfa-chat/hub/src/store"
+	"github.com/confa-chat/node/pkg/uuid"
+	"github.com/confa-chat/node/src/confa"
+	channelv1 "github.com/confa-chat/node/src/proto/confa/channel/v1"
+	serverv1 "github.com/confa-chat/node/src/proto/confa/server/v1"
+	"github.com/confa-chat/node/src/store"
 )
 
-func NewServerService(srv *konfa.Service) *ServerService {
+func NewServerService(srv *confa.Service) *ServerService {
 	return &ServerService{srv: srv}
 }
 
 type ServerService struct {
-	srv *konfa.Service
+	srv *confa.Service
 }
 
 var _ serverv1.ServerServiceServer = (*ServerService)(nil)

@@ -6,8 +6,8 @@ import (
 	"errors"
 	"log/slog"
 
-	"github.com/konfa-chat/hub/pkg/uuid"
-	"github.com/konfa-chat/hub/src/store"
+	"github.com/confa-chat/node/pkg/uuid"
+	"github.com/confa-chat/node/src/store"
 	"github.com/uptrace/bun"
 	"github.com/zitadel/oidc/v3/pkg/client/rs"
 	"github.com/zitadel/oidc/v3/pkg/oidc"

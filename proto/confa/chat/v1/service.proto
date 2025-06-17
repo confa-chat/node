@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package konfa.chat.v1;
+package confa.chat.v1;
 
 option go_package = "/chatv1";
 

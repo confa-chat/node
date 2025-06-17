@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        (unknown)
-// source: konfa/channel/v1/channels.proto
+// source: confa/channel/v1/channels.proto
 
 package channelv1
 
@@ -34,7 +34,7 @@ type Channel struct {
 
 func (x *Channel) Reset() {
 	*x = Channel{}
-	mi := &file_konfa_channel_v1_channels_proto_msgTypes[0]
+	mi := &file_confa_channel_v1_channels_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -46,7 +46,7 @@ func (x *Channel) String() string {
 func (*Channel) ProtoMessage() {}
 
 func (x *Channel) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_channel_v1_channels_proto_msgTypes[0]
+	mi := &file_confa_channel_v1_channels_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -59,7 +59,7 @@ func (x *Channel) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Channel.ProtoReflect.Descriptor instead.
 func (*Channel) Descriptor() ([]byte, []int) {
-	return file_konfa_channel_v1_channels_proto_rawDescGZIP(), []int{0}
+	return file_confa_channel_v1_channels_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Channel) GetChannel() isChannel_Channel {
@@ -114,7 +114,7 @@ type TextChannel struct {
 
 func (x *TextChannel) Reset() {
 	*x = TextChannel{}
-	mi := &file_konfa_channel_v1_channels_proto_msgTypes[1]
+	mi := &file_confa_channel_v1_channels_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -126,7 +126,7 @@ func (x *TextChannel) String() string {
 func (*TextChannel) ProtoMessage() {}
 
 func (x *TextChannel) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_channel_v1_channels_proto_msgTypes[1]
+	mi := &file_confa_channel_v1_channels_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -139,7 +139,7 @@ func (x *TextChannel) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TextChannel.ProtoReflect.Descriptor instead.
 func (*TextChannel) Descriptor() ([]byte, []int) {
-	return file_konfa_channel_v1_channels_proto_rawDescGZIP(), []int{1}
+	return file_confa_channel_v1_channels_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *TextChannel) GetServerId() string {
@@ -175,7 +175,7 @@ type VoiceChannel struct {
 
 func (x *VoiceChannel) Reset() {
 	*x = VoiceChannel{}
-	mi := &file_konfa_channel_v1_channels_proto_msgTypes[2]
+	mi := &file_confa_channel_v1_channels_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -187,7 +187,7 @@ func (x *VoiceChannel) String() string {
 func (*VoiceChannel) ProtoMessage() {}
 
 func (x *VoiceChannel) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_channel_v1_channels_proto_msgTypes[2]
+	mi := &file_confa_channel_v1_channels_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -200,7 +200,7 @@ func (x *VoiceChannel) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VoiceChannel.ProtoReflect.Descriptor instead.
 func (*VoiceChannel) Descriptor() ([]byte, []int) {
-	return file_konfa_channel_v1_channels_proto_rawDescGZIP(), []int{2}
+	return file_confa_channel_v1_channels_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *VoiceChannel) GetServerId() string {
@@ -231,14 +231,14 @@ func (x *VoiceChannel) GetVoiceRelayId() []string {
 	return nil
 }
 
-var File_konfa_channel_v1_channels_proto protoreflect.FileDescriptor
+var File_confa_channel_v1_channels_proto protoreflect.FileDescriptor
 
-const file_konfa_channel_v1_channels_proto_rawDesc = "" +
+const file_confa_channel_v1_channels_proto_rawDesc = "" +
 	"\n" +
-	"\x1fkonfa/channel/v1/channels.proto\x12\x10konfa.channel.v1\"\x9f\x01\n" +
+	"\x1fconfa/channel/v1/channels.proto\x12\x10confa.channel.v1\"\x9f\x01\n" +
 	"\aChannel\x12B\n" +
-	"\ftext_channel\x18\x01 \x01(\v2\x1d.konfa.channel.v1.TextChannelH\x00R\vtextChannel\x12E\n" +
-	"\rvoice_channel\x18\x02 \x01(\v2\x1e.konfa.channel.v1.VoiceChannelH\x00R\fvoiceChannelB\t\n" +
+	"\ftext_channel\x18\x01 \x01(\v2\x1d.confa.channel.v1.TextChannelH\x00R\vtextChannel\x12E\n" +
+	"\rvoice_channel\x18\x02 \x01(\v2\x1e.confa.channel.v1.VoiceChannelH\x00R\fvoiceChannelB\t\n" +
 	"\achannel\"]\n" +
 	"\vTextChannel\x12\x1b\n" +
 	"\tserver_id\x18\x01 \x01(\tR\bserverId\x12\x1d\n" +
@@ -251,29 +251,29 @@ const file_konfa_channel_v1_channels_proto_rawDesc = "" +
 	"channel_id\x18\x02 \x01(\tR\tchannelId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12$\n" +
 	"\x0evoice_relay_id\x18\x04 \x03(\tR\fvoiceRelayIdB\xc7\x01\n" +
-	"\x14com.konfa.channel.v1B\rChannelsProtoP\x01Z>github.com/konfa-chat/hub/src/proto/konfa/channel/v1;channelv1\xa2\x02\x03KCX\xaa\x02\x10Konfa.Channel.V1\xca\x02\x10Konfa\\Channel\\V1\xe2\x02\x1cKonfa\\Channel\\V1\\GPBMetadata\xea\x02\x12Konfa::Channel::V1b\x06proto3"
+	"\x14com.confa.channel.v1B\rChannelsProtoP\x01Z>github.com/confa-chat/node/src/proto/confa/channel/v1;channelv1\xa2\x02\x03KCX\xaa\x02\x10Confa.Channel.V1\xca\x02\x10Confa\\Channel\\V1\xe2\x02\x1cConfa\\Channel\\V1\\GPBMetadata\xea\x02\x12Confa::Channel::V1b\x06proto3"
 
 var (
-	file_konfa_channel_v1_channels_proto_rawDescOnce sync.Once
-	file_konfa_channel_v1_channels_proto_rawDescData []byte
+	file_confa_channel_v1_channels_proto_rawDescOnce sync.Once
+	file_confa_channel_v1_channels_proto_rawDescData []byte
 )
 
-func file_konfa_channel_v1_channels_proto_rawDescGZIP() []byte {
-	file_konfa_channel_v1_channels_proto_rawDescOnce.Do(func() {
-		file_konfa_channel_v1_channels_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_konfa_channel_v1_channels_proto_rawDesc), len(file_konfa_channel_v1_channels_proto_rawDesc)))
+func file_confa_channel_v1_channels_proto_rawDescGZIP() []byte {
+	file_confa_channel_v1_channels_proto_rawDescOnce.Do(func() {
+		file_confa_channel_v1_channels_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_confa_channel_v1_channels_proto_rawDesc), len(file_confa_channel_v1_channels_proto_rawDesc)))
 	})
-	return file_konfa_channel_v1_channels_proto_rawDescData
+	return file_confa_channel_v1_channels_proto_rawDescData
 }
 
-var file_konfa_channel_v1_channels_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_konfa_channel_v1_channels_proto_goTypes = []any{
-	(*Channel)(nil),      // 0: konfa.channel.v1.Channel
-	(*TextChannel)(nil),  // 1: konfa.channel.v1.TextChannel
-	(*VoiceChannel)(nil), // 2: konfa.channel.v1.VoiceChannel
+var file_confa_channel_v1_channels_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_confa_channel_v1_channels_proto_goTypes = []any{
+	(*Channel)(nil),      // 0: confa.channel.v1.Channel
+	(*TextChannel)(nil),  // 1: confa.channel.v1.TextChannel
+	(*VoiceChannel)(nil), // 2: confa.channel.v1.VoiceChannel
 }
-var file_konfa_channel_v1_channels_proto_depIdxs = []int32{
-	1, // 0: konfa.channel.v1.Channel.text_channel:type_name -> konfa.channel.v1.TextChannel
-	2, // 1: konfa.channel.v1.Channel.voice_channel:type_name -> konfa.channel.v1.VoiceChannel
+var file_confa_channel_v1_channels_proto_depIdxs = []int32{
+	1, // 0: confa.channel.v1.Channel.text_channel:type_name -> confa.channel.v1.TextChannel
+	2, // 1: confa.channel.v1.Channel.voice_channel:type_name -> confa.channel.v1.VoiceChannel
 	2, // [2:2] is the sub-list for method output_type
 	2, // [2:2] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
@@ -281,12 +281,12 @@ var file_konfa_channel_v1_channels_proto_depIdxs = []int32{
 	0, // [0:2] is the sub-list for field type_name
 }
 
-func init() { file_konfa_channel_v1_channels_proto_init() }
-func file_konfa_channel_v1_channels_proto_init() {
-	if File_konfa_channel_v1_channels_proto != nil {
+func init() { file_confa_channel_v1_channels_proto_init() }
+func file_confa_channel_v1_channels_proto_init() {
+	if File_confa_channel_v1_channels_proto != nil {
 		return
 	}
-	file_konfa_channel_v1_channels_proto_msgTypes[0].OneofWrappers = []any{
+	file_confa_channel_v1_channels_proto_msgTypes[0].OneofWrappers = []any{
 		(*Channel_TextChannel)(nil),
 		(*Channel_VoiceChannel)(nil),
 	}
@@ -294,17 +294,17 @@ func file_konfa_channel_v1_channels_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_konfa_channel_v1_channels_proto_rawDesc), len(file_konfa_channel_v1_channels_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_confa_channel_v1_channels_proto_rawDesc), len(file_confa_channel_v1_channels_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_konfa_channel_v1_channels_proto_goTypes,
-		DependencyIndexes: file_konfa_channel_v1_channels_proto_depIdxs,
-		MessageInfos:      file_konfa_channel_v1_channels_proto_msgTypes,
+		GoTypes:           file_confa_channel_v1_channels_proto_goTypes,
+		DependencyIndexes: file_confa_channel_v1_channels_proto_depIdxs,
+		MessageInfos:      file_confa_channel_v1_channels_proto_msgTypes,
 	}.Build()
-	File_konfa_channel_v1_channels_proto = out.File
-	file_konfa_channel_v1_channels_proto_goTypes = nil
-	file_konfa_channel_v1_channels_proto_depIdxs = nil
+	File_confa_channel_v1_channels_proto = out.File
+	file_confa_channel_v1_channels_proto_goTypes = nil
+	file_confa_channel_v1_channels_proto_depIdxs = nil
 }

@@ -8,7 +8,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/konfa-chat/hub/pkg/uuid"
+	"github.com/confa-chat/node/pkg/uuid"
 )
 
 // LocalStorage implements Storage interface for local filesystem

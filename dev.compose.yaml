@@ -6,6 +6,6 @@ services:
     volumes:
       - ./bin/data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=konfa
-      - POSTGRES_USER=konfa
-      - POSTGRES_DB=konfa
+      - POSTGRES_PASSWORD=confa
+      - POSTGRES_USER=confa
+      - POSTGRES_DB=confa

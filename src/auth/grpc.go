@@ -4,12 +4,26 @@ import (
 	"context"
 	"strings"
 
-	"github.com/konfa-chat/hub/src/store"
+	"github.com/confa-chat/node/src/store"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
+	"google.golang.org/protobuf/reflect/protoreflect"
+	"google.golang.org/protobuf/reflect/protoregistry"
 )
 
 func (a *Authenticator) isNeedAuth(method string) bool {
+	methodFullName := protoreflect.FullName(strings.ReplaceAll(strings.TrimPrefix(method, "/"), "/", "."))
+	desc, _ := protoregistry.GlobalFiles.FindDescriptorByName(methodFullName)
+	if desc != nil {
+		methodDesc := desc.(protoreflect.MethodDescriptor)
+
+		methodOptions := methodDesc.Options().ProtoReflect().Descriptor().Fields()
+
+		if methodOptions.ByName("skip_auth") != nil {
+			return false
+		}
+	}
+
 	for _, noAuthMethod := range a.skipAuthMethods {
 		if strings.HasPrefix(method, noAuthMethod) {
 			return false
@@ -19,6 +33,7 @@ func (a *Authenticator) isNeedAuth(method string) bool {
 }
 
 func (a *Authenticator) UnaryAuthenticate(ctx context.Context, req any, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
+
 	if !a.isNeedAuth(info.FullMethod) {
 		return handler(ctx, req)
 	}

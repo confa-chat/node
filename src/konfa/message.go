@@ -1,13 +1,13 @@
-package konfa
+package confa
 
 import (
 	"context"
 	"fmt"
 	"time"
 
+	"github.com/confa-chat/node/pkg/uuid"
+	"github.com/confa-chat/node/src/store"
 	"github.com/cskr/pubsub/v2"
-	"github.com/konfa-chat/hub/pkg/uuid"
-	"github.com/konfa-chat/hub/src/store"
 )
 
 type ChannelSubscription struct {

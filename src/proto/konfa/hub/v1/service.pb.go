@@ -2,12 +2,13 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        (unknown)
-// source: konfa/hub/v1/service.proto
+// source: confa/hub/v1/service.proto
 
 package hubv1
 
 import (
-	v1 "github.com/konfa-chat/hub/src/proto/konfa/user/v1"
+	_ "github.com/confa-chat/node/src/proto/confa"
+	v1 "github.com/confa-chat/node/src/proto/confa/user/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -22,6 +23,102 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type SupportedClientVersionsRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	CurrentVersion string                 `protobuf:"bytes,1,opt,name=current_version,json=currentVersion,proto3" json:"current_version,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *SupportedClientVersionsRequest) Reset() {
+	*x = SupportedClientVersionsRequest{}
+	mi := &file_confa_hub_v1_service_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SupportedClientVersionsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SupportedClientVersionsRequest) ProtoMessage() {}
+
+func (x *SupportedClientVersionsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_confa_hub_v1_service_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SupportedClientVersionsRequest.ProtoReflect.Descriptor instead.
+func (*SupportedClientVersionsRequest) Descriptor() ([]byte, []int) {
+	return file_confa_hub_v1_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *SupportedClientVersionsRequest) GetCurrentVersion() string {
+	if x != nil {
+		return x.CurrentVersion
+	}
+	return ""
+}
+
+type SupportedClientVersionsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Supported     bool                   `protobuf:"varint,1,opt,name=supported,proto3" json:"supported,omitempty"`
+	MinVersion    string                 `protobuf:"bytes,2,opt,name=min_version,json=minVersion,proto3" json:"min_version,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SupportedClientVersionsResponse) Reset() {
+	*x = SupportedClientVersionsResponse{}
+	mi := &file_confa_hub_v1_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SupportedClientVersionsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SupportedClientVersionsResponse) ProtoMessage() {}
+
+func (x *SupportedClientVersionsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_confa_hub_v1_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SupportedClientVersionsResponse.ProtoReflect.Descriptor instead.
+func (*SupportedClientVersionsResponse) Descriptor() ([]byte, []int) {
+	return file_confa_hub_v1_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *SupportedClientVersionsResponse) GetSupported() bool {
+	if x != nil {
+		return x.Supported
+	}
+	return false
+}
+
+func (x *SupportedClientVersionsResponse) GetMinVersion() string {
+	if x != nil {
+		return x.MinVersion
+	}
+	return ""
+}
+
 type ListServersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -30,7 +127,7 @@ type ListServersRequest struct {
 
 func (x *ListServersRequest) Reset() {
 	*x = ListServersRequest{}
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[0]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -42,7 +139,7 @@ func (x *ListServersRequest) String() string {
 func (*ListServersRequest) ProtoMessage() {}
 
 func (x *ListServersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[0]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -55,7 +152,7 @@ func (x *ListServersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListServersRequest.ProtoReflect.Descriptor instead.
 func (*ListServersRequest) Descriptor() ([]byte, []int) {
-	return file_konfa_hub_v1_service_proto_rawDescGZIP(), []int{0}
+	return file_confa_hub_v1_service_proto_rawDescGZIP(), []int{2}
 }
 
 type ListServersResponse struct {
@@ -67,7 +164,7 @@ type ListServersResponse struct {
 
 func (x *ListServersResponse) Reset() {
 	*x = ListServersResponse{}
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[1]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -79,7 +176,7 @@ func (x *ListServersResponse) String() string {
 func (*ListServersResponse) ProtoMessage() {}
 
 func (x *ListServersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[1]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -92,7 +189,7 @@ func (x *ListServersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListServersResponse.ProtoReflect.Descriptor instead.
 func (*ListServersResponse) Descriptor() ([]byte, []int) {
-	return file_konfa_hub_v1_service_proto_rawDescGZIP(), []int{1}
+	return file_confa_hub_v1_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ListServersResponse) GetServerIds() []string {
@@ -110,7 +207,7 @@ type ListVoiceRelaysRequest struct {
 
 func (x *ListVoiceRelaysRequest) Reset() {
 	*x = ListVoiceRelaysRequest{}
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[2]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -122,7 +219,7 @@ func (x *ListVoiceRelaysRequest) String() string {
 func (*ListVoiceRelaysRequest) ProtoMessage() {}
 
 func (x *ListVoiceRelaysRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[2]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -135,7 +232,7 @@ func (x *ListVoiceRelaysRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListVoiceRelaysRequest.ProtoReflect.Descriptor instead.
 func (*ListVoiceRelaysRequest) Descriptor() ([]byte, []int) {
-	return file_konfa_hub_v1_service_proto_rawDescGZIP(), []int{2}
+	return file_confa_hub_v1_service_proto_rawDescGZIP(), []int{4}
 }
 
 type VoiceRelay struct {
@@ -149,7 +246,7 @@ type VoiceRelay struct {
 
 func (x *VoiceRelay) Reset() {
 	*x = VoiceRelay{}
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[3]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -161,7 +258,7 @@ func (x *VoiceRelay) String() string {
 func (*VoiceRelay) ProtoMessage() {}
 
 func (x *VoiceRelay) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[3]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -174,7 +271,7 @@ func (x *VoiceRelay) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VoiceRelay.ProtoReflect.Descriptor instead.
 func (*VoiceRelay) Descriptor() ([]byte, []int) {
-	return file_konfa_hub_v1_service_proto_rawDescGZIP(), []int{3}
+	return file_confa_hub_v1_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *VoiceRelay) GetId() string {
@@ -207,7 +304,7 @@ type ListVoiceRelaysResponse struct {
 
 func (x *ListVoiceRelaysResponse) Reset() {
 	*x = ListVoiceRelaysResponse{}
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[4]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -219,7 +316,7 @@ func (x *ListVoiceRelaysResponse) String() string {
 func (*ListVoiceRelaysResponse) ProtoMessage() {}
 
 func (x *ListVoiceRelaysResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[4]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -232,7 +329,7 @@ func (x *ListVoiceRelaysResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListVoiceRelaysResponse.ProtoReflect.Descriptor instead.
 func (*ListVoiceRelaysResponse) Descriptor() ([]byte, []int) {
-	return file_konfa_hub_v1_service_proto_rawDescGZIP(), []int{4}
+	return file_confa_hub_v1_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ListVoiceRelaysResponse) GetVoiceRelays() []*VoiceRelay {
@@ -250,7 +347,7 @@ type ListAuthProvidersRequest struct {
 
 func (x *ListAuthProvidersRequest) Reset() {
 	*x = ListAuthProvidersRequest{}
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[5]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -262,7 +359,7 @@ func (x *ListAuthProvidersRequest) String() string {
 func (*ListAuthProvidersRequest) ProtoMessage() {}
 
 func (x *ListAuthProvidersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[5]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -275,7 +372,7 @@ func (x *ListAuthProvidersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAuthProvidersRequest.ProtoReflect.Descriptor instead.
 func (*ListAuthProvidersRequest) Descriptor() ([]byte, []int) {
-	return file_konfa_hub_v1_service_proto_rawDescGZIP(), []int{5}
+	return file_confa_hub_v1_service_proto_rawDescGZIP(), []int{7}
 }
 
 type ListAuthProvidersResponse struct {
@@ -287,7 +384,7 @@ type ListAuthProvidersResponse struct {
 
 func (x *ListAuthProvidersResponse) Reset() {
 	*x = ListAuthProvidersResponse{}
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[6]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -299,7 +396,7 @@ func (x *ListAuthProvidersResponse) String() string {
 func (*ListAuthProvidersResponse) ProtoMessage() {}
 
 func (x *ListAuthProvidersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[6]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -312,7 +409,7 @@ func (x *ListAuthProvidersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAuthProvidersResponse.ProtoReflect.Descriptor instead.
 func (*ListAuthProvidersResponse) Descriptor() ([]byte, []int) {
-	return file_konfa_hub_v1_service_proto_rawDescGZIP(), []int{6}
+	return file_confa_hub_v1_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ListAuthProvidersResponse) GetAuthProviders() []*AuthProvider {
@@ -331,7 +428,7 @@ type GetUserRequest struct {
 
 func (x *GetUserRequest) Reset() {
 	*x = GetUserRequest{}
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[7]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -343,7 +440,7 @@ func (x *GetUserRequest) String() string {
 func (*GetUserRequest) ProtoMessage() {}
 
 func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[7]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -356,7 +453,7 @@ func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserRequest.ProtoReflect.Descriptor instead.
 func (*GetUserRequest) Descriptor() ([]byte, []int) {
-	return file_konfa_hub_v1_service_proto_rawDescGZIP(), []int{7}
+	return file_confa_hub_v1_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetUserRequest) GetId() string {
@@ -375,7 +472,7 @@ type GetUserResponse struct {
 
 func (x *GetUserResponse) Reset() {
 	*x = GetUserResponse{}
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[8]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -387,7 +484,7 @@ func (x *GetUserResponse) String() string {
 func (*GetUserResponse) ProtoMessage() {}
 
 func (x *GetUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[8]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -400,7 +497,7 @@ func (x *GetUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserResponse.ProtoReflect.Descriptor instead.
 func (*GetUserResponse) Descriptor() ([]byte, []int) {
-	return file_konfa_hub_v1_service_proto_rawDescGZIP(), []int{8}
+	return file_confa_hub_v1_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetUserResponse) GetUser() *v1.User {
@@ -418,7 +515,7 @@ type CurrentUserRequest struct {
 
 func (x *CurrentUserRequest) Reset() {
 	*x = CurrentUserRequest{}
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[9]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -430,7 +527,7 @@ func (x *CurrentUserRequest) String() string {
 func (*CurrentUserRequest) ProtoMessage() {}
 
 func (x *CurrentUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[9]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -443,7 +540,7 @@ func (x *CurrentUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CurrentUserRequest.ProtoReflect.Descriptor instead.
 func (*CurrentUserRequest) Descriptor() ([]byte, []int) {
-	return file_konfa_hub_v1_service_proto_rawDescGZIP(), []int{9}
+	return file_confa_hub_v1_service_proto_rawDescGZIP(), []int{11}
 }
 
 type CurrentUserResponse struct {
@@ -455,7 +552,7 @@ type CurrentUserResponse struct {
 
 func (x *CurrentUserResponse) Reset() {
 	*x = CurrentUserResponse{}
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[10]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -467,7 +564,7 @@ func (x *CurrentUserResponse) String() string {
 func (*CurrentUserResponse) ProtoMessage() {}
 
 func (x *CurrentUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_hub_v1_service_proto_msgTypes[10]
+	mi := &file_confa_hub_v1_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -480,7 +577,7 @@ func (x *CurrentUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CurrentUserResponse.ProtoReflect.Descriptor instead.
 func (*CurrentUserResponse) Descriptor() ([]byte, []int) {
-	return file_konfa_hub_v1_service_proto_rawDescGZIP(), []int{10}
+	return file_confa_hub_v1_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *CurrentUserResponse) GetUser() *v1.User {
@@ -490,11 +587,17 @@ func (x *CurrentUserResponse) GetUser() *v1.User {
 	return nil
 }
 
-var File_konfa_hub_v1_service_proto protoreflect.FileDescriptor
+var File_confa_hub_v1_service_proto protoreflect.FileDescriptor
 
-const file_konfa_hub_v1_service_proto_rawDesc = "" +
+const file_confa_hub_v1_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1akonfa/hub/v1/service.proto\x12\fkonfa.hub.v1\x1a konfa/hub/v1/auth_provider.proto\x1a\x18konfa/user/v1/user.proto\"\x14\n" +
+	"\x1aconfa/hub/v1/service.proto\x12\fconfa.hub.v1\x1a confa/hub/v1/auth_provider.proto\x1a\x18confa/user/v1/user.proto\x1a\x16confa/extensions.proto\"I\n" +
+	"\x1eSupportedClientVersionsRequest\x12'\n" +
+	"\x0fcurrent_version\x18\x01 \x01(\tR\x0ecurrentVersion\"`\n" +
+	"\x1fSupportedClientVersionsResponse\x12\x1c\n" +
+	"\tsupported\x18\x01 \x01(\bR\tsupported\x12\x1f\n" +
+	"\vmin_version\x18\x02 \x01(\tR\n" +
+	"minVersion\"\x14\n" +
 	"\x12ListServersRequest\"4\n" +
 	"\x13ListServersResponse\x12\x1d\n" +
 	"\n" +
@@ -506,97 +609,102 @@ const file_konfa_hub_v1_service_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
 	"\aaddress\x18\x03 \x01(\tR\aaddress\"V\n" +
 	"\x17ListVoiceRelaysResponse\x12;\n" +
-	"\fvoice_relays\x18\x01 \x03(\v2\x18.konfa.hub.v1.VoiceRelayR\vvoiceRelays\"\x1a\n" +
+	"\fvoice_relays\x18\x01 \x03(\v2\x18.confa.hub.v1.VoiceRelayR\vvoiceRelays\"\x1a\n" +
 	"\x18ListAuthProvidersRequest\"^\n" +
 	"\x19ListAuthProvidersResponse\x12A\n" +
-	"\x0eauth_providers\x18\x01 \x03(\v2\x1a.konfa.hub.v1.AuthProviderR\rauthProviders\" \n" +
+	"\x0eauth_providers\x18\x01 \x03(\v2\x1a.confa.hub.v1.AuthProviderR\rauthProviders\" \n" +
 	"\x0eGetUserRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\":\n" +
 	"\x0fGetUserResponse\x12'\n" +
-	"\x04user\x18\x01 \x01(\v2\x13.konfa.user.v1.UserR\x04user\"\x14\n" +
+	"\x04user\x18\x01 \x01(\v2\x13.confa.user.v1.UserR\x04user\"\x14\n" +
 	"\x12CurrentUserRequest\">\n" +
 	"\x13CurrentUserResponse\x12'\n" +
-	"\x04user\x18\x01 \x01(\v2\x13.konfa.user.v1.UserR\x04user2\xc8\x03\n" +
+	"\x04user\x18\x01 \x01(\v2\x13.confa.user.v1.UserR\x04user2\xc8\x04\n" +
 	"\n" +
-	"HubService\x12H\n" +
-	"\aGetUser\x12\x1c.konfa.hub.v1.GetUserRequest\x1a\x1d.konfa.hub.v1.GetUserResponse\"\x00\x12T\n" +
-	"\vCurrentUser\x12 .konfa.hub.v1.CurrentUserRequest\x1a!.konfa.hub.v1.CurrentUserResponse\"\x00\x12T\n" +
-	"\rListServerIDs\x12 .konfa.hub.v1.ListServersRequest\x1a!.konfa.hub.v1.ListServersResponse\x12^\n" +
-	"\x0fListVoiceRelays\x12$.konfa.hub.v1.ListVoiceRelaysRequest\x1a%.konfa.hub.v1.ListVoiceRelaysResponse\x12d\n" +
-	"\x11ListAuthProviders\x12&.konfa.hub.v1.ListAuthProvidersRequest\x1a'.konfa.hub.v1.ListAuthProvidersResponseB\xaa\x01\n" +
-	"\x10com.konfa.hub.v1B\fServiceProtoP\x01Z6github.com/konfa-chat/hub/src/proto/konfa/hub/v1;hubv1\xa2\x02\x03KHX\xaa\x02\fKonfa.Hub.V1\xca\x02\fKonfa\\Hub\\V1\xe2\x02\x18Konfa\\Hub\\V1\\GPBMetadata\xea\x02\x0eKonfa::Hub::V1b\x06proto3"
+	"HubService\x12|\n" +
+	"\x17SupportedClientVersions\x12,.confa.hub.v1.SupportedClientVersionsRequest\x1a-.confa.hub.v1.SupportedClientVersionsResponse\"\x04\xa8\xa1\x10\x01\x12j\n" +
+	"\x11ListAuthProviders\x12&.confa.hub.v1.ListAuthProvidersRequest\x1a'.confa.hub.v1.ListAuthProvidersResponse\"\x04\xa8\xa1\x10\x01\x12F\n" +
+	"\aGetUser\x12\x1c.confa.hub.v1.GetUserRequest\x1a\x1d.confa.hub.v1.GetUserResponse\x12R\n" +
+	"\vCurrentUser\x12 .confa.hub.v1.CurrentUserRequest\x1a!.confa.hub.v1.CurrentUserResponse\x12T\n" +
+	"\rListServerIDs\x12 .confa.hub.v1.ListServersRequest\x1a!.confa.hub.v1.ListServersResponse\x12^\n" +
+	"\x0fListVoiceRelays\x12$.confa.hub.v1.ListVoiceRelaysRequest\x1a%.confa.hub.v1.ListVoiceRelaysResponseB\xaa\x01\n" +
+	"\x10com.confa.hub.v1B\fServiceProtoP\x01Z6github.com/confa-chat/node/src/proto/confa/hub/v1;hubv1\xa2\x02\x03KHX\xaa\x02\fConfa.Hub.V1\xca\x02\fConfa\\Hub\\V1\xe2\x02\x18Confa\\Hub\\V1\\GPBMetadata\xea\x02\x0eConfa::Hub::V1b\x06proto3"
 
 var (
-	file_konfa_hub_v1_service_proto_rawDescOnce sync.Once
-	file_konfa_hub_v1_service_proto_rawDescData []byte
+	file_confa_hub_v1_service_proto_rawDescOnce sync.Once
+	file_confa_hub_v1_service_proto_rawDescData []byte
 )
 
-func file_konfa_hub_v1_service_proto_rawDescGZIP() []byte {
-	file_konfa_hub_v1_service_proto_rawDescOnce.Do(func() {
-		file_konfa_hub_v1_service_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_konfa_hub_v1_service_proto_rawDesc), len(file_konfa_hub_v1_service_proto_rawDesc)))
+func file_confa_hub_v1_service_proto_rawDescGZIP() []byte {
+	file_confa_hub_v1_service_proto_rawDescOnce.Do(func() {
+		file_confa_hub_v1_service_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_confa_hub_v1_service_proto_rawDesc), len(file_confa_hub_v1_service_proto_rawDesc)))
 	})
-	return file_konfa_hub_v1_service_proto_rawDescData
+	return file_confa_hub_v1_service_proto_rawDescData
 }
 
-var file_konfa_hub_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
-var file_konfa_hub_v1_service_proto_goTypes = []any{
-	(*ListServersRequest)(nil),        // 0: konfa.hub.v1.ListServersRequest
-	(*ListServersResponse)(nil),       // 1: konfa.hub.v1.ListServersResponse
-	(*ListVoiceRelaysRequest)(nil),    // 2: konfa.hub.v1.ListVoiceRelaysRequest
-	(*VoiceRelay)(nil),                // 3: konfa.hub.v1.VoiceRelay
-	(*ListVoiceRelaysResponse)(nil),   // 4: konfa.hub.v1.ListVoiceRelaysResponse
-	(*ListAuthProvidersRequest)(nil),  // 5: konfa.hub.v1.ListAuthProvidersRequest
-	(*ListAuthProvidersResponse)(nil), // 6: konfa.hub.v1.ListAuthProvidersResponse
-	(*GetUserRequest)(nil),            // 7: konfa.hub.v1.GetUserRequest
-	(*GetUserResponse)(nil),           // 8: konfa.hub.v1.GetUserResponse
-	(*CurrentUserRequest)(nil),        // 9: konfa.hub.v1.CurrentUserRequest
-	(*CurrentUserResponse)(nil),       // 10: konfa.hub.v1.CurrentUserResponse
-	(*AuthProvider)(nil),              // 11: konfa.hub.v1.AuthProvider
-	(*v1.User)(nil),                   // 12: konfa.user.v1.User
+var file_confa_hub_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_confa_hub_v1_service_proto_goTypes = []any{
+	(*SupportedClientVersionsRequest)(nil),  // 0: confa.hub.v1.SupportedClientVersionsRequest
+	(*SupportedClientVersionsResponse)(nil), // 1: confa.hub.v1.SupportedClientVersionsResponse
+	(*ListServersRequest)(nil),              // 2: confa.hub.v1.ListServersRequest
+	(*ListServersResponse)(nil),             // 3: confa.hub.v1.ListServersResponse
+	(*ListVoiceRelaysRequest)(nil),          // 4: confa.hub.v1.ListVoiceRelaysRequest
+	(*VoiceRelay)(nil),                      // 5: confa.hub.v1.VoiceRelay
+	(*ListVoiceRelaysResponse)(nil),         // 6: confa.hub.v1.ListVoiceRelaysResponse
+	(*ListAuthProvidersRequest)(nil),        // 7: confa.hub.v1.ListAuthProvidersRequest
+	(*ListAuthProvidersResponse)(nil),       // 8: confa.hub.v1.ListAuthProvidersResponse
+	(*GetUserRequest)(nil),                  // 9: confa.hub.v1.GetUserRequest
+	(*GetUserResponse)(nil),                 // 10: confa.hub.v1.GetUserResponse
+	(*CurrentUserRequest)(nil),              // 11: confa.hub.v1.CurrentUserRequest
+	(*CurrentUserResponse)(nil),             // 12: confa.hub.v1.CurrentUserResponse
+	(*AuthProvider)(nil),                    // 13: confa.hub.v1.AuthProvider
+	(*v1.User)(nil),                         // 14: confa.user.v1.User
 }
-var file_konfa_hub_v1_service_proto_depIdxs = []int32{
-	3,  // 0: konfa.hub.v1.ListVoiceRelaysResponse.voice_relays:type_name -> konfa.hub.v1.VoiceRelay
-	11, // 1: konfa.hub.v1.ListAuthProvidersResponse.auth_providers:type_name -> konfa.hub.v1.AuthProvider
-	12, // 2: konfa.hub.v1.GetUserResponse.user:type_name -> konfa.user.v1.User
-	12, // 3: konfa.hub.v1.CurrentUserResponse.user:type_name -> konfa.user.v1.User
-	7,  // 4: konfa.hub.v1.HubService.GetUser:input_type -> konfa.hub.v1.GetUserRequest
-	9,  // 5: konfa.hub.v1.HubService.CurrentUser:input_type -> konfa.hub.v1.CurrentUserRequest
-	0,  // 6: konfa.hub.v1.HubService.ListServerIDs:input_type -> konfa.hub.v1.ListServersRequest
-	2,  // 7: konfa.hub.v1.HubService.ListVoiceRelays:input_type -> konfa.hub.v1.ListVoiceRelaysRequest
-	5,  // 8: konfa.hub.v1.HubService.ListAuthProviders:input_type -> konfa.hub.v1.ListAuthProvidersRequest
-	8,  // 9: konfa.hub.v1.HubService.GetUser:output_type -> konfa.hub.v1.GetUserResponse
-	10, // 10: konfa.hub.v1.HubService.CurrentUser:output_type -> konfa.hub.v1.CurrentUserResponse
-	1,  // 11: konfa.hub.v1.HubService.ListServerIDs:output_type -> konfa.hub.v1.ListServersResponse
-	4,  // 12: konfa.hub.v1.HubService.ListVoiceRelays:output_type -> konfa.hub.v1.ListVoiceRelaysResponse
-	6,  // 13: konfa.hub.v1.HubService.ListAuthProviders:output_type -> konfa.hub.v1.ListAuthProvidersResponse
-	9,  // [9:14] is the sub-list for method output_type
-	4,  // [4:9] is the sub-list for method input_type
+var file_confa_hub_v1_service_proto_depIdxs = []int32{
+	5,  // 0: confa.hub.v1.ListVoiceRelaysResponse.voice_relays:type_name -> confa.hub.v1.VoiceRelay
+	13, // 1: confa.hub.v1.ListAuthProvidersResponse.auth_providers:type_name -> confa.hub.v1.AuthProvider
+	14, // 2: confa.hub.v1.GetUserResponse.user:type_name -> confa.user.v1.User
+	14, // 3: confa.hub.v1.CurrentUserResponse.user:type_name -> confa.user.v1.User
+	0,  // 4: confa.hub.v1.HubService.SupportedClientVersions:input_type -> confa.hub.v1.SupportedClientVersionsRequest
+	7,  // 5: confa.hub.v1.HubService.ListAuthProviders:input_type -> confa.hub.v1.ListAuthProvidersRequest
+	9,  // 6: confa.hub.v1.HubService.GetUser:input_type -> confa.hub.v1.GetUserRequest
+	11, // 7: confa.hub.v1.HubService.CurrentUser:input_type -> confa.hub.v1.CurrentUserRequest
+	2,  // 8: confa.hub.v1.HubService.ListServerIDs:input_type -> confa.hub.v1.ListServersRequest
+	4,  // 9: confa.hub.v1.HubService.ListVoiceRelays:input_type -> confa.hub.v1.ListVoiceRelaysRequest
+	1,  // 10: confa.hub.v1.HubService.SupportedClientVersions:output_type -> confa.hub.v1.SupportedClientVersionsResponse
+	8,  // 11: confa.hub.v1.HubService.ListAuthProviders:output_type -> confa.hub.v1.ListAuthProvidersResponse
+	10, // 12: confa.hub.v1.HubService.GetUser:output_type -> confa.hub.v1.GetUserResponse
+	12, // 13: confa.hub.v1.HubService.CurrentUser:output_type -> confa.hub.v1.CurrentUserResponse
+	3,  // 14: confa.hub.v1.HubService.ListServerIDs:output_type -> confa.hub.v1.ListServersResponse
+	6,  // 15: confa.hub.v1.HubService.ListVoiceRelays:output_type -> confa.hub.v1.ListVoiceRelaysResponse
+	10, // [10:16] is the sub-list for method output_type
+	4,  // [4:10] is the sub-list for method input_type
 	4,  // [4:4] is the sub-list for extension type_name
 	4,  // [4:4] is the sub-list for extension extendee
 	0,  // [0:4] is the sub-list for field type_name
 }
 
-func init() { file_konfa_hub_v1_service_proto_init() }
-func file_konfa_hub_v1_service_proto_init() {
-	if File_konfa_hub_v1_service_proto != nil {
+func init() { file_confa_hub_v1_service_proto_init() }
+func file_confa_hub_v1_service_proto_init() {
+	if File_confa_hub_v1_service_proto != nil {
 		return
 	}
-	file_konfa_hub_v1_auth_provider_proto_init()
+	file_confa_hub_v1_auth_provider_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_konfa_hub_v1_service_proto_rawDesc), len(file_konfa_hub_v1_service_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_confa_hub_v1_service_proto_rawDesc), len(file_confa_hub_v1_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_konfa_hub_v1_service_proto_goTypes,
-		DependencyIndexes: file_konfa_hub_v1_service_proto_depIdxs,
-		MessageInfos:      file_konfa_hub_v1_service_proto_msgTypes,
+		GoTypes:           file_confa_hub_v1_service_proto_goTypes,
+		DependencyIndexes: file_confa_hub_v1_service_proto_depIdxs,
+		MessageInfos:      file_confa_hub_v1_service_proto_msgTypes,
 	}.Build()
-	File_konfa_hub_v1_service_proto = out.File
-	file_konfa_hub_v1_service_proto_goTypes = nil
-	file_konfa_hub_v1_service_proto_depIdxs = nil
+	File_confa_hub_v1_service_proto = out.File
+	file_confa_hub_v1_service_proto_goTypes = nil
+	file_confa_hub_v1_service_proto_depIdxs = nil
 }

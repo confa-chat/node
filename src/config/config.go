@@ -1,4 +1,4 @@
-// Package config provides configuration management for the Konfa Hub application
+// Package config provides configuration management for the Confa Hub application
 package config
 
 import (
@@ -7,11 +7,11 @@ import (
 	"strconv"
 	"strings"
 
+	hubv1 "github.com/confa-chat/node/src/proto/confa/hub/v1"
 	"github.com/knadh/koanf/parsers/yaml"
 	"github.com/knadh/koanf/providers/env"
 	"github.com/knadh/koanf/providers/file"
 	"github.com/knadh/koanf/v2"
-	hubv1 "github.com/konfa-chat/hub/src/proto/konfa/hub/v1"
 )
 
 // AuthProviderOpenIDConnect contains OpenID Connect configuration

@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+import "confa/hub/v1/auth_provider.proto";
+import "confa/user/v1/user.proto";
+import "confa/extensions.proto";
+
+package confa.hub.v1;
+
+service HubService {
+  rpc SupportedClientVersions(SupportedClientVersionsRequest)
+      returns (SupportedClientVersionsResponse) {
+    option (skip_auth) = true;
+  }
+  rpc ListAuthProviders(ListAuthProvidersRequest)
+      returns (ListAuthProvidersResponse) {
+    option (skip_auth) = true;
+  }
+
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+  rpc CurrentUser(CurrentUserRequest) returns (CurrentUserResponse);
+
+  rpc ListServerIDs(ListServersRequest) returns (ListServersResponse);
+  rpc ListVoiceRelays(ListVoiceRelaysRequest) returns (ListVoiceRelaysResponse);
+}
+
+message SupportedClientVersionsRequest { string current_version = 1; }
+
+message SupportedClientVersionsResponse {
+  bool supported = 1;
+  string min_version = 2;
+}
+
+message ListServersRequest {}
+
+message ListServersResponse { repeated string server_ids = 1; }
+
+message ListVoiceRelaysRequest {}
+
+message VoiceRelay {
+  string id = 1;
+  string name = 2;
+  string address = 3;
+}
+
+message ListVoiceRelaysResponse { repeated VoiceRelay voice_relays = 1; }
+
+message ListAuthProvidersRequest {}
+message ListAuthProvidersResponse { repeated AuthProvider auth_providers = 1; }
+
+message GetUserRequest { string id = 1; }
+message GetUserResponse { confa.user.v1.User user = 1; }
+
+message CurrentUserRequest {}
+message CurrentUserResponse { confa.user.v1.User user = 1; }

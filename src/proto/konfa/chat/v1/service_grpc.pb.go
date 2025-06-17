@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: konfa/chat/v1/service.proto
+// source: confa/chat/v1/service.proto
 
 package chatv1
 
@@ -19,11 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ChatService_SendMessage_FullMethodName       = "/konfa.chat.v1.ChatService/SendMessage"
-	ChatService_GetMessageHistory_FullMethodName = "/konfa.chat.v1.ChatService/GetMessageHistory"
-	ChatService_GetMessage_FullMethodName        = "/konfa.chat.v1.ChatService/GetMessage"
-	ChatService_StreamNewMessages_FullMethodName = "/konfa.chat.v1.ChatService/StreamNewMessages"
-	ChatService_UploadAttachment_FullMethodName  = "/konfa.chat.v1.ChatService/UploadAttachment"
+	ChatService_SendMessage_FullMethodName       = "/confa.chat.v1.ChatService/SendMessage"
+	ChatService_GetMessageHistory_FullMethodName = "/confa.chat.v1.ChatService/GetMessageHistory"
+	ChatService_GetMessage_FullMethodName        = "/confa.chat.v1.ChatService/GetMessage"
+	ChatService_StreamNewMessages_FullMethodName = "/confa.chat.v1.ChatService/StreamNewMessages"
+	ChatService_UploadAttachment_FullMethodName  = "/confa.chat.v1.ChatService/UploadAttachment"
 )
 
 // ChatServiceClient is the client API for ChatService service.
@@ -236,7 +236,7 @@ type ChatService_UploadAttachmentServer = grpc.ClientStreamingServer[UploadAttac
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ChatService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "konfa.chat.v1.ChatService",
+	ServiceName: "confa.chat.v1.ChatService",
 	HandlerType: (*ChatServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -264,5 +264,5 @@ var ChatService_ServiceDesc = grpc.ServiceDesc{
 			ClientStreams: true,
 		},
 	},
-	Metadata: "konfa/chat/v1/service.proto",
+	Metadata: "confa/chat/v1/service.proto",
 }

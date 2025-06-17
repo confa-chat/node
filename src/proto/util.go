@@ -1,8 +1,8 @@
 package proto
 
 import (
-	"github.com/konfa-chat/hub/pkg/uuid"
-	chatv1 "github.com/konfa-chat/hub/src/proto/konfa/chat/v1"
+	"github.com/confa-chat/node/pkg/uuid"
+	chatv1 "github.com/confa-chat/node/src/proto/confa/chat/v1"
 )
 
 func apply[I any, O any](input []I, f func(I) O) []O {

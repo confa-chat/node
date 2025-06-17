@@ -1,11 +1,11 @@
-package konfa
+package confa
 
 import (
 	"context"
 	"io"
 
-	"github.com/konfa-chat/hub/pkg/uuid"
-	"github.com/konfa-chat/hub/src/store/attachment"
+	"github.com/confa-chat/node/pkg/uuid"
+	"github.com/confa-chat/node/src/store/attachment"
 )
 
 // UploadAttachment handles storing an attachment and returns the attachment info

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package konfa.user.v1;
+package confa.user.v1;
 
 option go_package = "/userv1";
 

@@ -1,11 +1,11 @@
-package konfa
+package confa
 
 import (
+	"github.com/confa-chat/node/pkg/uuid"
+	"github.com/confa-chat/node/src/config"
+	"github.com/confa-chat/node/src/store/attachment"
 	"github.com/cskr/pubsub/v2"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/konfa-chat/hub/pkg/uuid"
-	"github.com/konfa-chat/hub/src/config"
-	"github.com/konfa-chat/hub/src/store/attachment"
 	"github.com/uptrace/bun"
 )
 

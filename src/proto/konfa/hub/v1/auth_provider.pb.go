@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        (unknown)
-// source: konfa/hub/v1/auth_provider.proto
+// source: confa/hub/v1/auth_provider.proto
 
 package hubv1
 
@@ -35,7 +35,7 @@ type AuthProvider struct {
 
 func (x *AuthProvider) Reset() {
 	*x = AuthProvider{}
-	mi := &file_konfa_hub_v1_auth_provider_proto_msgTypes[0]
+	mi := &file_confa_hub_v1_auth_provider_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47,7 +47,7 @@ func (x *AuthProvider) String() string {
 func (*AuthProvider) ProtoMessage() {}
 
 func (x *AuthProvider) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_hub_v1_auth_provider_proto_msgTypes[0]
+	mi := &file_confa_hub_v1_auth_provider_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60,7 +60,7 @@ func (x *AuthProvider) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuthProvider.ProtoReflect.Descriptor instead.
 func (*AuthProvider) Descriptor() ([]byte, []int) {
-	return file_konfa_hub_v1_auth_provider_proto_rawDescGZIP(), []int{0}
+	return file_confa_hub_v1_auth_provider_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *AuthProvider) GetId() string {
@@ -114,7 +114,7 @@ type OpenIDConnect struct {
 
 func (x *OpenIDConnect) Reset() {
 	*x = OpenIDConnect{}
-	mi := &file_konfa_hub_v1_auth_provider_proto_msgTypes[1]
+	mi := &file_confa_hub_v1_auth_provider_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -126,7 +126,7 @@ func (x *OpenIDConnect) String() string {
 func (*OpenIDConnect) ProtoMessage() {}
 
 func (x *OpenIDConnect) ProtoReflect() protoreflect.Message {
-	mi := &file_konfa_hub_v1_auth_provider_proto_msgTypes[1]
+	mi := &file_confa_hub_v1_auth_provider_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -139,7 +139,7 @@ func (x *OpenIDConnect) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OpenIDConnect.ProtoReflect.Descriptor instead.
 func (*OpenIDConnect) Descriptor() ([]byte, []int) {
-	return file_konfa_hub_v1_auth_provider_proto_rawDescGZIP(), []int{1}
+	return file_confa_hub_v1_auth_provider_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *OpenIDConnect) GetIssuer() string {
@@ -163,42 +163,42 @@ func (x *OpenIDConnect) GetClientSecret() string {
 	return ""
 }
 
-var File_konfa_hub_v1_auth_provider_proto protoreflect.FileDescriptor
+var File_confa_hub_v1_auth_provider_proto protoreflect.FileDescriptor
 
-const file_konfa_hub_v1_auth_provider_proto_rawDesc = "" +
+const file_confa_hub_v1_auth_provider_proto_rawDesc = "" +
 	"\n" +
-	" konfa/hub/v1/auth_provider.proto\x12\fkonfa.hub.v1\"\x84\x01\n" +
+	" confa/hub/v1/auth_provider.proto\x12\fconfa.hub.v1\"\x84\x01\n" +
 	"\fAuthProvider\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12D\n" +
-	"\x0eopenid_connect\x18e \x01(\v2\x1b.konfa.hub.v1.OpenIDConnectH\x00R\ropenidConnectB\n" +
+	"\x0eopenid_connect\x18e \x01(\v2\x1b.confa.hub.v1.OpenIDConnectH\x00R\ropenidConnectB\n" +
 	"\n" +
 	"\bprotocol\"i\n" +
 	"\rOpenIDConnect\x12\x16\n" +
 	"\x06issuer\x18\x01 \x01(\tR\x06issuer\x12\x1b\n" +
 	"\tclient_id\x18\x02 \x01(\tR\bclientId\x12#\n" +
 	"\rclient_secret\x18\x03 \x01(\tR\fclientSecretB\xaf\x01\n" +
-	"\x10com.konfa.hub.v1B\x11AuthProviderProtoP\x01Z6github.com/konfa-chat/hub/src/proto/konfa/hub/v1;hubv1\xa2\x02\x03KHX\xaa\x02\fKonfa.Hub.V1\xca\x02\fKonfa\\Hub\\V1\xe2\x02\x18Konfa\\Hub\\V1\\GPBMetadata\xea\x02\x0eKonfa::Hub::V1b\x06proto3"
+	"\x10com.confa.hub.v1B\x11AuthProviderProtoP\x01Z6github.com/confa-chat/node/src/proto/confa/hub/v1;hubv1\xa2\x02\x03KHX\xaa\x02\fConfa.Hub.V1\xca\x02\fConfa\\Hub\\V1\xe2\x02\x18Confa\\Hub\\V1\\GPBMetadata\xea\x02\x0eConfa::Hub::V1b\x06proto3"
 
 var (
-	file_konfa_hub_v1_auth_provider_proto_rawDescOnce sync.Once
-	file_konfa_hub_v1_auth_provider_proto_rawDescData []byte
+	file_confa_hub_v1_auth_provider_proto_rawDescOnce sync.Once
+	file_confa_hub_v1_auth_provider_proto_rawDescData []byte
 )
 
-func file_konfa_hub_v1_auth_provider_proto_rawDescGZIP() []byte {
-	file_konfa_hub_v1_auth_provider_proto_rawDescOnce.Do(func() {
-		file_konfa_hub_v1_auth_provider_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_konfa_hub_v1_auth_provider_proto_rawDesc), len(file_konfa_hub_v1_auth_provider_proto_rawDesc)))
+func file_confa_hub_v1_auth_provider_proto_rawDescGZIP() []byte {
+	file_confa_hub_v1_auth_provider_proto_rawDescOnce.Do(func() {
+		file_confa_hub_v1_auth_provider_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_confa_hub_v1_auth_provider_proto_rawDesc), len(file_confa_hub_v1_auth_provider_proto_rawDesc)))
 	})
-	return file_konfa_hub_v1_auth_provider_proto_rawDescData
+	return file_confa_hub_v1_auth_provider_proto_rawDescData
 }
 
-var file_konfa_hub_v1_auth_provider_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_konfa_hub_v1_auth_provider_proto_goTypes = []any{
-	(*AuthProvider)(nil),  // 0: konfa.hub.v1.AuthProvider
-	(*OpenIDConnect)(nil), // 1: konfa.hub.v1.OpenIDConnect
+var file_confa_hub_v1_auth_provider_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_confa_hub_v1_auth_provider_proto_goTypes = []any{
+	(*AuthProvider)(nil),  // 0: confa.hub.v1.AuthProvider
+	(*OpenIDConnect)(nil), // 1: confa.hub.v1.OpenIDConnect
 }
-var file_konfa_hub_v1_auth_provider_proto_depIdxs = []int32{
-	1, // 0: konfa.hub.v1.AuthProvider.openid_connect:type_name -> konfa.hub.v1.OpenIDConnect
+var file_confa_hub_v1_auth_provider_proto_depIdxs = []int32{
+	1, // 0: confa.hub.v1.AuthProvider.openid_connect:type_name -> confa.hub.v1.OpenIDConnect
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -206,29 +206,29 @@ var file_konfa_hub_v1_auth_provider_proto_depIdxs = []int32{
 	0, // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_konfa_hub_v1_auth_provider_proto_init() }
-func file_konfa_hub_v1_auth_provider_proto_init() {
-	if File_konfa_hub_v1_auth_provider_proto != nil {
+func init() { file_confa_hub_v1_auth_provider_proto_init() }
+func file_confa_hub_v1_auth_provider_proto_init() {
+	if File_confa_hub_v1_auth_provider_proto != nil {
 		return
 	}
-	file_konfa_hub_v1_auth_provider_proto_msgTypes[0].OneofWrappers = []any{
+	file_confa_hub_v1_auth_provider_proto_msgTypes[0].OneofWrappers = []any{
 		(*AuthProvider_OpenidConnect)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_konfa_hub_v1_auth_provider_proto_rawDesc), len(file_konfa_hub_v1_auth_provider_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_confa_hub_v1_auth_provider_proto_rawDesc), len(file_confa_hub_v1_auth_provider_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_konfa_hub_v1_auth_provider_proto_goTypes,
-		DependencyIndexes: file_konfa_hub_v1_auth_provider_proto_depIdxs,
-		MessageInfos:      file_konfa_hub_v1_auth_provider_proto_msgTypes,
+		GoTypes:           file_confa_hub_v1_auth_provider_proto_goTypes,
+		DependencyIndexes: file_confa_hub_v1_auth_provider_proto_depIdxs,
+		MessageInfos:      file_confa_hub_v1_auth_provider_proto_msgTypes,
 	}.Build()
-	File_konfa_hub_v1_auth_provider_proto = out.File
-	file_konfa_hub_v1_auth_provider_proto_goTypes = nil
-	file_konfa_hub_v1_auth_provider_proto_depIdxs = nil
+	File_confa_hub_v1_auth_provider_proto = out.File
+	file_confa_hub_v1_auth_provider_proto_goTypes = nil
+	file_confa_hub_v1_auth_provider_proto_depIdxs = nil
 }

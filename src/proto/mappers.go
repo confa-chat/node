@@ -3,10 +3,10 @@ package proto
 import (
 	"fmt"
 
-	channelv1 "github.com/konfa-chat/hub/src/proto/konfa/channel/v1"
-	chatv1 "github.com/konfa-chat/hub/src/proto/konfa/chat/v1"
-	userv1 "github.com/konfa-chat/hub/src/proto/konfa/user/v1"
-	"github.com/konfa-chat/hub/src/store"
+	channelv1 "github.com/confa-chat/node/src/proto/confa/channel/v1"
+	chatv1 "github.com/confa-chat/node/src/proto/confa/chat/v1"
+	userv1 "github.com/confa-chat/node/src/proto/confa/user/v1"
+	"github.com/confa-chat/node/src/store"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 

@@ -4,7 +4,7 @@ import (
 	"context"
 	"io"
 
-	"github.com/konfa-chat/hub/pkg/uuid"
+	"github.com/confa-chat/node/pkg/uuid"
 )
 
 // AttachmentInfo holds metadata about an attachment

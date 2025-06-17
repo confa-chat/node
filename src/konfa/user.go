@@ -1,10 +1,10 @@
-package konfa
+package confa
 
 import (
 	"context"
 
-	"github.com/konfa-chat/hub/pkg/uuid"
-	"github.com/konfa-chat/hub/src/store"
+	"github.com/confa-chat/node/pkg/uuid"
+	"github.com/confa-chat/node/src/store"
 )
 
 func (u *Service) GetUser(ctx context.Context, id uuid.UUID) (store.User, error) {

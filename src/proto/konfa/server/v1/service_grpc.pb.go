@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: konfa/server/v1/service.proto
+// source: confa/server/v1/service.proto
 
 package serverv1
 
@@ -19,9 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ServerService_ListChannels_FullMethodName  = "/konfa.server.v1.ServerService/ListChannels"
-	ServerService_ListUsers_FullMethodName     = "/konfa.server.v1.ServerService/ListUsers"
-	ServerService_CreateChannel_FullMethodName = "/konfa.server.v1.ServerService/CreateChannel"
+	ServerService_ListChannels_FullMethodName  = "/confa.server.v1.ServerService/ListChannels"
+	ServerService_ListUsers_FullMethodName     = "/confa.server.v1.ServerService/ListUsers"
+	ServerService_CreateChannel_FullMethodName = "/confa.server.v1.ServerService/CreateChannel"
 )
 
 // ServerServiceClient is the client API for ServerService service.
@@ -174,7 +174,7 @@ func _ServerService_CreateChannel_Handler(srv interface{}, ctx context.Context, 
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ServerService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "konfa.server.v1.ServerService",
+	ServiceName: "confa.server.v1.ServerService",
 	HandlerType: (*ServerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -191,5 +191,5 @@ var ServerService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "konfa/server/v1/service.proto",
+	Metadata: "confa/server/v1/service.proto",
 }

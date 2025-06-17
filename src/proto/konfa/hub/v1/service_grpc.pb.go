@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: konfa/hub/v1/service.proto
+// source: confa/hub/v1/service.proto
 
 package hubv1
 
@@ -19,22 +19,24 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	HubService_GetUser_FullMethodName           = "/konfa.hub.v1.HubService/GetUser"
-	HubService_CurrentUser_FullMethodName       = "/konfa.hub.v1.HubService/CurrentUser"
-	HubService_ListServerIDs_FullMethodName     = "/konfa.hub.v1.HubService/ListServerIDs"
-	HubService_ListVoiceRelays_FullMethodName   = "/konfa.hub.v1.HubService/ListVoiceRelays"
-	HubService_ListAuthProviders_FullMethodName = "/konfa.hub.v1.HubService/ListAuthProviders"
+	HubService_SupportedClientVersions_FullMethodName = "/confa.hub.v1.HubService/SupportedClientVersions"
+	HubService_ListAuthProviders_FullMethodName       = "/confa.hub.v1.HubService/ListAuthProviders"
+	HubService_GetUser_FullMethodName                 = "/confa.hub.v1.HubService/GetUser"
+	HubService_CurrentUser_FullMethodName             = "/confa.hub.v1.HubService/CurrentUser"
+	HubService_ListServerIDs_FullMethodName           = "/confa.hub.v1.HubService/ListServerIDs"
+	HubService_ListVoiceRelays_FullMethodName         = "/confa.hub.v1.HubService/ListVoiceRelays"
 )
 
 // HubServiceClient is the client API for HubService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type HubServiceClient interface {
+	SupportedClientVersions(ctx context.Context, in *SupportedClientVersionsRequest, opts ...grpc.CallOption) (*SupportedClientVersionsResponse, error)
+	ListAuthProviders(ctx context.Context, in *ListAuthProvidersRequest, opts ...grpc.CallOption) (*ListAuthProvidersResponse, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
 	CurrentUser(ctx context.Context, in *CurrentUserRequest, opts ...grpc.CallOption) (*CurrentUserResponse, error)
 	ListServerIDs(ctx context.Context, in *ListServersRequest, opts ...grpc.CallOption) (*ListServersResponse, error)
 	ListVoiceRelays(ctx context.Context, in *ListVoiceRelaysRequest, opts ...grpc.CallOption) (*ListVoiceRelaysResponse, error)
-	ListAuthProviders(ctx context.Context, in *ListAuthProvidersRequest, opts ...grpc.CallOption) (*ListAuthProvidersResponse, error)
 }
 
 type hubServiceClient struct {
@@ -43,6 +45,26 @@ type hubServiceClient struct {
 
 func NewHubServiceClient(cc grpc.ClientConnInterface) HubServiceClient {
 	return &hubServiceClient{cc}
+}
+
+func (c *hubServiceClient) SupportedClientVersions(ctx context.Context, in *SupportedClientVersionsRequest, opts ...grpc.CallOption) (*SupportedClientVersionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SupportedClientVersionsResponse)
+	err := c.cc.Invoke(ctx, HubService_SupportedClientVersions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *hubServiceClient) ListAuthProviders(ctx context.Context, in *ListAuthProvidersRequest, opts ...grpc.CallOption) (*ListAuthProvidersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAuthProvidersResponse)
+	err := c.cc.Invoke(ctx, HubService_ListAuthProviders_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *hubServiceClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error) {
@@ -85,25 +107,16 @@ func (c *hubServiceClient) ListVoiceRelays(ctx context.Context, in *ListVoiceRel
 	return out, nil
 }
 
-func (c *hubServiceClient) ListAuthProviders(ctx context.Context, in *ListAuthProvidersRequest, opts ...grpc.CallOption) (*ListAuthProvidersResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListAuthProvidersResponse)
-	err := c.cc.Invoke(ctx, HubService_ListAuthProviders_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // HubServiceServer is the server API for HubService service.
 // All implementations should embed UnimplementedHubServiceServer
 // for forward compatibility.
 type HubServiceServer interface {
+	SupportedClientVersions(context.Context, *SupportedClientVersionsRequest) (*SupportedClientVersionsResponse, error)
+	ListAuthProviders(context.Context, *ListAuthProvidersRequest) (*ListAuthProvidersResponse, error)
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	CurrentUser(context.Context, *CurrentUserRequest) (*CurrentUserResponse, error)
 	ListServerIDs(context.Context, *ListServersRequest) (*ListServersResponse, error)
 	ListVoiceRelays(context.Context, *ListVoiceRelaysRequest) (*ListVoiceRelaysResponse, error)
-	ListAuthProviders(context.Context, *ListAuthProvidersRequest) (*ListAuthProvidersResponse, error)
 }
 
 // UnimplementedHubServiceServer should be embedded to have
@@ -113,6 +126,12 @@ type HubServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedHubServiceServer struct{}
 
+func (UnimplementedHubServiceServer) SupportedClientVersions(context.Context, *SupportedClientVersionsRequest) (*SupportedClientVersionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SupportedClientVersions not implemented")
+}
+func (UnimplementedHubServiceServer) ListAuthProviders(context.Context, *ListAuthProvidersRequest) (*ListAuthProvidersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAuthProviders not implemented")
+}
 func (UnimplementedHubServiceServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
@@ -124,9 +143,6 @@ func (UnimplementedHubServiceServer) ListServerIDs(context.Context, *ListServers
 }
 func (UnimplementedHubServiceServer) ListVoiceRelays(context.Context, *ListVoiceRelaysRequest) (*ListVoiceRelaysResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListVoiceRelays not implemented")
-}
-func (UnimplementedHubServiceServer) ListAuthProviders(context.Context, *ListAuthProvidersRequest) (*ListAuthProvidersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAuthProviders not implemented")
 }
 func (UnimplementedHubServiceServer) testEmbeddedByValue() {}
 
@@ -146,6 +162,42 @@ func RegisterHubServiceServer(s grpc.ServiceRegistrar, srv HubServiceServer) {
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&HubService_ServiceDesc, srv)
+}
+
+func _HubService_SupportedClientVersions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SupportedClientVersionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HubServiceServer).SupportedClientVersions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HubService_SupportedClientVersions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HubServiceServer).SupportedClientVersions(ctx, req.(*SupportedClientVersionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HubService_ListAuthProviders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAuthProvidersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HubServiceServer).ListAuthProviders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HubService_ListAuthProviders_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HubServiceServer).ListAuthProviders(ctx, req.(*ListAuthProvidersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _HubService_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -220,31 +272,21 @@ func _HubService_ListVoiceRelays_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HubService_ListAuthProviders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAuthProvidersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(HubServiceServer).ListAuthProviders(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: HubService_ListAuthProviders_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HubServiceServer).ListAuthProviders(ctx, req.(*ListAuthProvidersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // HubService_ServiceDesc is the grpc.ServiceDesc for HubService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var HubService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "konfa.hub.v1.HubService",
+	ServiceName: "confa.hub.v1.HubService",
 	HandlerType: (*HubServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SupportedClientVersions",
+			Handler:    _HubService_SupportedClientVersions_Handler,
+		},
+		{
+			MethodName: "ListAuthProviders",
+			Handler:    _HubService_ListAuthProviders_Handler,
+		},
 		{
 			MethodName: "GetUser",
 			Handler:    _HubService_GetUser_Handler,
@@ -261,11 +303,7 @@ var HubService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "ListVoiceRelays",
 			Handler:    _HubService_ListVoiceRelays_Handler,
 		},
-		{
-			MethodName: "ListAuthProviders",
-			Handler:    _HubService_ListAuthProviders_Handler,
-		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "konfa/hub/v1/service.proto",
+	Metadata: "confa/hub/v1/service.proto",
 }

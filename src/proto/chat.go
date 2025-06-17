@@ -5,21 +5,21 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/konfa-chat/hub/pkg/uuid"
-	"github.com/konfa-chat/hub/src/auth"
-	"github.com/konfa-chat/hub/src/konfa"
-	chatv1 "github.com/konfa-chat/hub/src/proto/konfa/chat/v1"
-	"github.com/konfa-chat/hub/src/store/attachment"
+	"github.com/confa-chat/node/pkg/uuid"
+	"github.com/confa-chat/node/src/auth"
+	"github.com/confa-chat/node/src/confa"
+	chatv1 "github.com/confa-chat/node/src/proto/confa/chat/v1"
+	"github.com/confa-chat/node/src/store/attachment"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
 type ChatService struct {
-	srv *konfa.Service
+	srv *confa.Service
 }
 
-func NewChatService(srv *konfa.Service) *ChatService {
+func NewChatService(srv *confa.Service) *ChatService {
 	return &ChatService{
 		srv: srv,
 	}

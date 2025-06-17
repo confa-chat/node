@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/confa-chat/node/pkg/uuid"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/konfa-chat/hub/pkg/uuid"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 )

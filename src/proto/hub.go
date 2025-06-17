@@ -4,21 +4,38 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/konfa-chat/hub/pkg/uuid"
-	"github.com/konfa-chat/hub/src/auth"
-	"github.com/konfa-chat/hub/src/konfa"
-	hubv1 "github.com/konfa-chat/hub/src/proto/konfa/hub/v1"
+	"github.com/confa-chat/node/pkg/uuid"
+	"github.com/confa-chat/node/src/auth"
+	"github.com/confa-chat/node/src/confa"
+	hubv1 "github.com/confa-chat/node/src/proto/confa/hub/v1"
+
+	"github.com/Masterminds/semver/v3"
 )
 
-func NewHubService(srv *konfa.Service) *HubService {
+func NewHubService(srv *confa.Service) *HubService {
 	return &HubService{srv: srv}
 }
 
 type HubService struct {
-	srv *konfa.Service
+	srv *confa.Service
 }
 
 var _ hubv1.HubServiceServer = (*HubService)(nil)
+
+var MinVersion = semver.MustParse("0.0.1-beta.1")
+
+// SupportedClientVersions implements hubv1.HubServiceServer.
+func (h *HubService) SupportedClientVersions(ctx context.Context, req *hubv1.SupportedClientVersionsRequest) (*hubv1.SupportedClientVersionsResponse, error) {
+	clientVer, err := semver.NewVersion(req.CurrentVersion)
+	if err != nil {
+		return nil, fmt.Errorf("invalid version: %w", err)
+	}
+
+	return &hubv1.SupportedClientVersionsResponse{
+		Supported:  clientVer.GreaterThanEqual(MinVersion),
+		MinVersion: MinVersion.String(),
+	}, nil
+}
 
 // ListAuthProviders implements hubv1.HubServiceServer.
 func (h *HubService) ListAuthProviders(context.Context, *hubv1.ListAuthProvidersRequest) (*hubv1.ListAuthProvidersResponse, error) {
