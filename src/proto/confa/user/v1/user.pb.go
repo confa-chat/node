@@ -80,8 +80,8 @@ const file_confa_user_v1_user_proto_rawDesc = "" +
 	"\x18confa/user/v1/user.proto\x12\rconfa.user.v1\"2\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
-	"\busername\x18\x02 \x01(\tR\busernameB\xae\x01\n" +
-	"\x11com.confa.user.v1B\tUserProtoP\x01Z8github.com/confa-chat/node/src/proto/confa/user/v1;userv1\xa2\x02\x03KUX\xaa\x02\rConfa.User.V1\xca\x02\rConfa\\User\\V1\xe2\x02\x19Confa\\User\\V1\\GPBMetadata\xea\x02\x0fConfa::User::V1b\x06proto3"
+	"\busername\x18\x02 \x01(\tR\busernameB\xaf\x01\n" +
+	"\x11com.confa.user.v1B\tUserProtoP\x01Z9github.com/confa-chat/node/src/proto/confa/user/v1;userv1\xa2\x02\x03CUX\xaa\x02\rConfa.User.V1\xca\x02\rConfa\\User\\V1\xe2\x02\x19Confa\\User\\V1\\GPBMetadata\xea\x02\x0fConfa::User::V1b\x06proto3"
 
 var (
 	file_confa_user_v1_user_proto_rawDescOnce sync.Once

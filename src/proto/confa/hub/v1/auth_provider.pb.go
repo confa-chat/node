@@ -177,8 +177,8 @@ const file_confa_hub_v1_auth_provider_proto_rawDesc = "" +
 	"\rOpenIDConnect\x12\x16\n" +
 	"\x06issuer\x18\x01 \x01(\tR\x06issuer\x12\x1b\n" +
 	"\tclient_id\x18\x02 \x01(\tR\bclientId\x12#\n" +
-	"\rclient_secret\x18\x03 \x01(\tR\fclientSecretB\xaf\x01\n" +
-	"\x10com.confa.hub.v1B\x11AuthProviderProtoP\x01Z6github.com/confa-chat/node/src/proto/confa/hub/v1;hubv1\xa2\x02\x03KHX\xaa\x02\fConfa.Hub.V1\xca\x02\fConfa\\Hub\\V1\xe2\x02\x18Confa\\Hub\\V1\\GPBMetadata\xea\x02\x0eConfa::Hub::V1b\x06proto3"
+	"\rclient_secret\x18\x03 \x01(\tR\fclientSecretB\xb0\x01\n" +
+	"\x10com.confa.hub.v1B\x11AuthProviderProtoP\x01Z7github.com/confa-chat/node/src/proto/confa/hub/v1;hubv1\xa2\x02\x03CHX\xaa\x02\fConfa.Hub.V1\xca\x02\fConfa\\Hub\\V1\xe2\x02\x18Confa\\Hub\\V1\\GPBMetadata\xea\x02\x0eConfa::Hub::V1b\x06proto3"
 
 var (
 	file_confa_hub_v1_auth_provider_proto_rawDescOnce sync.Once

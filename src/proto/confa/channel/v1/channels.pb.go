@@ -250,8 +250,8 @@ const file_confa_channel_v1_channels_proto_rawDesc = "" +
 	"\n" +
 	"channel_id\x18\x02 \x01(\tR\tchannelId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12$\n" +
-	"\x0evoice_relay_id\x18\x04 \x03(\tR\fvoiceRelayIdB\xc7\x01\n" +
-	"\x14com.confa.channel.v1B\rChannelsProtoP\x01Z>github.com/confa-chat/node/src/proto/confa/channel/v1;channelv1\xa2\x02\x03KCX\xaa\x02\x10Confa.Channel.V1\xca\x02\x10Confa\\Channel\\V1\xe2\x02\x1cConfa\\Channel\\V1\\GPBMetadata\xea\x02\x12Confa::Channel::V1b\x06proto3"
+	"\x0evoice_relay_id\x18\x04 \x03(\tR\fvoiceRelayIdB\xc8\x01\n" +
+	"\x14com.confa.channel.v1B\rChannelsProtoP\x01Z?github.com/confa-chat/node/src/proto/confa/channel/v1;channelv1\xa2\x02\x03CCX\xaa\x02\x10Confa.Channel.V1\xca\x02\x10Confa\\Channel\\V1\xe2\x02\x1cConfa\\Channel\\V1\\GPBMetadata\xea\x02\x12Confa::Channel::V1b\x06proto3"
 
 var (
 	file_confa_channel_v1_channels_proto_rawDescOnce sync.Once

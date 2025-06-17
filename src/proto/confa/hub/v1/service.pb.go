@@ -627,8 +627,8 @@ const file_confa_hub_v1_service_proto_rawDesc = "" +
 	"\aGetUser\x12\x1c.confa.hub.v1.GetUserRequest\x1a\x1d.confa.hub.v1.GetUserResponse\x12R\n" +
 	"\vCurrentUser\x12 .confa.hub.v1.CurrentUserRequest\x1a!.confa.hub.v1.CurrentUserResponse\x12T\n" +
 	"\rListServerIDs\x12 .confa.hub.v1.ListServersRequest\x1a!.confa.hub.v1.ListServersResponse\x12^\n" +
-	"\x0fListVoiceRelays\x12$.confa.hub.v1.ListVoiceRelaysRequest\x1a%.confa.hub.v1.ListVoiceRelaysResponseB\xaa\x01\n" +
-	"\x10com.confa.hub.v1B\fServiceProtoP\x01Z6github.com/confa-chat/node/src/proto/confa/hub/v1;hubv1\xa2\x02\x03KHX\xaa\x02\fConfa.Hub.V1\xca\x02\fConfa\\Hub\\V1\xe2\x02\x18Confa\\Hub\\V1\\GPBMetadata\xea\x02\x0eConfa::Hub::V1b\x06proto3"
+	"\x0fListVoiceRelays\x12$.confa.hub.v1.ListVoiceRelaysRequest\x1a%.confa.hub.v1.ListVoiceRelaysResponseB\xab\x01\n" +
+	"\x10com.confa.hub.v1B\fServiceProtoP\x01Z7github.com/confa-chat/node/src/proto/confa/hub/v1;hubv1\xa2\x02\x03CHX\xaa\x02\fConfa.Hub.V1\xca\x02\fConfa\\Hub\\V1\xe2\x02\x18Confa\\Hub\\V1\\GPBMetadata\xea\x02\x0eConfa::Hub::V1b\x06proto3"
 
 var (
 	file_confa_hub_v1_service_proto_rawDescOnce sync.Once

@@ -374,8 +374,8 @@ const file_confa_server_v1_service_proto_rawDesc = "" +
 	"\rServerService\x12]\n" +
 	"\fListChannels\x12$.confa.server.v1.ListChannelsRequest\x1a%.confa.server.v1.ListChannelsResponse\"\x00\x12T\n" +
 	"\tListUsers\x12!.confa.server.v1.ListUsersRequest\x1a\".confa.server.v1.ListUsersResponse\"\x00\x12`\n" +
-	"\rCreateChannel\x12%.confa.server.v1.CreateChannelRequest\x1a&.confa.server.v1.CreateChannelResponse\"\x00B\xbf\x01\n" +
-	"\x13com.confa.server.v1B\fServiceProtoP\x01Z<github.com/confa-chat/node/src/proto/confa/server/v1;serverv1\xa2\x02\x03KSX\xaa\x02\x0fConfa.Server.V1\xca\x02\x0fConfa\\Server\\V1\xe2\x02\x1bConfa\\Server\\V1\\GPBMetadata\xea\x02\x11Confa::Server::V1b\x06proto3"
+	"\rCreateChannel\x12%.confa.server.v1.CreateChannelRequest\x1a&.confa.server.v1.CreateChannelResponse\"\x00B\xc0\x01\n" +
+	"\x13com.confa.server.v1B\fServiceProtoP\x01Z=github.com/confa-chat/node/src/proto/confa/server/v1;serverv1\xa2\x02\x03CSX\xaa\x02\x0fConfa.Server.V1\xca\x02\x0fConfa\\Server\\V1\xe2\x02\x1bConfa\\Server\\V1\\GPBMetadata\xea\x02\x11Confa::Server::V1b\x06proto3"
 
 var (
 	file_confa_server_v1_service_proto_rawDescOnce sync.Once

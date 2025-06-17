@@ -43,7 +43,7 @@ var File_confa_extensions_proto protoreflect.FileDescriptor
 const file_confa_extensions_proto_rawDesc = "" +
 	"\n" +
 	"\x16confa/extensions.proto\x1a google/protobuf/descriptor.proto:=\n" +
-	"\tskip_auth\x12\x1e.google.protobuf.MethodOptions\x18\x95\x84\x02 \x01(\bR\bskipAuthB>B\x0fExtensionsProtoP\x01Z)github.com/confa-chat/node/src/proto/confab\x06proto3"
+	"\tskip_auth\x12\x1e.google.protobuf.MethodOptions\x18\x95\x84\x02 \x01(\bR\bskipAuthB?B\x0fExtensionsProtoP\x01Z*github.com/confa-chat/node/src/proto/confab\x06proto3"
 
 var file_confa_extensions_proto_goTypes = []any{
 	(*descriptorpb.MethodOptions)(nil), // 0: google.protobuf.MethodOptions
