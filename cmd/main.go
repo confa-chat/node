@@ -15,7 +15,7 @@ import (
 	"github.com/confa-chat/node/src/config"
 	"github.com/confa-chat/node/src/proto"
 	chatv1 "github.com/confa-chat/node/src/proto/confa/chat/v1"
-	hubv1 "github.com/confa-chat/node/src/proto/confa/hub/v1"
+	nodev1 "github.com/confa-chat/node/src/proto/confa/node/v1"
 	serverv1 "github.com/confa-chat/node/src/proto/confa/server/v1"
 	"github.com/confa-chat/node/src/store"
 	"github.com/confa-chat/node/src/store/attachment"
@@ -78,7 +78,7 @@ func main() {
 
 	chatv1.RegisterChatServiceServer(grpcServer, proto.NewChatService(srv))
 	serverv1.RegisterServerServiceServer(grpcServer, proto.NewServerService(srv))
-	hubv1.RegisterHubServiceServer(grpcServer, proto.NewHubService(srv))
+	nodev1.RegisterNodeServiceServer(grpcServer, proto.NewHubService(srv))
 
 	reflection.Register(grpcServer)
 

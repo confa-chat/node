@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	hubv1 "github.com/confa-chat/node/src/proto/confa/hub/v1"
+	nodev1 "github.com/confa-chat/node/src/proto/confa/node/v1"
 	"github.com/knadh/koanf/parsers/yaml"
 	"github.com/knadh/koanf/providers/env"
 	"github.com/knadh/koanf/providers/file"
@@ -218,15 +218,15 @@ func validateConfig(cfg *Config) error {
 }
 
 // GetHubAuthProviders converts configuration AuthProviders to hubv1.AuthProvider format
-func (c *Config) GetHubAuthProviders() []*hubv1.AuthProvider {
-	providers := make([]*hubv1.AuthProvider, 0, len(c.AuthProviders))
+func (c *Config) GetHubAuthProviders() []*nodev1.AuthProvider {
+	providers := make([]*nodev1.AuthProvider, 0, len(c.AuthProviders))
 
 	for _, provider := range c.AuthProviders {
-		providers = append(providers, &hubv1.AuthProvider{
+		providers = append(providers, &nodev1.AuthProvider{
 			Id:   provider.ID,
 			Name: provider.Name,
-			Protocol: &hubv1.AuthProvider_OpenidConnect{
-				OpenidConnect: &hubv1.OpenIDConnect{
+			Protocol: &nodev1.AuthProvider_OpenidConnect{
+				OpenidConnect: &nodev1.OpenIDConnect{
 					Issuer:       provider.OpenIDConnect.Issuer,
 					ClientId:     provider.OpenIDConnect.ClientID,
 					ClientSecret: provider.OpenIDConnect.ClientSecret,
@@ -239,11 +239,11 @@ func (c *Config) GetHubAuthProviders() []*hubv1.AuthProvider {
 }
 
 // GetHubVoiceRelays converts configuration VoiceRelays to hubv1.VoiceRelay format
-func (c *Config) GetHubVoiceRelays() []*hubv1.VoiceRelay {
-	relays := make([]*hubv1.VoiceRelay, 0, len(c.VoiceRelays))
+func (c *Config) GetHubVoiceRelays() []*nodev1.VoiceRelay {
+	relays := make([]*nodev1.VoiceRelay, 0, len(c.VoiceRelays))
 
 	for _, relay := range c.VoiceRelays {
-		relays = append(relays, &hubv1.VoiceRelay{
+		relays = append(relays, &nodev1.VoiceRelay{
 			Id:      relay.ID,
 			Name:    relay.Name,
 			Address: relay.Address,

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package confa.hub.v1;
+package confa.node.v1;
 
 message AuthProvider {
   string id = 1;

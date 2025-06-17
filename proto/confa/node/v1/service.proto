@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-import "confa/hub/v1/auth_provider.proto";
+import "confa/node/v1/auth_provider.proto";
 import "confa/user/v1/user.proto";
 import "confa/extensions.proto";
 
-package confa.hub.v1;
+package confa.node.v1;
 
-service HubService {
+service NodeService {
   rpc SupportedClientVersions(SupportedClientVersionsRequest)
       returns (SupportedClientVersionsResponse) {
     option (skip_auth) = true;
