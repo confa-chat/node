@@ -1,29 +1,29 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Launch Confa Hub",
-            "type": "go",
-            "request": "launch",
-            "mode": "debug",
-            "env": {
-                "KONFA_HUB_DB": "postgres://localhost:5432/confa?sslmode=disable&user=confa&password=confa",
-                "KONFA_HUB_AUTHPROVIDERS_0_ID": "confach-sso",
-                "KONFA_HUB_AUTHPROVIDERS_0_NAME": "Confach SSO",
-                "KONFA_HUB_AUTHPROVIDERS_0_OPENIDCONNECT_ISSUER": "https://sso.confach.ru/realms/confach",
-                "KONFA_HUB_AUTHPROVIDERS_0_OPENIDCONNECT_CLIENTID": "confa",
-                "KONFA_HUB_AUTHPROVIDERS_0_OPENIDCONNECT_CLIENTSECRET": "UqeaMowRXcGULkAepr0EAEUfE82OjY72",
-                "KONFA_HUB_VOICERELAYS_0_ID": "local",
-                "KONFA_HUB_VOICERELAYS_0_NAME": "Local",
-                "KONFA_HUB_VOICERELAYS_0_ADDRESS": "localhost:8081",
-                "KONFA_HUB_ATTACHMENT_TYPE": "local",
-                "KONFA_HUB_ATTACHMENT_LOCAL_PATH": "./attachments",
-            },
-            "program": "${workspaceFolder}/cmd/main.go",
-            "cwd": "${workspaceFolder}/bin",
-        }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Confa Node",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "env": {
+        "CONFA_NODE_DB": "postgres://localhost:5432/confa?sslmode=disable&user=confa&password=confa",
+        "CONFA_NODE_AUTHPROVIDERS_0_NAME": "Konfach SSO",
+        "CONFA_NODE_AUTHPROVIDERS_0_OPENIDCONNECT_ISSUER": "https://sso.konfach.ru/realms/konfach",
+        "CONFA_NODE_AUTHPROVIDERS_0_ID": "konfach-sso",
+        "CONFA_NODE_AUTHPROVIDERS_0_OPENIDCONNECT_CLIENTID": "konfa",
+        "CONFA_NODE_AUTHPROVIDERS_0_OPENIDCONNECT_CLIENTSECRET": "UqeaMowRXcGULkAepr0EAEUfE82OjY72",
+        "CONFA_NODE_VOICERELAYS_0_ID": "local",
+        "CONFA_NODE_VOICERELAYS_0_NAME": "Local",
+        "CONFA_NODE_VOICERELAYS_0_ADDRESS": "localhost:8081",
+        "CONFA_NODE_ATTACHMENT_TYPE": "local",
+        "CONFA_NODE_ATTACHMENT_LOCAL_PATH": "./attachments"
+      },
+      "program": "${workspaceFolder}/cmd/main.go",
+      "cwd": "${workspaceFolder}/bin"
+    }
+  ]
 }

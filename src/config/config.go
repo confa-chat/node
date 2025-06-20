@@ -84,8 +84,8 @@ func Load(configFile string) (*Config, error) {
 	}
 
 	// Load environment variables (these take precedence over the YAML config)
-	err := k.Load(env.Provider("KONFA_HUB_", ".", func(s string) string {
-		s = strings.TrimPrefix(s, "KONFA_HUB_")
+	err := k.Load(env.Provider("CONFA_NODE_", ".", func(s string) string {
+		s = strings.TrimPrefix(s, "CONFA_NODE_")
 		s = strings.ToLower(s)
 		s = strings.ReplaceAll(s, "_", ".")
 		return s
