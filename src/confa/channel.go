@@ -59,3 +59,25 @@ func (c *Service) ListTextChannelsOnServer(ctx context.Context, serverID uuid.UU
 		Scan(ctx)
 	return channels, err
 }
+
+// UpdateTextChannel updates an existing text channel
+func (c *Service) UpdateTextChannel(ctx context.Context, channelID uuid.UUID, name string) error {
+	_, err := c.db.NewUpdate().
+		Model((*store.TextChannel)(nil)).
+		Set("name = ?", name).
+		Where("id = ?", channelID).
+		Exec(ctx)
+
+	return err
+}
+
+// UpdateVoiceChannel updates an existing voice channel
+func (c *Service) UpdateVoiceChannel(ctx context.Context, channelID uuid.UUID, name string) error {
+	_, err := c.db.NewUpdate().
+		Model((*store.VoiceChannel)(nil)).
+		Set("name = ?", name).
+		Where("id = ?", channelID).
+		Exec(ctx)
+
+	return err
+}

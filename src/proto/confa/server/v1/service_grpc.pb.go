@@ -22,6 +22,7 @@ const (
 	ServerService_ListChannels_FullMethodName  = "/confa.server.v1.ServerService/ListChannels"
 	ServerService_ListUsers_FullMethodName     = "/confa.server.v1.ServerService/ListUsers"
 	ServerService_CreateChannel_FullMethodName = "/confa.server.v1.ServerService/CreateChannel"
+	ServerService_EditChannel_FullMethodName   = "/confa.server.v1.ServerService/EditChannel"
 )
 
 // ServerServiceClient is the client API for ServerService service.
@@ -31,6 +32,7 @@ type ServerServiceClient interface {
 	ListChannels(ctx context.Context, in *ListChannelsRequest, opts ...grpc.CallOption) (*ListChannelsResponse, error)
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
 	CreateChannel(ctx context.Context, in *CreateChannelRequest, opts ...grpc.CallOption) (*CreateChannelResponse, error)
+	EditChannel(ctx context.Context, in *EditChannelRequest, opts ...grpc.CallOption) (*EditChannelResponse, error)
 }
 
 type serverServiceClient struct {
@@ -71,6 +73,16 @@ func (c *serverServiceClient) CreateChannel(ctx context.Context, in *CreateChann
 	return out, nil
 }
 
+func (c *serverServiceClient) EditChannel(ctx context.Context, in *EditChannelRequest, opts ...grpc.CallOption) (*EditChannelResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EditChannelResponse)
+	err := c.cc.Invoke(ctx, ServerService_EditChannel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ServerServiceServer is the server API for ServerService service.
 // All implementations should embed UnimplementedServerServiceServer
 // for forward compatibility.
@@ -78,6 +90,7 @@ type ServerServiceServer interface {
 	ListChannels(context.Context, *ListChannelsRequest) (*ListChannelsResponse, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
 	CreateChannel(context.Context, *CreateChannelRequest) (*CreateChannelResponse, error)
+	EditChannel(context.Context, *EditChannelRequest) (*EditChannelResponse, error)
 }
 
 // UnimplementedServerServiceServer should be embedded to have
@@ -95,6 +108,9 @@ func (UnimplementedServerServiceServer) ListUsers(context.Context, *ListUsersReq
 }
 func (UnimplementedServerServiceServer) CreateChannel(context.Context, *CreateChannelRequest) (*CreateChannelResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateChannel not implemented")
+}
+func (UnimplementedServerServiceServer) EditChannel(context.Context, *EditChannelRequest) (*EditChannelResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EditChannel not implemented")
 }
 func (UnimplementedServerServiceServer) testEmbeddedByValue() {}
 
@@ -170,6 +186,24 @@ func _ServerService_CreateChannel_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ServerService_EditChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EditChannelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServerServiceServer).EditChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ServerService_EditChannel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServerServiceServer).EditChannel(ctx, req.(*EditChannelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ServerService_ServiceDesc is the grpc.ServiceDesc for ServerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -188,6 +222,10 @@ var ServerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateChannel",
 			Handler:    _ServerService_CreateChannel_Handler,
+		},
+		{
+			MethodName: "EditChannel",
+			Handler:    _ServerService_EditChannel_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -22,7 +22,7 @@ type NodeService struct {
 
 var _ nodev1.NodeServiceServer = (*NodeService)(nil)
 
-var MinVersion = semver.MustParse("0.0.1-beta.1")
+var MinVersion = semver.MustParse("0.0.0-dev.18")
 
 // SupportedClientVersions implements nodev1.NodeServiceServer.
 func (h *NodeService) SupportedClientVersions(ctx context.Context, req *nodev1.SupportedClientVersionsRequest) (*nodev1.SupportedClientVersionsResponse, error) {

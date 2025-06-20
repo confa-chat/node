@@ -4,24 +4,27 @@ import (
 	"context"
 	"strings"
 
+	"github.com/confa-chat/node/src/proto/confa"
+	_ "github.com/confa-chat/node/src/proto/confa"
 	"github.com/confa-chat/node/src/store"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/protobuf/reflect/protoreflect"
 	"google.golang.org/protobuf/reflect/protoregistry"
+	_ "google.golang.org/protobuf/types/descriptorpb"
 )
+
+func getOptionSkipAuth(mdDescriptor protoreflect.MethodDescriptor) bool {
+	val := mdDescriptor.Options().ProtoReflect().Get(confa.E_SkipAuth.TypeDescriptor())
+	return val.Bool()
+}
 
 func (a *Authenticator) isNeedAuth(method string) bool {
 	methodFullName := protoreflect.FullName(strings.ReplaceAll(strings.TrimPrefix(method, "/"), "/", "."))
 	desc, _ := protoregistry.GlobalFiles.FindDescriptorByName(methodFullName)
-	if desc != nil {
-		methodDesc := desc.(protoreflect.MethodDescriptor)
 
-		methodOptions := methodDesc.Options().ProtoReflect().Descriptor().Fields()
-
-		if methodOptions.ByName("skip_auth") != nil {
-			return false
-		}
+	if getOptionSkipAuth(desc.(protoreflect.MethodDescriptor)) {
+		return false
 	}
 
 	for _, noAuthMethod := range a.skipAuthMethods {

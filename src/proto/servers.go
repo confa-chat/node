@@ -121,3 +121,65 @@ func (s *ServerService) CreateChannel(ctx context.Context, req *serverv1.CreateC
 		Channel: channel,
 	}, nil
 }
+
+// EditChannel implements serverv1.ServerServiceServer.
+func (s *ServerService) EditChannel(ctx context.Context, req *serverv1.EditChannelRequest) (*serverv1.EditChannelResponse, error) {
+	serverID, err := uuid.FromString(req.ServerId)
+	if err != nil {
+		return nil, fmt.Errorf("invalid server ID: %w", err)
+	}
+
+	channelID, err := uuid.FromString(req.ChannelId)
+	if err != nil {
+		return nil, fmt.Errorf("invalid channel ID: %w", err)
+	}
+
+	var channel *channelv1.Channel
+
+	// Update either a text or voice channel based on the type
+	switch req.Type {
+	case serverv1.EditChannelRequest_TEXT:
+		// Update the text channel
+		err = s.srv.UpdateTextChannel(ctx, channelID, req.Name)
+		if err != nil {
+			return nil, fmt.Errorf("failed to update text channel: %w", err)
+		}
+
+		// Create response with updated channel information
+		channel = &channelv1.Channel{
+			Channel: &channelv1.Channel_TextChannel{
+				TextChannel: &channelv1.TextChannel{
+					ServerId:  serverID.String(),
+					ChannelId: channelID.String(),
+					Name:      req.Name,
+				},
+			},
+		}
+
+	case serverv1.EditChannelRequest_VOICE:
+		// Update the voice channel
+		err = s.srv.UpdateVoiceChannel(ctx, channelID, req.Name)
+		if err != nil {
+			return nil, fmt.Errorf("failed to update voice channel: %w", err)
+		}
+
+		// Create response with updated channel information
+		channel = &channelv1.Channel{
+			Channel: &channelv1.Channel_VoiceChannel{
+				VoiceChannel: &channelv1.VoiceChannel{
+					ServerId:     serverID.String(),
+					ChannelId:    channelID.String(),
+					Name:         req.Name,
+					VoiceRelayId: []string{s.srv.Config.VoiceRelays[0].ID},
+				},
+			},
+		}
+
+	default:
+		return nil, fmt.Errorf("unknown channel type: %v", req.Type)
+	}
+
+	return &serverv1.EditChannelResponse{
+		Channel: channel,
+	}, nil
+}

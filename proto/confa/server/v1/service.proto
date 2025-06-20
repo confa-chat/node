@@ -12,6 +12,7 @@ service ServerService {
   rpc ListChannels(ListChannelsRequest) returns (ListChannelsResponse) {}
   rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
   rpc CreateChannel(CreateChannelRequest) returns (CreateChannelResponse) {}
+  rpc EditChannel(EditChannelRequest) returns (EditChannelResponse) {}
 }
 
 message ListChannelsRequest { string server_id = 1; }
@@ -31,3 +32,16 @@ message CreateChannelRequest {
 }
 
 message CreateChannelResponse { confa.channel.v1.Channel channel = 1; }
+
+message EditChannelRequest {
+  string server_id = 1;
+  string channel_id = 2;
+  string name = 3;
+  enum ChannelType {
+    TEXT = 0;
+    VOICE = 1;
+  }
+  ChannelType type = 4;
+}
+
+message EditChannelResponse { confa.channel.v1.Channel channel = 1; }

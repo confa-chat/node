@@ -69,6 +69,52 @@ func (CreateChannelRequest_ChannelType) EnumDescriptor() ([]byte, []int) {
 	return file_confa_server_v1_service_proto_rawDescGZIP(), []int{4, 0}
 }
 
+type EditChannelRequest_ChannelType int32
+
+const (
+	EditChannelRequest_TEXT  EditChannelRequest_ChannelType = 0
+	EditChannelRequest_VOICE EditChannelRequest_ChannelType = 1
+)
+
+// Enum value maps for EditChannelRequest_ChannelType.
+var (
+	EditChannelRequest_ChannelType_name = map[int32]string{
+		0: "TEXT",
+		1: "VOICE",
+	}
+	EditChannelRequest_ChannelType_value = map[string]int32{
+		"TEXT":  0,
+		"VOICE": 1,
+	}
+)
+
+func (x EditChannelRequest_ChannelType) Enum() *EditChannelRequest_ChannelType {
+	p := new(EditChannelRequest_ChannelType)
+	*p = x
+	return p
+}
+
+func (x EditChannelRequest_ChannelType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (EditChannelRequest_ChannelType) Descriptor() protoreflect.EnumDescriptor {
+	return file_confa_server_v1_service_proto_enumTypes[1].Descriptor()
+}
+
+func (EditChannelRequest_ChannelType) Type() protoreflect.EnumType {
+	return &file_confa_server_v1_service_proto_enumTypes[1]
+}
+
+func (x EditChannelRequest_ChannelType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use EditChannelRequest_ChannelType.Descriptor instead.
+func (EditChannelRequest_ChannelType) EnumDescriptor() ([]byte, []int) {
+	return file_confa_server_v1_service_proto_rawDescGZIP(), []int{6, 0}
+}
+
 type ListChannelsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ServerId      string                 `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
@@ -349,6 +395,118 @@ func (x *CreateChannelResponse) GetChannel() *v1.Channel {
 	return nil
 }
 
+type EditChannelRequest struct {
+	state         protoimpl.MessageState         `protogen:"open.v1"`
+	ServerId      string                         `protobuf:"bytes,1,opt,name=server_id,json=serverId,proto3" json:"server_id,omitempty"`
+	ChannelId     string                         `protobuf:"bytes,2,opt,name=channel_id,json=channelId,proto3" json:"channel_id,omitempty"`
+	Name          string                         `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Type          EditChannelRequest_ChannelType `protobuf:"varint,4,opt,name=type,proto3,enum=confa.server.v1.EditChannelRequest_ChannelType" json:"type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EditChannelRequest) Reset() {
+	*x = EditChannelRequest{}
+	mi := &file_confa_server_v1_service_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EditChannelRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EditChannelRequest) ProtoMessage() {}
+
+func (x *EditChannelRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_confa_server_v1_service_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EditChannelRequest.ProtoReflect.Descriptor instead.
+func (*EditChannelRequest) Descriptor() ([]byte, []int) {
+	return file_confa_server_v1_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *EditChannelRequest) GetServerId() string {
+	if x != nil {
+		return x.ServerId
+	}
+	return ""
+}
+
+func (x *EditChannelRequest) GetChannelId() string {
+	if x != nil {
+		return x.ChannelId
+	}
+	return ""
+}
+
+func (x *EditChannelRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *EditChannelRequest) GetType() EditChannelRequest_ChannelType {
+	if x != nil {
+		return x.Type
+	}
+	return EditChannelRequest_TEXT
+}
+
+type EditChannelResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Channel       *v1.Channel            `protobuf:"bytes,1,opt,name=channel,proto3" json:"channel,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EditChannelResponse) Reset() {
+	*x = EditChannelResponse{}
+	mi := &file_confa_server_v1_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EditChannelResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EditChannelResponse) ProtoMessage() {}
+
+func (x *EditChannelResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_confa_server_v1_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EditChannelResponse.ProtoReflect.Descriptor instead.
+func (*EditChannelResponse) Descriptor() ([]byte, []int) {
+	return file_confa_server_v1_service_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *EditChannelResponse) GetChannel() *v1.Channel {
+	if x != nil {
+		return x.Channel
+	}
+	return nil
+}
+
 var File_confa_server_v1_service_proto protoreflect.FileDescriptor
 
 const file_confa_server_v1_service_proto_rawDesc = "" +
@@ -370,11 +528,23 @@ const file_confa_server_v1_service_proto_rawDesc = "" +
 	"\x04TEXT\x10\x00\x12\t\n" +
 	"\x05VOICE\x10\x01\"L\n" +
 	"\x15CreateChannelResponse\x123\n" +
-	"\achannel\x18\x01 \x01(\v2\x19.confa.channel.v1.ChannelR\achannel2\xa6\x02\n" +
+	"\achannel\x18\x01 \x01(\v2\x19.confa.channel.v1.ChannelR\achannel\"\xcd\x01\n" +
+	"\x12EditChannelRequest\x12\x1b\n" +
+	"\tserver_id\x18\x01 \x01(\tR\bserverId\x12\x1d\n" +
+	"\n" +
+	"channel_id\x18\x02 \x01(\tR\tchannelId\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12C\n" +
+	"\x04type\x18\x04 \x01(\x0e2/.confa.server.v1.EditChannelRequest.ChannelTypeR\x04type\"\"\n" +
+	"\vChannelType\x12\b\n" +
+	"\x04TEXT\x10\x00\x12\t\n" +
+	"\x05VOICE\x10\x01\"J\n" +
+	"\x13EditChannelResponse\x123\n" +
+	"\achannel\x18\x01 \x01(\v2\x19.confa.channel.v1.ChannelR\achannel2\x82\x03\n" +
 	"\rServerService\x12]\n" +
 	"\fListChannels\x12$.confa.server.v1.ListChannelsRequest\x1a%.confa.server.v1.ListChannelsResponse\"\x00\x12T\n" +
 	"\tListUsers\x12!.confa.server.v1.ListUsersRequest\x1a\".confa.server.v1.ListUsersResponse\"\x00\x12`\n" +
-	"\rCreateChannel\x12%.confa.server.v1.CreateChannelRequest\x1a&.confa.server.v1.CreateChannelResponse\"\x00B\xc0\x01\n" +
+	"\rCreateChannel\x12%.confa.server.v1.CreateChannelRequest\x1a&.confa.server.v1.CreateChannelResponse\"\x00\x12Z\n" +
+	"\vEditChannel\x12#.confa.server.v1.EditChannelRequest\x1a$.confa.server.v1.EditChannelResponse\"\x00B\xc0\x01\n" +
 	"\x13com.confa.server.v1B\fServiceProtoP\x01Z=github.com/confa-chat/node/src/proto/confa/server/v1;serverv1\xa2\x02\x03CSX\xaa\x02\x0fConfa.Server.V1\xca\x02\x0fConfa\\Server\\V1\xe2\x02\x1bConfa\\Server\\V1\\GPBMetadata\xea\x02\x11Confa::Server::V1b\x06proto3"
 
 var (
@@ -389,35 +559,42 @@ func file_confa_server_v1_service_proto_rawDescGZIP() []byte {
 	return file_confa_server_v1_service_proto_rawDescData
 }
 
-var file_confa_server_v1_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_confa_server_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_confa_server_v1_service_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_confa_server_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_confa_server_v1_service_proto_goTypes = []any{
 	(CreateChannelRequest_ChannelType)(0), // 0: confa.server.v1.CreateChannelRequest.ChannelType
-	(*ListChannelsRequest)(nil),           // 1: confa.server.v1.ListChannelsRequest
-	(*ListChannelsResponse)(nil),          // 2: confa.server.v1.ListChannelsResponse
-	(*ListUsersRequest)(nil),              // 3: confa.server.v1.ListUsersRequest
-	(*ListUsersResponse)(nil),             // 4: confa.server.v1.ListUsersResponse
-	(*CreateChannelRequest)(nil),          // 5: confa.server.v1.CreateChannelRequest
-	(*CreateChannelResponse)(nil),         // 6: confa.server.v1.CreateChannelResponse
-	(*v1.Channel)(nil),                    // 7: confa.channel.v1.Channel
-	(*v11.User)(nil),                      // 8: confa.user.v1.User
+	(EditChannelRequest_ChannelType)(0),   // 1: confa.server.v1.EditChannelRequest.ChannelType
+	(*ListChannelsRequest)(nil),           // 2: confa.server.v1.ListChannelsRequest
+	(*ListChannelsResponse)(nil),          // 3: confa.server.v1.ListChannelsResponse
+	(*ListUsersRequest)(nil),              // 4: confa.server.v1.ListUsersRequest
+	(*ListUsersResponse)(nil),             // 5: confa.server.v1.ListUsersResponse
+	(*CreateChannelRequest)(nil),          // 6: confa.server.v1.CreateChannelRequest
+	(*CreateChannelResponse)(nil),         // 7: confa.server.v1.CreateChannelResponse
+	(*EditChannelRequest)(nil),            // 8: confa.server.v1.EditChannelRequest
+	(*EditChannelResponse)(nil),           // 9: confa.server.v1.EditChannelResponse
+	(*v1.Channel)(nil),                    // 10: confa.channel.v1.Channel
+	(*v11.User)(nil),                      // 11: confa.user.v1.User
 }
 var file_confa_server_v1_service_proto_depIdxs = []int32{
-	7, // 0: confa.server.v1.ListChannelsResponse.channels:type_name -> confa.channel.v1.Channel
-	8, // 1: confa.server.v1.ListUsersResponse.users:type_name -> confa.user.v1.User
-	0, // 2: confa.server.v1.CreateChannelRequest.type:type_name -> confa.server.v1.CreateChannelRequest.ChannelType
-	7, // 3: confa.server.v1.CreateChannelResponse.channel:type_name -> confa.channel.v1.Channel
-	1, // 4: confa.server.v1.ServerService.ListChannels:input_type -> confa.server.v1.ListChannelsRequest
-	3, // 5: confa.server.v1.ServerService.ListUsers:input_type -> confa.server.v1.ListUsersRequest
-	5, // 6: confa.server.v1.ServerService.CreateChannel:input_type -> confa.server.v1.CreateChannelRequest
-	2, // 7: confa.server.v1.ServerService.ListChannels:output_type -> confa.server.v1.ListChannelsResponse
-	4, // 8: confa.server.v1.ServerService.ListUsers:output_type -> confa.server.v1.ListUsersResponse
-	6, // 9: confa.server.v1.ServerService.CreateChannel:output_type -> confa.server.v1.CreateChannelResponse
-	7, // [7:10] is the sub-list for method output_type
-	4, // [4:7] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	10, // 0: confa.server.v1.ListChannelsResponse.channels:type_name -> confa.channel.v1.Channel
+	11, // 1: confa.server.v1.ListUsersResponse.users:type_name -> confa.user.v1.User
+	0,  // 2: confa.server.v1.CreateChannelRequest.type:type_name -> confa.server.v1.CreateChannelRequest.ChannelType
+	10, // 3: confa.server.v1.CreateChannelResponse.channel:type_name -> confa.channel.v1.Channel
+	1,  // 4: confa.server.v1.EditChannelRequest.type:type_name -> confa.server.v1.EditChannelRequest.ChannelType
+	10, // 5: confa.server.v1.EditChannelResponse.channel:type_name -> confa.channel.v1.Channel
+	2,  // 6: confa.server.v1.ServerService.ListChannels:input_type -> confa.server.v1.ListChannelsRequest
+	4,  // 7: confa.server.v1.ServerService.ListUsers:input_type -> confa.server.v1.ListUsersRequest
+	6,  // 8: confa.server.v1.ServerService.CreateChannel:input_type -> confa.server.v1.CreateChannelRequest
+	8,  // 9: confa.server.v1.ServerService.EditChannel:input_type -> confa.server.v1.EditChannelRequest
+	3,  // 10: confa.server.v1.ServerService.ListChannels:output_type -> confa.server.v1.ListChannelsResponse
+	5,  // 11: confa.server.v1.ServerService.ListUsers:output_type -> confa.server.v1.ListUsersResponse
+	7,  // 12: confa.server.v1.ServerService.CreateChannel:output_type -> confa.server.v1.CreateChannelResponse
+	9,  // 13: confa.server.v1.ServerService.EditChannel:output_type -> confa.server.v1.EditChannelResponse
+	10, // [10:14] is the sub-list for method output_type
+	6,  // [6:10] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_confa_server_v1_service_proto_init() }
@@ -430,8 +607,8 @@ func file_confa_server_v1_service_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_confa_server_v1_service_proto_rawDesc), len(file_confa_server_v1_service_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   6,
+			NumEnums:      2,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
