@@ -1,6 +1,8 @@
 package confa
 
 import (
+	"log/slog"
+
 	"github.com/confa-chat/node/pkg/uuid"
 	"github.com/confa-chat/node/src/config"
 	"github.com/confa-chat/node/src/store/attachment"
@@ -15,6 +17,8 @@ type Service struct {
 	msgBroker     *pubsub.PubSub[uuid.UUID, uuid.UUID]
 	Config        *config.Config
 	attachStorage attachment.Storage
+
+	log *slog.Logger
 }
 
 func NewService(db *bun.DB, dbpool *pgxpool.Pool, cfg *config.Config, attachStorage attachment.Storage) *Service {
@@ -24,5 +28,7 @@ func NewService(db *bun.DB, dbpool *pgxpool.Pool, cfg *config.Config, attachStor
 		msgBroker:     pubsub.New[uuid.UUID, uuid.UUID](10),
 		Config:        cfg,
 		attachStorage: attachStorage,
+
+		log: slog.Default().With(slog.String("service", "confa")),
 	}
 }

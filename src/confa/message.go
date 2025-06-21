@@ -45,7 +45,13 @@ func (c *Service) GetMessagesHistory(ctx context.Context, serverID uuid.UUID, ch
 		Relation("Attachments").
 		Limit(count).
 		Scan(ctx)
-	return messages, err
+
+	if err != nil {
+		c.log.Error("failed to get messages history", "server_id", serverID, "channel_id", channelID, "from", from, "count", count, "error", err)
+		return nil, err
+	}
+
+	return messages, nil
 }
 
 func (c *Service) GetMessage(ctx context.Context, serverID, channelID, messageID uuid.UUID) (store.Message, error) {
@@ -58,10 +64,17 @@ func (c *Service) GetMessage(ctx context.Context, serverID, channelID, messageID
 		Relation("Attachments").
 		Order("timestamp DESC").
 		Scan(ctx)
-	return message, err
+
+	if err != nil {
+		c.log.Error("failed to get message", "server_id", serverID, "channel_id", channelID, "message_id", messageID, "error", err)
+		return message, err
+	}
+	return message, nil
 }
 
 func (c *Service) SendMessage(ctx context.Context, senderID, serverID, channelID uuid.UUID, content string) (uuid.UUID, error) {
+	log := c.log.With("server_id", senderID, "server_id", serverID, "channel_id", channelID)
+
 	msg := store.Message{
 		ID:        uuid.New(),
 		Timestamp: time.Now(),
@@ -71,6 +84,10 @@ func (c *Service) SendMessage(ctx context.Context, senderID, serverID, channelID
 	}
 
 	_, err := c.db.NewInsert().Model(&msg).Exec(ctx)
+	if err != nil {
+		log.Error("failed to send message", "message_id", msg.ID, "error", err)
+		return uuid.Nil, err
+	}
 
 	c.msgBroker.Pub(msg.ID, channelID)
 
@@ -97,9 +114,12 @@ func (c *Service) SendMessage(ctx context.Context, senderID, serverID, channelID
 
 // SendMessageWithAttachments creates a new message with the specified attachments
 func (c *Service) SendMessageWithAttachments(ctx context.Context, senderID, serverID, channelID uuid.UUID, content string, attachmentIDs []uuid.UUID, attachmentNames []string) (uuid.UUID, error) {
+	log := c.log.With("server_id", senderID, "server_id", serverID, "channel_id", channelID, "attachment_ids", attachmentIDs, "attachment_names", attachmentNames)
+
 	// Create transaction
 	tx, err := c.db.BeginTx(ctx, nil)
 	if err != nil {
+		log.Error("failed to begin transaction", "server_id", serverID, "channel_id", channelID, "error", err)
 		return uuid.Nil, err
 	}
 	defer tx.Rollback()
@@ -124,6 +144,7 @@ func (c *Service) SendMessageWithAttachments(ctx context.Context, senderID, serv
 	if len(attachmentIDs) > 0 {
 		// Ensure we have the same number of names as IDs
 		if len(attachmentIDs) != len(attachmentNames) {
+			log.Error("number of attachment IDs doesn't match number of names", "error", err)
 			return uuid.Nil, fmt.Errorf("number of attachment IDs (%d) doesn't match number of names (%d)", len(attachmentIDs), len(attachmentNames))
 		}
 
@@ -141,12 +162,14 @@ func (c *Service) SendMessageWithAttachments(ctx context.Context, senderID, serv
 		// Insert all attachments
 		_, err = tx.NewInsert().Model(&attachments).Exec(ctx)
 		if err != nil {
+			log.Error("failed to insert attachments", "error", err)
 			return uuid.Nil, err
 		}
 	}
 
 	// Commit the transaction
 	if err := tx.Commit(); err != nil {
+		log.Error("failed to commit transaction", "error", err)
 		return uuid.Nil, err
 	}
 
