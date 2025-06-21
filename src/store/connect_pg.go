@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"embed"
 	"fmt"
+	"log/slog"
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -26,16 +27,14 @@ import (
 var pg_migrations embed.FS
 
 func ConnectPostgres(ctx context.Context, databaseURL string) (*bun.DB, *pgxpool.Pool, error) {
+	bun.SetLogger(&bunLogger{log: slog.Default()})
+
 	sq.StatementBuilder = sq.StatementBuilder.PlaceholderFormat(sq.Dollar)
 
 	dbconfig, err := pgxpool.ParseConfig(databaseURL)
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to parse database URL: %w", err)
 	}
-	// dbconfig.AfterConnect = func(ctx context.Context, conn *pgx.Conn) error {
-	// 	pgxuuid.Register(conn.TypeMap())
-	// 	return nil
-	// }
 
 	if err := postgresMigrate(ctx, dbconfig.ConnConfig.Copy()); err != nil {
 		return nil, nil, fmt.Errorf("failed to apply migrations: %w", err)
@@ -46,40 +45,22 @@ func ConnectPostgres(ctx context.Context, databaseURL string) (*bun.DB, *pgxpool
 		return nil, nil, fmt.Errorf("failed to connect to database: %w", err)
 	}
 
-	// db, err := gorm.Open(
-	// 	postgres.New(postgres.Config{
-	// 		Conn: stdlib.OpenDBFromPool(dbpool),
-	// 	}),
-	// 	&gorm.Config{
-	// 		Logger: logger.New(
-	// 			slog.NewWriter(),
-	// 			logger.Config{
-	// 				SlowThreshold: time.Millisecond,
-	// 				LogLevel:      logger.Warn,
-	// 				Colorful:      false,
-	// 			},
-	// 		),
-	// 		NamingStrategy: schema.NamingStrategy{
-	// 			SingularTable: true,
-	// 		},
-	// 	})
-	// if err != nil {
-	// 	return nil, nil, err
-	// }
-
-	// err = db.Use(tracing.NewPlugin())
-	// if err != nil {
-	// 	return nil, nil, fmt.Errorf("failed to use tracing plugin: %w", err)
-	// }
-
 	sqldb := stdlib.OpenDBFromPool(dbpool)
 	db := bun.NewDB(sqldb, pgdialect.New())
-	db.AddQueryHook(bunotel.NewQueryHook(bunotel.WithDBName("mydb")))
+	db.AddQueryHook(bunotel.NewQueryHook(bunotel.WithDBName("confa")))
 	db.AddQueryHook(bundebug.NewQueryHook(
 		bundebug.WithVerbose(true), // log everything
 	))
 
 	return db, dbpool, nil
+}
+
+type bunLogger struct {
+	log *slog.Logger
+}
+
+func (l *bunLogger) Printf(format string, args ...interface{}) {
+	l.log.Info(fmt.Sprintf(format, args...))
 }
 
 func postgresMigrate(ctx context.Context, dbconfig *pgx.ConnConfig) error {

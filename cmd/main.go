@@ -5,8 +5,10 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"log/slog"
 	"net"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/confa-chat/node/pkg/uuid"
@@ -19,6 +21,8 @@ import (
 	serverv1 "github.com/confa-chat/node/src/proto/confa/server/v1"
 	"github.com/confa-chat/node/src/store"
 	"github.com/confa-chat/node/src/store/attachment"
+	"github.com/rs/zerolog"
+	slogzerolog "github.com/samber/slog-zerolog/v2"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 	"google.golang.org/grpc"
@@ -29,6 +33,9 @@ func main() {
 	// Parse command line flags
 	configFilePath := flag.String("config", "", "Path to YAML configuration file")
 	flag.Parse()
+
+	zerologLogger := zerolog.New(zerolog.ConsoleWriter{Out: os.Stderr})
+	slog.SetDefault(slog.New(slogzerolog.Option{Level: slog.LevelDebug, Logger: &zerologLogger}.NewZerologHandler()))
 
 	ctx := context.Background()
 
