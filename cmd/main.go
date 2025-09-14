@@ -30,12 +30,14 @@ import (
 )
 
 func main() {
+	zerologLogger := zerolog.New(zerolog.ConsoleWriter{Out: os.Stderr})
+	slog.SetDefault(slog.New(slogzerolog.Option{Level: slog.LevelDebug, Logger: &zerologLogger}.NewZerologHandler()))
+
+	slog.Info("Confa Node starting")
+
 	// Parse command line flags
 	configFilePath := flag.String("config", "", "Path to YAML configuration file")
 	flag.Parse()
-
-	zerologLogger := zerolog.New(zerolog.ConsoleWriter{Out: os.Stderr})
-	slog.SetDefault(slog.New(slogzerolog.Option{Level: slog.LevelDebug, Logger: &zerologLogger}.NewZerologHandler()))
 
 	ctx := context.Background()
 
@@ -89,13 +91,12 @@ func main() {
 
 	reflection.Register(grpcServer)
 
-	serverID, chanID, err := createConfach(ctx, srv)
+	serverID, chanID, err := createDefaultServer(ctx, srv)
 	if err != nil {
 		panic(err)
 	}
 
-	println(serverID.String())
-	println(chanID.String())
+	slog.Info("Server ID: %s, Channel ID: %s", serverID.String(), chanID.String())
 
 	// Create an HTTP mux for handling attachments
 	httpMux := http.NewServeMux()
@@ -129,7 +130,7 @@ func main() {
 	log.Fatal(multiplexedServer.Serve(lis))
 }
 
-func createConfach(ctx context.Context, srv *confa.Service) (uuid.UUID, uuid.UUID, error) {
+func createDefaultServer(ctx context.Context, srv *confa.Service) (uuid.UUID, uuid.UUID, error) {
 	var serverID uuid.UUID
 
 	servers, err := srv.ListServers(ctx)

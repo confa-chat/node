@@ -170,17 +170,11 @@ func (c *ChatService) UploadAttachment(req grpc.ClientStreamingServer[chatv1.Upl
 
 	// Start the upload process in a goroutine
 	go func() {
-		var info attachment.AttachmentInfo
-		var err error
-
-		defer func() {
-			resultCh <- struct {
-				info attachment.AttachmentInfo
-				err  error
-			}{info, err}
-		}()
-
-		info, err = c.srv.UploadAttachment(req.Context(), filename, pr)
+		info, err := c.srv.UploadAttachment(req.Context(), filename, pr)
+		resultCh <- struct {
+			info attachment.AttachmentInfo
+			err  error
+		}{info, err}
 	}()
 
 	// Process the incoming stream of data
